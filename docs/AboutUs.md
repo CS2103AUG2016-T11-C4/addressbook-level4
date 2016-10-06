@@ -17,6 +17,13 @@ Role: Project Advisor
 Role: Team lead <br>
 Responsibilities: Integration
 
+### [Sun Mingyang](https://github.com/nightism)
+
+![Sun Mingyang](images/team/SunMingyang.jpg)
+
+Role: Developer <br>
+Responsibilities: Code Quality
+
 # Original Authors
 
 Task Tracker is based on [code](https://github.com/se-edu/addressbook-level4) by the following authors:

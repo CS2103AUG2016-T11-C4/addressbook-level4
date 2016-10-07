@@ -29,10 +29,10 @@
 
 7. Add task with due date/time, example commands are:
 
-	* `add "bake cookies" 31/12 1500`<br>
+	* `add "bake cookies" 31/12 3pm`<br>
       bake cookies by 31 December of this year, 3pm.
 
-	* `add "bake cookies" 1500`<br>
+	* `add "bake cookies" 3pm`<br>
       bake cookies by 3pm today.
 
    ![alt text](./images/userguide/task.png "")
@@ -40,21 +40,21 @@
 8. Add event. An event is a task with a start time and end time, example
    commands are:
 
-	* `add "CS2103t summer camp" 30/8 1300 3/1/2017 1800`
+	* `add "CS2103t summer camp" 30/8 1pm 3/1/2017 6pm`
 
       Event CS2103t summer camp starts on 30 Aug 2016, 1pm, and ends on 3
       January 2017,6pm.
 
-	* `add "potato peeling" 1500 1900`
+	* `add "potato peeling" 3pm 7pm`
 
       Event potato peeling starts today 3pm and ends today 7pm.
 
-	* `add "cupcake festival" 30/08 800 1200`
+	* `add "cupcake festival" 30/08 8am 12pm`
 
       Event cupcake festival starts on 8am and ends on 12pm of 24 Oct of this
       year.
 
-	* `add "Trick or treat" 800 31/10 900`
+	* `add "Trick or treat" 8am 31/10 9am`
 
       Event Trick or treat starts today 8pm and ends on 31 Oct 9pm.
 
@@ -78,12 +78,12 @@
 
 11. To edit a deadline, try:
 
-	* `edit "bake potato" dd-12/10 dt-1500`
+	* `edit "bake potato" dd-12/10 dt-3pm`
 
       The following fields of task are modified: due date, due time. (`dd`
       refers to `due date`, `dt` refers to `due time`)
 
-	* `edit "bake potato" dt-1500`
+	* `edit "bake potato" dt-3pm`
 
       Due time of bake potato modified.
 
@@ -93,12 +93,12 @@
 
       Location of cupcake festival set to NUS.
 
-	* `edit "cupcake festival" st-1500 sd-12/10 et-1700 -ed 13/10 loc-Yishun`
+	* `edit "cupcake festival" st-3pm sd-12/10 et-5pm -ed 13/10 loc-Yishun`
 
       All fields modified. (`st` : `starting time`, `sd` : `starting date`,
       `et` : `ending time`, `ed` : `ending date`)
 
-    * `edit "cupcake festival" st-1500`
+    * `edit "cupcake festival" st-3pm`
 
       start time of cupcake festival modified.
 
@@ -352,32 +352,7 @@ Show all empty time slots in a given time period with a given duration.
 
 View all the task of a specific date in the Calander View of TaskTracker.
 
-    view DATE
-
-### Search by keywords: `srch`
-Search task that contains specific keywords.
-
-    srch KEY_WORDS
-
-* The `KEY_WORDS` are CASE-SENSITIVE
-
-#### Examples
-
-* `srch lecture`
-
-  Search for all the tasks that contain keyword `lecture`, TaskTracker will
-  generate a list for view.
-
-* `srch training SESSION`
-
-  Search for all the tasks that contain keyword `training SESSION`, TaskTracker
-  will generate a list for view.
-
-### Undo an action : `undo`
-
-Undo the last one action that the user performs wrongly.
-
-    undo
+[=
 
 ### Clearing all entries : `clear`
 

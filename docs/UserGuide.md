@@ -276,12 +276,12 @@ List certain type of task stored in the database
 
 * `list event` will show all events according to the order of their starting time.
 
-* 'list due' will show all deadline according to their due time and due date. (when sorting
-the deadline without due time, the sorting will use 11:59 pm of the due date as deafault)
+* `list due` will show all deadline according to their due time and due date. (when sorting
+the deadline without due time, the sorting will use 11:59 pm of the due date as default)
 
 * Every tasks (floating tasks / events / deadlines) will have a unique index to differentiate
 their uniqueness. And their index will also be listed besides them when `list` command is
-excuted.
+executed.
 
 * The overdue/past/finished tasks will not be listed.
 
@@ -459,7 +459,7 @@ Search task that contains specific keywords.
 
 * The `KEY_WORDS` are CASE-SENSITIVE
 
-* Quotations marks are not allowed in `KEY_WORLDS`.
+* Quotations marks are not allowed in `KEY_WORDS`.
 
 * The results will be listed according to their `TASK_UNIQUE_INDEX`
 
@@ -490,7 +490,7 @@ Redo the commands on which the user perform `undo`
     redo
     
 * This command can redo can redo all the actions that were undone if there is no new other command
-being excuted between this first `undo` command and the last `redo` command
+being executed between this first `undo` command and the last `redo` command
 
 ### Clearing all entries : `clear`
 

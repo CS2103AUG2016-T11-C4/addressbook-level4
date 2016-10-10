@@ -1,31 +1,31 @@
 # User Guide
 
 * [Quick Start](#quick-start)
-	* [Quick Start Summary](#quick-start)
+	* [Quick Start Summary](#qss)
 * [Features](#features)
-	* [Data Models]()
-    * [Command Format]()
-    * [Parameter Keywords]()
-    * [Date Format]()
-    * [Time Format]()
-    * [Viewing Help]()
-    * [Add Floating Task]()
-    * [Add Deadline Task]()
-    * [Add Event]()
-    * [list]()
-    * [View Task index]()
-    * [Delete]()
-    * [Edit Floating Task]()
-    * [Edit Deadline Task]()
-    * [Edit Event]()
-    * [Mark Finish]()
-    * [Show Empty Timeslots]()
-    * [Toggle Event views]()
-    * [Search]()
-    * [Undo]()
-    * [Redo]()
-    * [Clear]()
-    * [Exit]()
+	* [Data Models](#dm)
+    * [Command Format](#cf)
+    * [Parameter Keywords](#pk)
+    * [Date Format](#DateFormat)
+    * [Time Format](#TimeFormat)
+    * [Viewing Help](#help)
+    * [Add Floating Task](#addft)
+    * [Add Deadline Task](#adddt)
+    * [Add Event](#adde)
+    * [list](#list)
+    * [View Task index](#i)
+    * [Delete](#del)
+    * [Edit Floating Task](#editft)
+    * [Edit Deadline Task](#editdt)
+    * [Edit Event](#adde)
+    * [Mark Finish](#fin)
+    * [Show Empty Timeslots](#slot)
+    * [Toggle Event views](#view)
+    * [Search](#search)
+    * [Undo](#undo)
+    * [Redo](#redo)
+    * [Clear](#clear)
+    * [Exit](#exit)
 * [Command Summary](#command-summary)
 
 ## Quick Start
@@ -140,7 +140,7 @@
 14. Refer to the [Features](#features) section below for details of each
     command.
     
-**Quick Start Summary**
+<a name="qss">**Quick Start Summary**</a>
 
 | Command | Essential Parameters|
 |---------|:----------|
@@ -155,7 +155,7 @@
 
 ## Features
 
-**Data models**<br>
+<a name="dm">**Data models**</a>
 The task stored in Task Tracker will be automatically grouped into three different type of task: floating task, deadline task, and event, depending on the type and number of fields entered when creating the task. 
 
 |A/An... | has...|
@@ -166,7 +166,7 @@ The task stored in Task Tracker will be automatically grouped into three differe
 
 All the time and date fields of the task have to be entered in order to create the task.
 
-**Command Format**
+<a name="cf">**Command Format**</a>
 
 * Words in `UPPER_CASE` are the required parameters.
 
@@ -183,7 +183,7 @@ All the time and date fields of the task have to be entered in order to create t
 
 * The parameters have to follow the order in which they are presented, unless otherwise specified.
 
-**parameter keywords**
+<a name="pk">**parameter keywords**</a>
 
 |Keyword | Definition|
 |----| :--------:|:------|
@@ -240,7 +240,7 @@ To
     
  * This keyword is only applicable for adding an event. `to` can only be entered into an `<END_DATE>` field. `to` would mean the `<END_DATE>` is the same as the `<START_DATE>` for an event. See [example](#to).
 
-<a name="TimeFormat">**Time Format**</a>
+**<a name="TimeFormat">Time Format</a>**
 The 12 hour clock is used. hh:mm am/pm 
 
 Valid input examples:
@@ -255,7 +255,7 @@ Valid input examples:
 8:00pm at night
 if the minute field is 00, it may be ommitted from the command.
 
-### Viewing help : `help`
+<a name="help">### Viewing help : `help`</a>
 
     help
 
@@ -263,7 +263,7 @@ Help is also shown if you enter an incorrect command e.g. `abcd`
 
 ![alt text](./images/userguide/help.png "")
 
-### Adding a floating task : `add`
+### <a name="addft"> Adding a floating task : `add`</a>
 
 Adds a floating task to TaskTracker.
 
@@ -293,7 +293,7 @@ not allowed in task name.
 
   To create a task called `Progress Reflection` with default `PRIORITY` of 0.
 
-### Adding a deadline task: `add`
+### <a name="adddt"> Adding a deadline task: `add`</a>
 
 Adds a deadline with specific due date and time to TaskTracker.
 
@@ -322,7 +322,7 @@ Adds a deadline with specific due date and time to TaskTracker.
 
   To create a deadline named `EE2024 homework 1` tommorow, 6 am.
 
-### Adding a event: `add`
+### <a name="adde"> Adding an event: `add`</a>
 
 Adds an event with specific start date, start time and end date, end time to TaskTracker.
 
@@ -354,7 +354,7 @@ Adds an event with specific start date, start time and end date, end time to Tas
 
   To create an event `sports training camp` with starting date 1 December 2016, starting time 7pm, ending date 10 January 2017 and ending time 1pm.
 
-### List tasks: `list`
+###<a name="list">List tasks: `list`</a>
 
 List certain type of task stored in the database
 
@@ -373,7 +373,7 @@ List certain type of task stored in the database
 
 * The overdue/past/finished tasks will not be listed.
   
-### View task index: i
+### <a name="i"> View task index: `i`</a>
 
 UI will show the index of all floating task, deadline task and events.
 
@@ -385,7 +385,7 @@ UI will show the index of all floating task, deadline task and events.
 
  * To switch out of index view, enter anything into the command bar.
 
-### Deleting a floating task/event/deadline: `del`
+### <a name="del"> Deleting a floating task/event/deadline: `del`</a>
 
 Delete a useless floating task/event/deadline on TaskTracker.
 
@@ -415,7 +415,7 @@ For example, `edit` cannot transform a floating task to a event task.
 
 To edit an task, key in the index of the event followed by the properties to be modified. Label the new properties with their respective field references. 
 
-#### Edit a floating task:
+#### <a name="editft"> Edit a floating task: `edit` </a>
 
 Edit a floating task to revise its name or priority.
 
@@ -444,7 +444,7 @@ Edit a floating task to revise its name or priority.
 
   Edit task with unique index of `00125`'s name to `"go to Nanyang Mart"` and priority to 1.
 
-#### Edit a deadline :
+####<a name="editdl"> Edit a deadline : `edit` </a>
 
 Edit a deadline to revise its name and due date/time.
 
@@ -471,7 +471,7 @@ Edit a deadline to revise its name and due date/time.
 
   Edit deadline with unique index of `00128`'s due date to 2016 23th November.
 
-#### Edit an event :
+#### <a name="edite">Edit an event : `edit` </a>
 
 Edit an event to revise its name, starting/ending date/time and location.
 
@@ -505,7 +505,7 @@ Edit an event to revise its name, starting/ending date/time and location.
 
   Edit event with unique index of `00127`'s starting time to 7pm and name to `proposal meeting`.
 
-### Mark a floating task/deadline as done/finished: `fin`
+###<a name="fin"> Mark a floating task/deadline as done/finished: `fin`</a>
 
 Mark a floating task/event/deadline as done on TaskTracker, the marked tasks
 will be archived.
@@ -524,7 +524,7 @@ will be archived.
 
   Marked task `00123` as finished.
 
-### Show empty time slots : `slot`
+###<a name="slot"> Show empty time slots : `slot`</a>
 
 Show all empty time slots in a given time period with a given duration.
 
@@ -553,7 +553,7 @@ Show all empty time slots in a given time period with a given duration.
   The TaskTracker will generate all empty time slots that are equal or greater than 45 minutes
   between 2016 5st November 0am to 2pm.
 
-### Toggle event views: `view`
+###<a name="view">Toggle event views: `view`</a>
 
 ###View all the events of a specific date in TaskTracker.
 
@@ -577,7 +577,7 @@ Show all empty time slots in a given time period with a given duration.
 
   View all the tasks that are of the date of 1st December of the current year.
 
-### Search by keywords: `search`
+###<a name="search"> Search by keywords: `search`</a>
 Search task that contains specific keywords.
 
     search KEY_WORDS
@@ -600,7 +600,7 @@ Search task that contains specific keywords.
   Search for all the tasks that contain keyword `training SESSION`, TaskTracker
   will generate a list for view.
 
-### Undo an action : `undo`
+###<a name="undo"> Undo an action : `undo`</a>
 
 Undo the previous action that modifies data. Undo can be performed many times until the first action since the app was launched has been undone.
 
@@ -610,7 +610,7 @@ view the stack of actions that undo will perform: `undo stack`
 
     undo stack
     
-### Redo an action : `redo`
+###<a name="redo"> Redo an action : `redo`</a>
 
 Redo the previous action that was undone by undo. The amount of consecutive redos doable is equal to the number of consecutive undos performed right before redo is entered.
 
@@ -620,7 +620,7 @@ view the stack of actions that redo will perform: `redo stack`
 
     redo stack
     
-### Clearing all entries : `clear`
+###<a name="clear"> Clearing all entries : `clear`</a>
 
 Clears all entries from TaskTracker.
 
@@ -628,7 +628,7 @@ Clears all entries from TaskTracker.
 
 * The `TASK_UNIQUE_NUMBER` will be reset.
 
-### Exiting the program : `exit`
+###<a name="exit"> Exiting the program : `exit`</a>
 
 Exits the program.
 

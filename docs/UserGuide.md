@@ -60,17 +60,16 @@
 
    The events for current selected day will show up under schedule.
 
+9. To see the schedule of a different day, enter `view DATE`
+   The schedule for the day will show up in the schedule column.
+
+       * `view 10oct2016`
+
    ![alt text](./images/userguide/event.png "")
 
-9. To see the schedule of a different day, press 'C' to toggle calender mode on
-   and off. Use arrow keys and enter to select the day to view. The schedule
-   for the day will show up in the schedule column.
+   To view all events, enter `view events`
 
-   ![alt text](./images/userguide/calender.png "")
-
-   ![alt text](./images/userguide/toggle_calender.png "")
-
-   Alternatively, use the command line to view schedules. For example: `view 30/08/2016`
+   ![alt text](./images/userguide/event_list.png "")
 
 10. To delete a task/event, try:
 
@@ -160,6 +159,8 @@
     help
 
 Help is also shown if you enter an incorrect command e.g. `abcd`
+
+![alt text](./images/userguide/help.png "")
 
 ### Adding a floating task : `task`
 

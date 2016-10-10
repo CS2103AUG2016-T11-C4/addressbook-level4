@@ -118,6 +118,18 @@
 
 ## Features
 
+**Data models**
+
+The task stored in Task Tracker will be automatically grouped into three
+different type of task: floating task, deadline task, and event, depending on
+the type and number of fields entered when creating the task.
+
+|A/An... | has...|
+|----| :--------:|:------|
+|Floating Task | only a task name|
+|Deadline task |  end time and date |
+|Event | start time and date,  end time and date|
+
 **Command Format**
 
 * Words in `UPPER_CASE` are the required parameters.
@@ -403,6 +415,9 @@ Edit a deadline to revise its name and due date/time.
 
   Edit deadline with unique index of `00128`'s due date to 2016 23th November.
 
+### Switching the type of task: `edit`
+Edit the type of task, for example switching event to a deadline task,
+
 ### Mark a floating task/deadline as done/finished: `fin`
 
 Mark a floating task/event/deadline as done on TaskTracker, the marked tasks
@@ -496,20 +511,26 @@ Search task that contains specific keywords.
 
 ### Undo an action : `undo`
 
-Undo the last one action that the user performs wrongly.
+Undo the previous action that modifies data. Undo can be performed many times
+until the first action since the app was launched has been undone.
 
     undo
 
-* This command can undo all the commands the user performs after he opens the TaskTracker.
+view the stack of actions that undo will perform: `undo stack`
+
+    undo stack
 
 ### Redo an action : `redo`
 
-Redo the commands on which the user perform `undo`
+Redo the previous action that was undone by undo. The amount of consecutive
+redos doable depends on the number of consecutive undos performed right before
+redo is entered.
 
     redo
 
-* This command can redo can redo all the actions that were undone if there is no new other command
-  being executed between this first `undo` command and the last `redo` command
+view the stack of actions that redo will perform: `redo stack`
+
+    redo stack
 
 ### Clearing all entries : `clear`
 

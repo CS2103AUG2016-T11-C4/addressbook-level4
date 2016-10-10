@@ -1,7 +1,31 @@
 # User Guide
 
 * [Quick Start](#quick-start)
+	* [Quick Start Summary](#quick-start)
 * [Features](#features)
+	* [Data Models]()
+    * [Command Format]()
+    * [Parameter Keywords]()
+    * [Date Format]()
+    * [Time Format]()
+    * [Viewing Help]()
+    * [Add Floating Task]()
+    * [Add Deadline Task]()
+    * [Add Event]()
+    * [list]()
+    * [View Task index]()
+    * [Delete]()
+    * [Edit Floating Task]()
+    * [Edit Deadline Task]()
+    * [Edit Event]()
+    * [Mark Finish]()
+    * [Show Empty Timeslots]()
+    * [Toggle Event views]()
+    * [Search]()
+    * [Undo]()
+    * [Redo]()
+    * [Clear]()
+    * [Exit]()
 * [Command Summary](#command-summary)
 
 ## Quick Start
@@ -82,7 +106,7 @@
       The following properties of task are modified: due date, due time. (`dd`
       refers to `due date`, `dt` refers to `due time`)
 
-	* `edit "bake potato" dt-1500`
+	* `edit "bake potato" dt-3pm`
 
       Due time of bake potato modified.
 
@@ -92,12 +116,12 @@
 
       Location of cupcake festival set to NUS.
 
-	* `edit "cupcake festival" st-1500 sd-12/10 et-1700 -ed 13/10 loc-Yishun`
+	* `edit "cupcake festival" st-3pm sd-12oct et-5pm ed-13oct loc-Yishun`
 
       All fields modified. (`st` : `starting time`, `sd` : `starting date`,
       `et` : `ending time`, `ed` : `ending date`)
 
-    * `edit "cupcake festival" st-1500`
+    * `edit "cupcake festival" st-3pm`
 
       start time of cupcake festival modified.
 
@@ -349,7 +373,7 @@ List certain type of task stored in the database
 
 * The overdue/past/finished tasks will not be listed.
   
-### View the index of all task: i
+### View task index: i
 
 UI will show the index of all floating task, deadline task and events.
 
@@ -378,7 +402,7 @@ Delete a useless floating task/event/deadline on TaskTracker.
 
 * `i`
 
-  List all the events stored in the database with their unique index number.
+  List all the task stored in the database with their unique index number.
 
 * `del 00123`
 
@@ -529,11 +553,11 @@ Show all empty time slots in a given time period with a given duration.
   The TaskTracker will generate all empty time slots that are equal or greater than 45 minutes
   between 2016 5st November 0am to 2pm.
 
-### View a date: `view`
+### Toggle event views: `view`
 
-View all the events of a specific date in TaskTracker.
+###View all the events of a specific date in TaskTracker.
 
-    view DATE
+    view <DATE>
 
 * `DATE` will follow thw format shown in [Date Format](#DateFormat)
 
@@ -541,6 +565,11 @@ View all the events of a specific date in TaskTracker.
   events' starting time.
 
 * The `TASK_UNIQUE_INDEX` will also be shown after `view` command is executed.
+
+### View all events
+	view events
+    
+* All the events in the database will be displayed in a list
 
 #### Examples
 

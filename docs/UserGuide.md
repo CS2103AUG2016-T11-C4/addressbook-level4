@@ -32,7 +32,7 @@
 	* `add "bake cookies" 31/12 1500`<br>
       bake cookies by 31 December of this year, 3pm.
 
-	* `add "bake cookies" 1500`<br>
+	* `add "bake cookies" 1500 tdy`<br>
       bake cookies by 3pm today.
 
    ![alt text](./images/userguide/task.png "")
@@ -45,7 +45,7 @@
       Event CS2103t summer camp starts on 30 Aug 2016, 1pm, and ends on 3
       January 2017,6pm.
 
-	* `add "potato peeling" 1500 1900`
+	* `add "potato peeling" 1500 tdy 1900 tdy`
 
       Event potato peeling starts today 3pm and ends today 7pm.
 
@@ -134,6 +134,26 @@
   use in each command.
 
 * Items with `...` after them can have multiple instances.
+
+**parameter keywords**
+
+|Keyword | Definition|
+|----| :--------:|
+|tdy | today|
+|tmr | tommorow|
+|yst | yesteday|
+|jan | January|
+|feb | February|
+|mar | March|
+|apr | April|
+|may | May|
+|jun | June|
+|jul | July|
+|aug | August|
+|sep | September|
+|oct | October|
+|nov | November|
+|dec | December|
 
 ### Viewing help : `help`
 

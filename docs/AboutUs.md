@@ -30,6 +30,12 @@ Responsibilities: Code Quality
 Role: Developer <br>
 Responsibilities: Testing
 
+### [Sherry Wong Wen Qi](https://github.com/potatowagon)
+<img src="images/team/sherry.jpg" width="200" height="200" >
+
+Role: Developer <br>
+Responsibilities: Documentation
+
 # Original Authors
 
 Task Tracker is based on [code](https://github.com/se-edu/addressbook-level4) by the following authors:

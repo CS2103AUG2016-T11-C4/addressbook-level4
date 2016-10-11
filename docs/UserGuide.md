@@ -49,7 +49,7 @@
    command bar. Press Enter to enter a command. For floating task, `add
    "taskname"`!
 
-   ![alt text](./images/userguide/command_bar.png "command bar")
+   ![alt text](./images/userguide/command_bar_add.png "command bar")
 
 7. Add task with due date and time, example commands are:
 
@@ -88,50 +88,51 @@
 9. To see the schedule of a particular day, enter `view DATE`
    The schedule for the day will show up in the schedule column.
 	`view 10oct2016`
-    
    ![alt text](./images/userguide/event.png "")
-   
    To view all events, enter `view events`
    ![alt text](./images/userguide/event_list.png "")
 
+10. Let's view the index of task. Enter `i`.![alttext](./images/userguide/index.png "") Enter anything into command line to hide index view.  
+	
+11. To delete a task, try:
 
-10. To delete a task/event, try:
+     `del 5`
+     Event Movie deleted
 
-	    del "cupcake festival"
+12. To edit a deadline, try:
 
-11. To edit a deadline, try:
+	* `i` to view index
+	* `edit 1 dd-29dec dt-2pm`
 
-	* `edit "bake potato" dd-12/10 dt-1500`
+      The following properties of task are modified: due date, due time.  (`dd`
+      refers to due date, `dt` refers to due time)
 
-      The following properties of task are modified: due date, due time. (`dd`
-      refers to `due date`, `dt` refers to `due time`)
+	* `edit 1 dt-3pm`
 
-	* `edit "bake potato" dt-3pm`
+      Only due time of bake potato modified.
 
-      Due time of bake potato modified.
-
-11. To edit an event, try:
-
-	* `edit "cupcake festival" loc-NUS`
+13. To edit an event, try:
+	* `i` to view index
+	* `edit 2 loc-NUS`
 
       Location of cupcake festival set to NUS.
 
-	* `edit "cupcake festival" st-3pm sd-12oct et-5pm ed-13oct loc-Yishun`
+	* `edit 2 st-3pm sd-12oct et-5pm ed-13oct loc-Yishun`
 
       All fields modified. (`st` : `starting time`, `sd` : `starting date`,
       `et` : `ending time`, `ed` : `ending date`)
 
-    * `edit "cupcake festival" st-3pm`
+    * `edit 2 st-3pm`
 
-      start time of cupcake festival modified.
+      Start time of cupcake festival modified.
 
-12. To edit a floating task, try:
+14. To edit a floating task, try:
+	* `i` to view index
+	* `edit 6 p-1`
 
-	* `edit "bake potato" p-1"`
+       Floating Task bake potato is given a priority of 1.
 
-      cupcake festival is given a priority of 1.
-
-13. To exit the program, try:
+15. To exit the program, try:
 
 	* `exit`
 
@@ -145,11 +146,12 @@
 | Command | Essential Parameters|
 |---------|:----------|
 |add| `"taskname"` <br> `"deadline task name"` `date` `time` <br> `"event name"` `start date` `start time` `end date` `end time`|
-|i| 
+|i|  |
 | edit | `floating task index` `n-` `p-` <br> `deadline task index` `n-` `dd-` `dt-` <br> `event index` `n-` `sd-` `st-` `ed-` `et` `loc-` <br> 
 | del | `index`|
+| fin |`index`| 
 | view | `date` <br> `events` |
-| exit |
+| exit |          |
     
  
 
@@ -168,13 +170,13 @@ All the time and date fields of the task have to be entered in order to create t
 
 <a name="cf">**Command Format**</a>
 
-* Words in `UPPER_CASE` are the required parameters.
+* Words in `UPPER_CASE` are parameters to be defined by the user.
 
 * Words in `lower_case` are the reserved keywords.
 
 * Items in `[SQUARE_BRACKETS]` are optional parameters.
 
-* Items in `<ANGLE_BRACKETS>` are essential parameters (These parameters cannot be ommitted in the command).
+* Items in `<ANGLE_BRACKETS>` essential parameters. All essential parameters have to be included in the command.
 
 * Items separated by `|` are in parallel relation, only one of them should be
   use in each command.
@@ -255,7 +257,7 @@ Valid input examples:
 8:00pm at night
 if the minute field is 00, it may be ommitted from the command.
 
-<a name="help">### Viewing help : `help`</a>
+### <a name="help">Viewing help : `help`</a>
 
     help
 
@@ -267,7 +269,7 @@ Help is also shown if you enter an incorrect command e.g. `abcd`
 
 Adds a floating task to TaskTracker.
 
-    add "FLOATING_TASK_NAME" [PRIORITY] 
+    add <"FLOATING_TASK_NAME"> [PRIORITY] 
 
 * Task name should be in a pair of quotation marks. And quotations marks are
 not allowed in task name.
@@ -297,7 +299,7 @@ not allowed in task name.
 
 Adds a deadline with specific due date and time to TaskTracker.
 
-    add "DEADLINE_NAME" <DATE> <TIME> [PRIORITY]
+    add <"DEADLINE_NAME"> <DATE> <TIME> [PRIORITY]
 
 * Deadline name should be in a pair of quotation marks. And quotations marks are not allowed in deadline name.
 
@@ -326,16 +328,16 @@ Adds a deadline with specific due date and time to TaskTracker.
 
 Adds an event with specific start date, start time and end date, end time to TaskTracker.
 
-    add “EVENT_NAME” <STARTING_DATE> <STARTING_TIME> <ENDING_DATE> <ENDING_TIME> [loc-LOCATION]
+    add <“EVENT_NAME”> <START_DATE> <START_TIME> <END_DATE> <END_TIME> [loc-LOCATION]
 
 * Event name should be within a pair of quotation marks. Quotations marks are
   not allowed in event name.
 
-* The four parameters `<STARTING_DATE>`, `<STARTING_TIME>`, `<ENDING_DATE>`,
-  `<ENDING_TIME>` are all required for adding an event.
+* The four parameters `START_DATE`, `START_TIME`, `END_DATE`,
+  `END_TIME` are all required for adding an event.
 
-* Formats of `<STARTING_DATE>`, `<STARTING_TIME>`, `<ENDING_DATE>`,
-  `<ENDING_TIME>` should follow those stated above in this user guide.  See [Date Format](#DateFormat) and  [Time Format](#TimeFormat)
+* Formats of `START_DATE`, `START_TIME`, `END_DATE`,
+  `END_TIME` should follow those stated above in this user guide.  See [Date Format](#DateFormat) and  [Time Format](#TimeFormat)
 
 
 * `[LOCATION]` is a String which could contain any characters.
@@ -413,8 +415,9 @@ Delete a useless floating task/event/deadline on TaskTracker.
 * Edit command can only edit the parameters of each commands but cannot change the type of task.
 For example, `edit` cannot transform a floating task to a event task.
 
-To edit an task, key in the index of the event followed by the properties to be modified. Label the new properties with their respective field references. 
+* To edit an task, key in the index of the event followed by the properties to be modified. Label the new properties with their respective field references. 
 
+* The [optional parameters] need not follow the order shown.
 #### <a name="editft"> Edit a floating task: `edit` </a>
 
 Edit a floating task to revise its name or priority.
@@ -424,7 +427,7 @@ Edit a floating task to revise its name or priority.
 | n- | name |
 | p- | priority |
 
-    edit TASK_UNIQUE_INDEX [n-NEW_NAME | p-PRIORITY]...
+    edit <TASK_UNIQUE_INDEX> [n-NEW_NAME | p-PRIORITY]...
 
 * Quotation marks are not necessary for `NEW_NAME`.
 
@@ -454,7 +457,7 @@ Edit a deadline to revise its name and due date/time.
 | dd- | due date |
 | dt- | due time |
 
-    edit TASK_UNIQUE_INDEX [dd-DUE_DATE | dt-DUE_TIME | n-NEW_NAME]...
+    edit <TASK_UNIQUE_INDEX> [dd-DUE_DATE | dt-DUE_TIME | n-NEW_NAME]...
 
 * Quotation marks are not necessary for `NEW_NAME`.
 
@@ -484,7 +487,7 @@ Edit an event to revise its name, starting/ending date/time and location.
 | et- | end time |
 | loc-| location |
 
-    edit TASK_UNIQUE_INDEX [sd-NEW_START_TIME | st-NEW_START_DATE | ed-NEW_END_DATE | et-NEW_END_TIME | n-NEW_NAME | loc-NEW_LOCATION]...
+    edit <TASK_UNIQUE_INDEX> [n-NEW_NAME | sd-NEW_START_TIME | st-NEW_START_DATE | ed-NEW_END_DATE | et-NEW_END_TIME | n-NEW_NAME | loc-NEW_LOCATION]...
 
 * Quotation marks are not necessary for `NEW_NAME`.
 
@@ -510,7 +513,7 @@ Edit an event to revise its name, starting/ending date/time and location.
 Mark a floating task/event/deadline as done on TaskTracker, the marked tasks
 will be archived.
 
-    fin TASK_UNIQUE_INDEX
+    fin <TASK_UNIQUE_INDEX>
 
 * Events that have already passed it `DUE_TIME` will be marked as done
   automatically.
@@ -553,7 +556,7 @@ Show all empty time slots in a given time period with a given duration.
   The TaskTracker will generate all empty time slots that are equal or greater than 45 minutes
   between 2016 5st November 0am to 2pm.
 
-###<a name="view">Toggle event views: `view`</a>
+###<a name="view"> Toggle event views: `view` </a>
 
 ###View all the events of a specific date in TaskTracker.
 
@@ -580,7 +583,7 @@ Show all empty time slots in a given time period with a given duration.
 ###<a name="search"> Search by keywords: `search`</a>
 Search task that contains specific keywords.
 
-    search KEY_WORDS
+    search <KEY_WORDS>
 
 * The `KEY_WORDS` are CASE-SENSITIVE
 

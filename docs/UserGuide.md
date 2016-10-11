@@ -56,7 +56,7 @@
 	* `add "bake cookies" 31dec 3pm`<br>
       bake cookies by 31 December of this year, 3pm. Undeclared year in date field will be taken as the current year.
 
-	* `add "learn task tracker" tdy 3pm`<br>
+	* `add "learn task-tracker" tdy 3pm`<br>
       learn task tracker by today, 3pm.
 
    ![alt text](./images/userguide/task.png "")
@@ -135,7 +135,7 @@
 15. You've finished a task. Congrations! Let's mark a task as finshed.   
     * `i` to view index
     * `fin 3`
-    Dateline task learn tasktracker is marked as finished. 
+    Dateline task learn task-tracker is marked as finished. 
 16. To exit the program, try:
 
 	* `exit`

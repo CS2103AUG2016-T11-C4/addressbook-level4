@@ -56,8 +56,8 @@
 	* `add "bake cookies" 31dec 3pm`<br>
       bake cookies by 31 December of this year, 3pm. Undeclared year in date field will be taken as the current year.
 
-	* `add "bake cookies" tdy 3pm`<br>
-      bake cookies by today, 3pm.
+	* `add "learn task tracker" tdy 3pm`<br>
+      learn task tracker by today, 3pm.
 
    ![alt text](./images/userguide/task.png "")
 
@@ -131,14 +131,18 @@
 	* `edit 6 p-1`
 
        Floating Task bake potato is given a priority of 1.
-
-15. To exit the program, try:
+       
+15. You've finished a task. Congrations! Let's mark a task as finshed.   
+    * `i` to view index
+    * `fin 3`
+    Dateline task learn tasktracker is marked as finished. 
+16. To exit the program, try:
 
 	* `exit`
 
       Close the Task-tracker.
 
-14. Refer to the [Features](#features) section below for details of each
+17. Refer to the [Features](#features) section below for details of each
     command.
     
 <a name="qss">**Quick Start Summary**</a>

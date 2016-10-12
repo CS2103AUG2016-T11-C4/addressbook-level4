@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.EventTask;
 import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.Task;
@@ -23,27 +24,35 @@ public class TaskBook implements ReadOnlyTaskBook {
 
     private final ObservableList<EventTask> eventTasks;
 
+    private final ObservableList<DeadlineTask> deadlineTasks;
+
     public TaskBook() {
         tasks = FXCollections.observableArrayList();
         floatingTasks = FXCollections.observableArrayList();
         eventTasks = FXCollections.observableArrayList();
+        deadlineTasks = FXCollections.observableArrayList();
     }
 
     /**
      * Tasks are copied into this TaskBook.
      */
     public TaskBook(ReadOnlyTaskBook toBeCopied) {
-        this(toBeCopied.getTasks(), toBeCopied.getFloatingTasks(), toBeCopied.getEventTasks());
+        this(toBeCopied.getTasks(),
+             toBeCopied.getFloatingTasks(),
+             toBeCopied.getEventTasks(),
+             toBeCopied.getDeadlineTasks());
     }
 
     /**
      * Tasks are copied into this TaskBook.
      */
-    public TaskBook(List<Task> tasks, List<FloatingTask> floatingTasks, List<EventTask> eventTasks) {
+    public TaskBook(List<Task> tasks, List<FloatingTask> floatingTasks,
+                    List<EventTask> eventTasks, List<DeadlineTask> deadlineTasks) {
         this();
         setTasks(tasks);
         setFloatingTasks(floatingTasks);
         setEventTasks(eventTasks);
+        setDeadlineTasks(deadlineTasks);
     }
 
     public void resetData(ReadOnlyTaskBook newData) {
@@ -130,6 +139,32 @@ public class TaskBook implements ReadOnlyTaskBook {
         eventTasks.set(index, newEventTask);
     }
 
+    //// deadline task operations
+
+    @Override
+    public ObservableList<DeadlineTask> getDeadlineTasks() {
+        return FXCollections.unmodifiableObservableList(deadlineTasks);
+    }
+
+    public void setDeadlineTasks(Collection<DeadlineTask> deadlineTasks) {
+        this.deadlineTasks.setAll(deadlineTasks);
+    }
+
+    public void addDeadlineTask(DeadlineTask deadlineTask) {
+        deadlineTasks.add(deadlineTask);
+    }
+
+    /**
+    * Removes the DeadlineTask at position `index` in the list. Returns the removed DeadlineTask.
+    */
+    public DeadlineTask removeDeadlineTask(int index) {
+        return deadlineTasks.remove(index);
+    }
+
+    public void setDeadlineTask(int index, DeadlineTask newDeadlineTask) {
+        deadlineTasks.set(index, newDeadlineTask);
+    }
+
     //// util methods
 
     @Override
@@ -144,12 +179,14 @@ public class TaskBook implements ReadOnlyTaskBook {
                 || (other instanceof TaskBook // instanceof handles nulls
                 && this.tasks.equals(((TaskBook) other).tasks)
                 && this.floatingTasks.equals(((TaskBook) other).floatingTasks)
-                && this.eventTasks.equals(((TaskBook) other).eventTasks));
+                && this.eventTasks.equals(((TaskBook) other).eventTasks)
+                && this.deadlineTasks.equals(((TaskBook) other).deadlineTasks)
+                );
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(tasks, floatingTasks, eventTasks);
+        return Objects.hash(tasks, floatingTasks, eventTasks, deadlineTasks);
     }
 }

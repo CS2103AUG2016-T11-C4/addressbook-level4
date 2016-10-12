@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.EventTask;
 import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.Task;
@@ -83,5 +84,29 @@ public interface Model {
      * If predicate is null, the filtered event task list will be populated with all event tasks.
      */
     void setEventTaskFilter(Predicate<? super EventTask> predicate);
+
+    //// Deadline Tasks
+
+    /** Adds the given deadline task */
+    void addDeadlineTask(DeadlineTask deadlineTask);
+
+    /** Retrieves the given deadline task from the specified index in the filtered deadline task list */
+    DeadlineTask getDeadlineTask(int indexInFilteredList) throws IllegalValueException;
+
+    /** Removes the given deadline task and returns it. */
+    DeadlineTask removeDeadlineTask(int indexInFilteredList) throws IllegalValueException;
+
+    /** Replaces the given deadline task with a new deadline task */
+    void setDeadlineTask(int indexInFilteredList, DeadlineTask newDeadlineTask) throws IllegalValueException;
+
+    /** Returns the filtered deadline task list as an unmodifiable ObservableList */
+    ObservableList<DeadlineTask> getFilteredDeadlineTaskList();
+
+    /**
+    * Updates the filter of the filtered deadline task list to filter by the given predicate.
+    *
+    * If predicate is null, the filtered deadline task list will be populated with all deadline tasks.
+    */
+    void setDeadlineTaskFilter(Predicate<? super DeadlineTask> predicate);
 
 }

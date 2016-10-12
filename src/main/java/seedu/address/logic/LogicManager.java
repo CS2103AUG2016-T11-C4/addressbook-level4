@@ -9,6 +9,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.parser.Parser;
 import seedu.address.model.Model;
+import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.EventTask;
 import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.Task;
@@ -49,6 +50,11 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<EventTask> getFilteredEventTaskList() {
         return model.getFilteredEventTaskList();
+    }
+
+    @Override
+    public ObservableList<DeadlineTask> getFilteredDeadlineTaskList() {
+        return model.getFilteredDeadlineTaskList();
     }
 
 }

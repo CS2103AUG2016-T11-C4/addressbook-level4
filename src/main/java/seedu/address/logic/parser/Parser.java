@@ -13,13 +13,16 @@ import java.util.regex.Pattern;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddDeadlineCommand;
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.AddFloatingTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteDeadlineCommand;
 import seedu.address.logic.commands.DeleteEventCommand;
 import seedu.address.logic.commands.DeleteFloatingTaskCommand;
+import seedu.address.logic.commands.EditDeadlineCommand;
 import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.commands.EditFloatingTaskCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -38,8 +41,6 @@ public class Parser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-
-    private static final Pattern PERSON_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
     private static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
@@ -76,6 +77,9 @@ public class Parser {
         case AddEventCommand.COMMAND_WORD:
             return new AddEventParser().parse(arguments);
 
+        case AddDeadlineCommand.COMMAND_WORD:
+            return new AddDeadlineParser().parse(arguments);
+
         case SelectCommand.COMMAND_WORD:
             return prepareSelect(arguments);
 
@@ -93,6 +97,12 @@ public class Parser {
 
         case EditEventCommand.COMMAND_WORD:
             return new EditEventParser().parse(arguments);
+
+        case DeleteDeadlineCommand.COMMAND_WORD:
+            return prepareDeleteDeadline(arguments);
+
+        case EditDeadlineCommand.COMMAND_WORD:
+            return new EditDeadlineParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -168,6 +178,9 @@ public class Parser {
 
     /**
      * Parses arguments in the context of the delete event command.
+     *
+     * @param args full command args string
+     * @return the prepared command
      */
     private Command prepareDeleteEvent(String args) {
         Optional<Integer> index = parseIndex(args);
@@ -176,6 +189,21 @@ public class Parser {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteEventCommand.MESSAGE_USAGE));
         }
         return new DeleteEventCommand(index.get());
+    }
+
+    /**
+     * Parses arguments in the context of the delete deadline command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareDeleteDeadline(String args) {
+        Optional<Integer> index = parseIndex(args);
+        if (!index.isPresent()) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteDeadlineCommand.MESSAGE_USAGE));
+        }
+        return new DeleteDeadlineCommand(index.get());
     }
 
     /**

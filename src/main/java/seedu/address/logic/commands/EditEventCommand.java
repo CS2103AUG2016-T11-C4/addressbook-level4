@@ -15,7 +15,7 @@ public class EditEventCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the event identified by the index number used in the filtered event listing.\n"
-            + "Parameters: INDEX [sd-NEW_START_TIME | st-NEW_START_DATE | ed-NEW_END_DATE | et-NEW_END_TIME | n-NEW_NAME]"
+            + "Parameters: INDEX [sd-NEW_START_DATE] [st-NEW_START_TIME] [ed-NEW_END_DATE] [et-NEW_END_TIME] [n-NEW_NAME]"
             + "Example: " + COMMAND_WORD + " 1 st-4pm et-8pm";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Event edited: %1$s";

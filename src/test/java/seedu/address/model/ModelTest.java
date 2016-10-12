@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.task.TypicalDeadlineTasks;
 import seedu.address.model.task.TypicalEventTasks;
 import seedu.address.model.task.TypicalFloatingTasks;
 
@@ -21,7 +22,9 @@ public class ModelTest {
 
     private TypicalFloatingTasks tpflt = new TypicalFloatingTasks();
 
-    private TypicalEventTasks tet = new TypicalEventTasks();
+    private TypicalEventTasks tpent = new TypicalEventTasks();
+
+    private TypicalDeadlineTasks tpdue = new TypicalDeadlineTasks();
 
     private Model model;
 
@@ -34,6 +37,7 @@ public class ModelTest {
     public void constructor() {
         assertEquals(Collections.emptyList(), model.getFilteredFloatingTaskList());
         assertEquals(Collections.emptyList(), model.getFilteredEventTaskList());
+        assertEquals(Collections.emptyList(), model.getFilteredDeadlineTaskList());
     }
 
     @Test
@@ -87,11 +91,11 @@ public class ModelTest {
 
     @Test
     public void addEventTask_appendsEventTask() throws Exception {
-        model.addEventTask(tet.lunchWithBillGates);
-        assertEquals(tet.lunchWithBillGates, model.getEventTask(0));
-        model.addEventTask(tet.launchNuclearWeapons);
-        assertEquals(tet.lunchWithBillGates, model.getEventTask(0));
-        assertEquals(tet.launchNuclearWeapons, model.getEventTask(1));
+        model.addEventTask(tpent.lunchWithBillGates);
+        assertEquals(tpent.lunchWithBillGates, model.getEventTask(0));
+        model.addEventTask(tpent.launchNuclearWeapons);
+        assertEquals(tpent.lunchWithBillGates, model.getEventTask(0));
+        assertEquals(tpent.launchNuclearWeapons, model.getEventTask(1));
     }
 
     @Test
@@ -102,12 +106,12 @@ public class ModelTest {
 
     @Test
     public void removeEventTask_removesIndexInFilteredList() throws Exception {
-        model.addEventTask(tet.lunchWithBillGates);
-        model.addEventTask(tet.launchNuclearWeapons);
-        model.setEventTaskFilter(eventTask -> eventTask.equals(tet.launchNuclearWeapons));
+        model.addEventTask(tpent.lunchWithBillGates);
+        model.addEventTask(tpent.launchNuclearWeapons);
+        model.setEventTaskFilter(eventTask -> eventTask.equals(tpent.launchNuclearWeapons));
         model.removeEventTask(0);
         model.setEventTaskFilter(null);
-        assertEquals(Arrays.asList(tet.lunchWithBillGates), model.getFilteredEventTaskList());
+        assertEquals(Arrays.asList(tpent.lunchWithBillGates), model.getFilteredEventTaskList());
     }
 
     @Test
@@ -118,19 +122,69 @@ public class ModelTest {
 
     @Test
     public void setEventTask_replacesIndexInFilteredList() throws Exception {
-        model.addEventTask(tet.lunchWithBillGates);
-        model.addEventTask(tet.launchNuclearWeapons);
-        model.setEventTaskFilter(eventTask -> eventTask.equals(tet.launchNuclearWeapons));
-        model.setEventTask(0, tet.lunchWithBillGates);
+        model.addEventTask(tpent.lunchWithBillGates);
+        model.addEventTask(tpent.launchNuclearWeapons);
+        model.setEventTaskFilter(eventTask -> eventTask.equals(tpent.launchNuclearWeapons));
+        model.setEventTask(0, tpent.lunchWithBillGates);
         model.setEventTaskFilter(null);
-        assertEquals(Arrays.asList(tet.lunchWithBillGates, tet.lunchWithBillGates),
+        assertEquals(Arrays.asList(tpent.lunchWithBillGates, tpent.lunchWithBillGates),
                     model.getFilteredEventTaskList());
     }
 
     @Test
     public void setEventTask_invalidIndex_throwsException() throws Exception {
         thrown.expect(IllegalValueException.class);
-        model.setEventTask(0, tet.lunchWithBillGates);
+        model.setEventTask(0, tpent.lunchWithBillGates);
+    }
+
+    ///
+
+    @Test
+    public void addDeadlineTask_appendsDeadlineTask() throws Exception {
+        model.addDeadlineTask(tpdue.speechTranscript);
+        assertEquals(tpdue.speechTranscript, model.getDeadlineTask(0));
+        model.addDeadlineTask(tpdue.assembleTheMissiles);
+        assertEquals(tpdue.speechTranscript, model.getDeadlineTask(0));
+        assertEquals(tpdue.assembleTheMissiles, model.getDeadlineTask(1));
+    }
+
+    @Test
+    public void getDeadlineTask_invalidIndex_throwsException() throws Exception {
+        thrown.expect(IllegalValueException.class);
+        model.getDeadlineTask(0);
+    }
+
+    @Test
+    public void removeDeadlineTask_removesIndexInFilteredList() throws Exception {
+        model.addDeadlineTask(tpdue.speechTranscript);
+        model.addDeadlineTask(tpdue.assembleTheMissiles);
+        model.setDeadlineTaskFilter(deadlineTask -> deadlineTask.equals(tpdue.assembleTheMissiles));
+        model.removeDeadlineTask(0);
+        model.setDeadlineTaskFilter(null);
+        assertEquals(Arrays.asList(tpdue.speechTranscript), model.getFilteredDeadlineTaskList());
+    }
+
+    @Test
+    public void removeDeadlineTask_invalidIndex_throwsException() throws Exception {
+        thrown.expect(IllegalValueException.class);
+        model.removeDeadlineTask(0);
+    }
+
+    @Test
+    public void setDeadlineTask_replacesIndexInFilteredList() throws Exception {
+        model.addDeadlineTask(tpdue.speechTranscript);
+        model.addDeadlineTask(tpdue.assembleTheMissiles);
+        model.setDeadlineTaskFilter(deadlineTask -> deadlineTask.equals(tpdue.assembleTheMissiles));
+        model.setDeadlineTask(0, tpdue.speechTranscript);
+        model.setDeadlineTaskFilter(null);
+        assertEquals(Arrays.asList(tpdue.speechTranscript, tpdue.speechTranscript),
+                    model.getFilteredDeadlineTaskList());
+    }
+
+    @Test
+    public void setDeadlineTask_invalidIndex_throwsException() throws Exception {
+        thrown.expect(IllegalValueException.class);
+        model.setDeadlineTask(0, tpdue.speechTranscript);
     }
 
 }

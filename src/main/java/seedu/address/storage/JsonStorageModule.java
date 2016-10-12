@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.Module;
 
 import seedu.address.model.TaskBook;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.Priority;
 import seedu.address.model.task.Task;
 
 public class JsonStorageModule extends Module {
@@ -22,7 +24,9 @@ public class JsonStorageModule extends Module {
     @Override
     public void setupModule(SetupContext context) {
         context.setMixInAnnotations(Name.class, JsonNameMixin.class);
+        context.setMixInAnnotations(Priority.class, JsonPriorityMixin.class);
         context.setMixInAnnotations(Task.class, JsonTaskMixin.class);
+        context.setMixInAnnotations(FloatingTask.class, JsonFloatingTaskMixin.class);
         context.setMixInAnnotations(TaskBook.class, JsonTaskBookMixin.class);
     }
 

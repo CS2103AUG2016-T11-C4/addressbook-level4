@@ -13,9 +13,12 @@ import java.util.regex.Pattern;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddFloatingTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteFloatingTaskCommand;
+import seedu.address.logic.commands.EditFloatingTaskCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -34,6 +37,8 @@ public class Parser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     private static final Pattern PERSON_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+
+    private static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
     private static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
@@ -62,12 +67,21 @@ public class Parser {
         case AddCommand.COMMAND_WORD:
             return prepareAdd(arguments);
 
+        case AddFloatingTaskCommand.COMMAND_WORD:
+            return new AddFloatingTaskParser().parse(arguments);
+            
         case SelectCommand.COMMAND_WORD:
             return prepareSelect(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete(arguments);
 
+        case DeleteFloatingTaskCommand.COMMAND_WORD:
+            return prepareDeleteFloatingTask(arguments);    
+                
+        case EditFloatingTaskCommand.COMMAND_WORD:
+            return new EditFloatingTaskParser().parse(arguments);    
+            
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
@@ -123,6 +137,23 @@ public class Parser {
 
         return new DeleteCommand(index.get());
     }
+    
+    /**
+     * Parses arguments in the context of the delete floating task command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareDeleteFloatingTask(String args) {
+        Optional<Integer> index = parseIndex(args);
+        if (!index.isPresent()) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
+                                  DeleteFloatingTaskCommand.MESSAGE_USAGE));
+        }      
+        return new DeleteFloatingTaskCommand(index.get());
+    }
+
 
     /**
      * Parses arguments in the context of the select person command.
@@ -145,7 +176,7 @@ public class Parser {
      *   Returns an {@code Optional.empty()} otherwise.
      */
     private Optional<Integer> parseIndex(String command) {
-        final Matcher matcher = PERSON_INDEX_ARGS_FORMAT.matcher(command.trim());
+        final Matcher matcher = TASK_INDEX_ARGS_FORMAT.matcher(command.trim());
         if (!matcher.matches()) {
             return Optional.empty();
         }

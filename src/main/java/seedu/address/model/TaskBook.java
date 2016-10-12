@@ -1,10 +1,12 @@
 package seedu.address.model;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskNotFoundException;
 
@@ -15,24 +17,30 @@ import seedu.address.model.task.TaskNotFoundException;
 public class TaskBook implements ReadOnlyTaskBook {
 
     private final ObservableList<Task> tasks;
+    
+    private final ObservableList<FloatingTask> floatingTasks;
 
     public TaskBook() {
         tasks = FXCollections.observableArrayList();
+        floatingTasks = FXCollections.observableArrayList();
     }
 
     /**
      * Tasks are copied into this TaskBook.
      */
     public TaskBook(ReadOnlyTaskBook toBeCopied) {
-        this(toBeCopied.getTasks());
+        this(toBeCopied.getTasks(),
+                toBeCopied.getFloatingTasks());
     }
 
     /**
      * Tasks are copied into this TaskBook.
      */
-    public TaskBook(List<Task> tasks) {
+    public TaskBook(List<Task> tasks, 
+            List<FloatingTask> floatingTasks) {
         this();
         setTasks(tasks);
+        setFloatingTasks(floatingTasks);
     }
 
     public void resetData(ReadOnlyTaskBook newData) {
@@ -66,6 +74,32 @@ public class TaskBook implements ReadOnlyTaskBook {
             throw new TaskNotFoundException();
         }
     }
+    
+    // floating task operations
+    
+    @Override
+    public ObservableList<FloatingTask> getFloatingTasks() {
+        return FXCollections.unmodifiableObservableList(floatingTasks);
+    }
+    
+    public void setFloatingTasks(Collection<FloatingTask> floatingTasks) {
+        this.floatingTasks.setAll(floatingTasks);
+    }
+    
+    public void addFloatingTask(FloatingTask floatingTask) {
+        floatingTasks.add(floatingTask);
+    }
+    
+    /**
+     * Remove the FloatingTask at position `index` in the list. Return the removed FloatingTask.
+     */
+    public FloatingTask removeFloatingTask(int index) {
+        return floatingTasks.remove(index);
+    }
+    
+    public void setFloatingTask(int index, FloatingTask newFloatingTask) {
+        floatingTasks.set(index, newFloatingTask);
+    }
 
     //// util methods
 
@@ -79,12 +113,13 @@ public class TaskBook implements ReadOnlyTaskBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TaskBook // instanceof handles nulls
-                && this.tasks.equals(((TaskBook) other).tasks));
+                && this.tasks.equals(((TaskBook) other).tasks)
+                && this.floatingTasks.equals(((TaskBook) other).floatingTasks));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(tasks);
+        return Objects.hash(tasks, floatingTasks);
     }
 }

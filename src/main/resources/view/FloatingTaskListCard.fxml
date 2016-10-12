@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER_LEFT" maxHeight="120.0" minHeight="80.0"
+        prefHeight="110.0" stylesheets="@DarkTheme.css" styleClass="card">
+    <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label fx:id="indexLabel" styleClass="cell_big_label"></Label>
+        <Label fx:id="nameLabel" styleClass="cell_big_label"></Label>
+    </HBox>
+    <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label>Priority: </Label>
+        <Label fx:id="priority">$priority</Label>
+    </HBox>
+</VBox>

@@ -19,7 +19,12 @@
         </MenuBar>
         <UiRegion VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="anchor-pane-with-border" />
         <UiRegion VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="anchor-pane-with-border" minHeight="100" prefHeight="100" maxHeight="100" />
-        <UiRegion fx:id="taskListPanelPlaceholder" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS" />
+        
+        <SplitPane dividerPositions="0.6" VBox.vgrow="ALWAYS">
+        	<UiRegion fx:id="taskListPanelPlaceholder" minWidth="340" prefWidth="340" />
+            <UiRegion fx:id="floatingTaskListRegion" />
+        </SplitPane>
+ 
         <UiRegion fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
     </VBox>
 </Scene>

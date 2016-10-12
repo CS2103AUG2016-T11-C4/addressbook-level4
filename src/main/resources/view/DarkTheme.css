@@ -307,3 +307,12 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+.card {
+	-fx-padding: 5px 5px 5px 15px;
+	-fx-border-color: #d6d6d6;
+	-fx-border-width: 1 1 1 1;
+}
+
+
+

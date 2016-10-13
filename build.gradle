@@ -85,6 +85,51 @@ jacocoTestReport {
 
 tasks.coveralls.dependsOn jacocoTestReport
 
+class PandocTask extends DefaultTask {
+
+    @InputFiles
+    List<File> inputFiles
+
+    @InputDirectory
+    File dataDir = project.file('pandoc')
+
+    @Input
+    File workDir
+
+    @Input
+    List<String> cmdArgs
+
+    @InputFiles
+    List<File> filters = []
+
+    @OutputFile
+    File outputFile
+
+    @TaskAction
+    def generate() {
+        project.exec {
+            workingDir workDir
+            commandLine(['pandoc', '--self-contained', '-s',
+                         "--data-dir=${dataDir}",
+                         '-o', outputFile]
+                        + filters.collect({ "--filter=${it}" })
+                        + cmdArgs
+                        + inputFiles.collect({it.toString()}))
+        }
+    }
+}
+
+task(pandoc, type: PandocTask) {
+    workDir = project.file('docs')
+    inputFiles = [project.file('docs/UserGuide.md'),
+                               project.file('docs/DeveloperGuide.md')]
+    cmdArgs = ['-f', 'markdown_github-hard_line_breaks+definition_lists+yaml_metadata_block+raw_tex',
+               '-t', 'latex',
+               '--latex-engine', 'xelatex']
+    outputFile = new File(project.docsDir, 'manual.pdf')
+    filters = []
+}
+
 artifacts {
     archives shadowJar
 }

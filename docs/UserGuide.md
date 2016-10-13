@@ -417,11 +417,11 @@ TaskTracker.
 
 Delete a useless floating task/event/deadline on TaskTracker.
 
-    del-float|-deadline|-event <TASK_UNIQUE_INDEX>
+    del-float|-deadline|-event <INDEX>
 
 * Every event, deadline and floating task will have their own unique index.
 
-* A task's `TASK_UNIQUE_INDEX` will be the same as what is the number beside the task name.
+* A task's `INDEX` is the number beside the task name.
 
 #### Examples
 
@@ -450,7 +450,7 @@ Edit a floating task to revise its name or priority.
 | p- | priority |
 
 
-    edit-float <TASK_UNIQUE_INDEX> [n-NEW_NAME | p-PRIORITY]...
+    edit-float <INDEX> [n-NEW_NAME | p-PRIORITY]...
 
 * Quotation marks are not necessary for `NEW_NAME`.
 
@@ -480,7 +480,7 @@ Edit a deadline to revise its name and due date/time.
 | dd- | due date |
 | dt- | due time |
 
-    edit-deadline <TASK_UNIQUE_INDEX> [dd-DUE_DATE | dt-DUE_TIME | n-NEW_NAME]...
+    edit-deadline <INDEX> [dd-DUE_DATE | dt-DUE_TIME | n-NEW_NAME]...
 
 * Quotation marks are not necessary for `NEW_NAME`.
 
@@ -510,7 +510,7 @@ Edit an event to revise its name, starting/ending date/time and location.
 | et- | end time |
 | loc-| location |
 
-    edit-event <TASK_UNIQUE_INDEX> [n-NEW_NAME | sd-NEW_START_TIME | st-NEW_START_DATE | ed-NEW_END_DATE | et-NEW_END_TIME | n-NEW_NAME | loc-NEW_LOCATION]...
+    edit-event <INDEX> [n-NEW_NAME | sd-NEW_START_TIME | st-NEW_START_DATE | ed-NEW_END_DATE | et-NEW_END_TIME | n-NEW_NAME | loc-NEW_LOCATION]...
 
 * Quotation marks are not necessary for `NEW_NAME`.
 
@@ -536,7 +536,7 @@ Edit an event to revise its name, starting/ending date/time and location.
 Mark a floating task/event/deadline as done on TaskTracker, the marked tasks
 will be archived.
 
-    fin-float|-deadline|-event <TASK_UNIQUE_INDEX>
+    fin-float|-deadline|-event <INDEX>
 
 * Events that have already passed it `DUE_TIME` will be marked as done
   automatically.
@@ -589,8 +589,6 @@ Show all empty time slots in a given time period with a given duration.
 
 * The deadlines and events will be listed according to the order of the deadline's due time and the event's starting time, with the earlier time displayed at the top of the list.
 
-* The `TASK_UNIQUE_INDEX` will also be shown after `view` command is executed.
-
 #### View all time events and deadline task
 
 	view all
@@ -613,7 +611,7 @@ Search task that contains specific keywords.
 
 * Quotations marks are not allowed in `KEY_WORDS`
 
-* The results will be listed according to their `TASK_UNIQUE_INDEX`
+* The results will be listed according to their `INDEX`
 
 #### Examples
 
@@ -653,8 +651,6 @@ Clears all entries from TaskTracker.
 
     clear
 
-* The `TASK_UNIQUE_NUMBER` will be reset.
-
 ### <a name="exit"> Exiting the program : `exit`</a>
 
 Exits the program.
@@ -668,12 +664,12 @@ Command | Format
 Add Floating Task | `add "FLOATING_TASK_NAME" [PRIORITY]`
 Add Event |`add “EVENT_NAME” <STARTING_DATE> <STARTING_TIME> <ENDING_DATE> <ENDING_TIME> [loc-LOCATION]`
 Add Deadline |`add “DEADLINE_NAME” <DATE> <TIME>`
-Delete a task | `del-[float or deadline or event] <TASK_UNIQUE_INDEX>`
-Edit Floating Tasks | `edit-float <TASK_UNIQUE_INDEX> [n-NEW_NAME or p-PRIORITY]... `
-Edit Event |`edit-event <TASK_UNIQUE_INDEX> [sd-NEW_START_DATE or st-NEW_START_TIME or ed-NEW_END_DATE or et-NEW_END_TIME or n-NEW_NAME or loc-NEW_LOCATION]... `
-Edit Deadline |`edit-deadline <TASK_UNIQUE_INDEX> [dd-DUE_DATE or dt-DUE_TIME or n-NEW_NAME]... `
+Delete a task | `del-[float or deadline or event] <INDEX>`
+Edit Floating Tasks | `edit-float <INDEX> [n-NEW_NAME or p-PRIORITY]... `
+Edit Event |`edit-event <INDEX> [sd-NEW_START_DATE or st-NEW_START_TIME or ed-NEW_END_DATE or et-NEW_END_TIME or n-NEW_NAME or loc-NEW_LOCATION]... `
+Edit Deadline |`edit-deadline <INDEX> [dd-DUE_DATE or dt-DUE_TIME or n-NEW_NAME]... `
 Generate recommended time slots | `slot <STARTING_DATE> <STARTING_TIME> <ENDING_DATE> <ENDING_TIME> <h-HOUR> <m-MINUTE>`
-Mark a task as finished | `fin-[float or deadline or event] <TASK_UNIQUE_INDEX>`
+Mark a task as finished | `fin-[float or deadline or event] <INDEX>`
 View a date in calendar | `view <DATE>`
 Search for keywords | `search <KEY_WORDS>`
 Help | `help`

@@ -1,3 +1,13 @@
+---
+title: Task Tracker
+papersize: A4
+documentclass: report
+numbersections: true
+geometry: margin=2.4cm
+mainfont: DejaVu Sans
+fontsize: 11pt
+---
+
 # User Guide
 
 * [About] (#about)

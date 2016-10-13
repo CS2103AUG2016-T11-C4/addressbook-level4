@@ -1,5 +1,5 @@
 # User Guide
-
+* [About] (#about)
 * [Quick Start](#quick-start)
 	* [Quick Start Summary](#qss)
 * [Features](#features)
@@ -24,6 +24,18 @@
     * [Clear](#clear)
     * [Exit](#exit)
 * [Command Summary](#command-summary)
+
+## About
+Unable to keep track of all your deadlines and other commitments?  Finding it difficult to remember tasks which do not have a specific date and time, but nevertheless needs to be done? Find yourself wasting time searching for time-management software online, and selecting multiple options each time you want to modify a task? 
+
+Fret not, TaskTracker is here to your rescue!
+
+To be simply defined, TaskTracker is a digital assistant that keeps your schedule neat and organized. It displays all your events lined up for the day, upcoming deadlines and also tasks that do not have a specific time/ date, on the same window. 
+
+You can perform various operations such as add/ delete/ edit/ prioritize, on your events by simply typing a one-line command. You don’t need to waste any more time navigating through multiple options or filling multiple fields every time you want to modify your schedule.
+
+TaskTracker makes time-management smart and simple for you!
+
 
 ## Quick Start
 

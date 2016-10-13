@@ -795,11 +795,40 @@ a new group activity.
   <dd>Task that has an end datetime only.</dd>
 
   <dt>Floating task</dt>
-  <dd>A task that has neither a start datetime not end datetime./dd>
+  <dd>A task that has neither a start datetime not end datetime.</dd>
 
   <dt>Time slot</dt>
   <dd>A time slot is referring to a period of time</dd>
 </dl>
+
+<!-- BEGIN LATEX
+
+\begin{description}
+
+\item[Task book] \hfill \\
+    The database where events, deadlines and floating tasks are stored.
+
+\item[Datetime] \hfill \\
+    Date and time
+
+\item[Task] \hfill \\
+    A unit of information in the task book database. Each task has a name.
+
+\item[Event] \hfill \\
+    Task that has a start datetime and end datetime.
+
+\item[Deadline] \hfill \\
+    Task that has an end datetime only.
+
+\item[Floating task] \hfill \\
+    A task that has neither a start datetime nor end datetime.
+
+\item[Time slot] \hfill \\
+    A time slot is referring to a period of time.
+
+\end{description}
+
+END LATEX -->
 
 # Appendix E: Product Survey
 

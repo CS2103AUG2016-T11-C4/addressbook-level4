@@ -127,7 +127,7 @@ task(pandoc, type: PandocTask) {
                '-t', 'latex',
                '--latex-engine', 'xelatex']
     outputFile = new File(project.docsDir, 'manual.pdf')
-    filters = [project.file('pandoc/githubonly.py')]
+    filters = [project.file('pandoc/githubonly.py'), project.file('pandoc/latexonly.py')]
 }
 
 artifacts {

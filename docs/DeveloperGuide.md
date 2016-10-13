@@ -331,8 +331,8 @@ User categories:
   (keystrokes, mouseclicks, confirmations) as possible.
 * Group user -- User that has other people working on the same task
 
-Priority | As a ... | I want to ... | So that I can...
--------- | :------- | :------------ | :---------------
+Priority | As a ... | I want to ...             | So that I can...
+-------- | :------- | :------------------------ | :---------------------------
 `* * *`  | New user | See the manual | refer to manual when I forget how to use the App
 `* * *`  | User | Add an event to the task manager | keep track of it and be notified when it is approaching.
 `* * *`  | User | Add a deadline to the task manager | keep track of it and be notified when it is approaching.
@@ -807,8 +807,8 @@ a new group activity.
 
 Full product survey [here](productsurveys/todo.txt.md)
 
-Jim's Requirement | Todo.txt Support
-:---------------- | ----------------
+Jim's Requirement                                        | Todo.txt Support
+:------------------------------------------------------- | ---------------
 Summoned quickly from anywhere | No
 Keyboard-oriented. Jim can type commands in "one shot" | Yes
 Works offline | Yes
@@ -852,8 +852,8 @@ operations are done without user confirmation.
 
 Full product survey [here](productsurveys/Todoist.md)
 
-Jim’s Requirement | Todoist support
-:---------------- | ------------------
+Jim’s Requirement                                        | Todoist support
+:------------------------------------------------------- | ---------------
 Summoned quickly from anywhere | No
 Keyboard-oriented. Jim can type commands in “one shot”. | No
 Keyboard-oriented. Jim can use keyboard shortcut to increase efficiency. | Yes
@@ -910,8 +910,8 @@ collaborating features are accessible.
 
 So, how well does Wunderlist satisfy Jim's requirements?
 
-| Jim's Requirement | Wunderlist support |
-| --- | --- |
+| Jim's Requirement                                        | Wunderlist support |
+| :------------------------------------------------------- | ------------------ |
 | Summoned quickly from anywhere | No |
 | Keyboard-oriented. Jim can type commands in "one shot". | Partially |
 | Works offline | Yes |
@@ -929,8 +929,8 @@ So, how well does Wunderlist satisfy Jim's requirements?
 
 Full product survey [here](https://docs.google.com/document/d/1ELun1gQUiVAxC6it-16jikFRwAePTXS5Xri7GdhUnL8/edit?usp=sharing)
 
-Jim's Requirement | Google Calendar
-:---------------- | ----------------
+Jim's Requirement                                                | Google Calendar
+:--------------------------------------------------------------- | ---------------
 Summoned quickly from anywhere | Yes
 Keyboard-oriented. Jim can type commands in "one shot" | Yes
 Works offline | Partially

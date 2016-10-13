@@ -525,7 +525,10 @@ Edit an event to revise its name, starting/ending date/time and location.
 | et- | end time |
 | loc-| location |
 
-    edit-event <TASK_UNIQUE_INDEX> [n-NEW_NAME | sd-NEW_START_TIME | st-NEW_START_DATE | ed-NEW_END_DATE | et-NEW_END_TIME | n-NEW_NAME | loc-NEW_LOCATION]...
+    edit-event <TASK_UNIQUE_INDEX> [ n-NEW_NAME | sd-NEW_START_TIME
+                                    | st-NEW_START_DATE | ed-NEW_END_DATE
+                                    | et-NEW_END_TIME | n-NEW_NAME
+                                    | loc-NEW_LOCATION]...
 
 * Quotation marks are not necessary for `NEW_NAME`.
 

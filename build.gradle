@@ -85,6 +85,74 @@ jacocoTestReport {
 
 tasks.coveralls.dependsOn jacocoTestReport
 
+class PandocTask extends DefaultTask {
+    @Input
+    File inputFile
+
+    File dataDir = project.file('pandoc')
+
+    File outputDir = new File(project.docsDir, 'pandoc')
+
+    String outputFileName
+
+    @Input
+    FileTree getDataDirFileTree() {
+        return project.fileTree(dir: dataDir)
+    }
+
+    @OutputFile
+    File getHtmlOutputFile() {
+        return new File(outputDir, inputFile.name.take(inputFile.name.lastIndexOf('.')) + '.html')
+    }
+
+    @OutputFile
+    File getPdfOutputFile() {
+        return new File(outputDir, inputFile.name.take(inputFile.name.lastIndexOf('.')) + '.pdf')
+    }
+
+    @OutputFile
+    File getDocxOutputFile() {
+        return new File(outputDir, inputFile.name.take(inputFile.name.lastIndexOf('.')) + '.docx')
+    }
+
+    @TaskAction
+    def generate() {
+        project.exec {
+            workingDir inputFile.parent
+            commandLine 'pandoc', '--self-contained', '-s', '-f',
+                        'markdown_github-hard_line_breaks',
+                        '-t', 'html5',
+                        "--data-dir=${dataDir}", '-o', htmlOutputFile,
+                        inputFile.name
+        }
+        project.exec {
+            workingDir inputFile.parent
+            commandLine 'pandoc', "--data-dir=${dataDir}", '-o', pdfOutputFile,
+                        '-f', 'markdown_github-hard_line_breaks',
+                        inputFile.name
+        }
+        project.exec {
+            workingDir inputFile.parent
+            commandLine 'pandoc', "--data-dir=${dataDir}",
+                        '-f', 'markdown_github-hard_line_breaks',
+                        '-o', docxOutputFile, inputFile.name
+        }
+    }
+}
+
+task(pandocUserGuide, type: PandocTask) {
+    inputFile = file('docs/UserGuide.md')
+}
+
+task(pandocDeveloperGuide, type: PandocTask) {
+    inputFile = file('docs/DeveloperGuide.md')
+}
+
+task(pandoc) {
+}
+pandoc.dependsOn pandocUserGuide
+pandoc.dependsOn pandocDeveloperGuide
+
 artifacts {
     archives shadowJar
 }

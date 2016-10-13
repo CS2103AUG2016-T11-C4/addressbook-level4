@@ -309,7 +309,11 @@ AssertionError is expected**
   [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option).
   Delete run configurations created when you ran tests earlier.
 
-## Appendix A: User Stories
+<!-- BEGIN LATEX
+\appendix
+END LATEX -->
+
+# Appendix A: User Stories
 
 Priorities:
 
@@ -351,13 +355,13 @@ Priority | As a ... | I want to ... | So that I can...
 `*`      | Group user | Option to categorize my task as a "Group activity" and automatically send notifications (through mail or other social networking platforms) to all other users who are in my team, whenever I make any changes to our work schedule for the group activity; and send them reminders about upcoming deadlines for the tasks. Every time I add a new task, I should have also an option to either include it to an existing group activity or add it to a new group activity (different commands for each of these operations). | Improve my work efficiency, and make sure everyone in my team are aware of the work schedule of our project.
 `* `     | User who needs to be reminded of the task before the deadline date. | Set reminders at customized times before the deadline. | Have enough time to complete the task before deadline, even if I forgot to do it.
 
-## Appendix B: Use Cases
+# Appendix B: Use Cases
 
 **Software System**: TaskTracker
 
 **Actor**: User
 
-### Use case: Add an event
+## Use case: Add an event
 
 **MSS**
 
@@ -399,7 +403,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 > Use case resumes from step 2.
 
-### Use case: Add a deadline
+## Use case: Add a deadline
 
 **MSS**
 
@@ -431,7 +435,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 > Use case resumes from step 2.
 
-### Use case: Add a floating task
+## Use case: Add a floating task
 
 **MSS**
 
@@ -458,7 +462,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 > Use case resumes from step 2.
 
-### Use case: View all floating tasks
+## Use case: View all floating tasks
 
 **MSS**
 
@@ -477,7 +481,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 > Use case ends.
 
-### Use case: Revise the due time of a deadline task
+## Use case: Revise the due time of a deadline task
 
 **MSS**
 
@@ -509,7 +513,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 > Use case resumes from step 2.
 
-### Use case: Revise the time of an event
+## Use case: Revise the time of an event
 
 **MSS**
 
@@ -556,7 +560,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 > Use case ends.
 
-### Use case: mark a floating task/deadline as finished
+## Use case: mark a floating task/deadline as finished
 
 **MSS**
 
@@ -573,7 +577,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 > Use case ends.
 
-### Use case: Generate a list of empty time slots
+## Use case: Generate a list of empty time slots
 
 **MSS**
 
@@ -604,7 +608,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 > Use case ends.
 
-### Use case: Add priority tags
+## Use case: Add priority tags
 
 **MSS**
 
@@ -635,7 +639,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 > Use case ends.
 
-### Use case: Add new event under a specific "group activity"
+## Use case: Add new event under a specific "group activity"
 
 **MSS**
 
@@ -673,7 +677,7 @@ a new group activity.
 
 > Use case ends.
 
-### Use case: Add event description
+## Use case: Add event description
 
 **MSS**
 
@@ -686,7 +690,7 @@ a new group activity.
 
    User case ends.
 
-### Use case: Set reminders
+## Use case: Set reminders
 
 **MSS**
 
@@ -707,7 +711,7 @@ a new group activity.
 
 > User case ends.
 
-### See the manual
+## See the manual
 
 **Use case: see the manual**
 
@@ -719,7 +723,7 @@ a new group activity.
 
    Use case ends.
 
-### Search the manual
+## Search the manual
 
 **Use case: search the manual**
 
@@ -739,7 +743,7 @@ a new group activity.
 
 > Use case ends
 
-### Undo an action
+## Undo an action
 
 **User case: Undo an action, such as restoring a deleted a task**
 
@@ -760,7 +764,7 @@ a new group activity.
 
 > User Case ends.
 
-## Appendix C: Non Functional Requirements
+# Appendix C: Non Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java `1.8.0_60` or higher
    installed.
@@ -772,7 +776,7 @@ a new group activity.
 4. Have the app notify me of the error in my command, and suggest the right
    command when I make a typo/forget the format of the command
 
-## Appendix D: Glossary
+# Appendix D: Glossary
 
 <dl>
   <dt>Task book</dt>
@@ -797,9 +801,9 @@ a new group activity.
   <dd>A time slot is referring to a period of time</dd>
 </dl>
 
-## Appendix E: Product Survey
+# Appendix E: Product Survey
 
-### Todo.txt
+## Todo.txt
 
 Full product survey [here](productsurveys/todo.txt.md)
 
@@ -844,7 +848,7 @@ Finally, it has no support for undoing operations. While this is alleviated
 somewhat as it asks for confirmation before deleting tasks, all other
 operations are done without user confirmation.
 
-### Todoist
+## Todoist
 
 Full product survey [here](productsurveys/Todoist.md)
 
@@ -893,7 +897,7 @@ floating task or deadline task in a single window. The second one is the "Undo"
 command, which enables the user to undo the last command immediately when them
 perform wrongly.
 
-### Wunderlist
+## Wunderlist
 
 Full product survey [here](productsurveys/Wunderlist.md)
 
@@ -921,7 +925,7 @@ So, how well does Wunderlist satisfy Jim's requirements?
 | Flexibility in command line format. | No |
 | Undo operations | Tiny |
 
-### Google Calendar
+## Google Calendar
 
 Full product survey [here](https://docs.google.com/document/d/1ELun1gQUiVAxC6it-16jikFRwAePTXS5Xri7GdhUnL8/edit?usp=sharing)
 

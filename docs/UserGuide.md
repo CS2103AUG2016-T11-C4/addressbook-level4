@@ -1,4 +1,17 @@
+---
+title: Task Tracker
+papersize: A4
+documentclass: report
+numbersections: true
+geometry: margin=2.4cm
+mainfont: DejaVu Sans
+fontsize: 11pt
+toc: true
+---
+
 # User Guide
+
+<!-- BEGIN GITHUB -->
 
 * [About] (#about)
 * [Quick Start](#quick-start)
@@ -25,6 +38,8 @@
     * [Clear](#clear)
     * [Exit](#exit)
 * [Command Summary](#command-summary)
+
+<!-- END GITHUB -->
 
 ## About
 
@@ -191,7 +206,7 @@ TaskTracker makes time-management smart and simple for you!
 <a name="qss">**Quick Start Summary**</a>
 
 | Command | Essential Parameters|
-|---------|:----------|
+|---------|:-----------------------------------------------------------------------------|
 |add| `"taskname"` <br> `"deadline task name"` `date` `time` <br> `"event name"` `start date` `start time` `end date` `end time`|
 | edit | `-float` `index` `n-` `p-` <br> `-deadline` `index` `n-` `dd-` `dt-` <br> `-event` `index` `n-` `sd-` `st-` `ed-` `et` `loc-` <br>
 | del | `-float` or `-deadline` or `-event` `index`|
@@ -207,7 +222,7 @@ different type of task: floating task, deadline task, and event, depending on
 the type and number of fields entered when creating the task.
 
 |A/An... | has...|
-|----| :--------:|:------|
+|----| :-------------------------------------|
 |Floating Task | only a task name|
 |Deadline task |  end time and date |
 |Event | start time and date,  end time and date|
@@ -235,8 +250,8 @@ All the time and date fields of the task have to be entered in order to create t
 
 ### <a name="pk">Parameter keywords</a>
 
-|Keyword | Definition|
-|----| :--------:|
+|Keyword | Definition     |
+|----| :------------------|
 |`tdy` | today|
 |`tmr` | tommorow|
 |`yst` | yesteday|
@@ -444,8 +459,8 @@ Delete a useless floating task/event/deadline on TaskTracker.
 
 Edit a floating task to revise its name or priority.
 
-|Field reference | Definition |
-|:----------------:|:-----------:|
+|Field reference | Definition                    |
+|:----------------|:-----------------------------|
 | n- | name |
 | p- | priority |
 
@@ -474,8 +489,8 @@ Edit a floating task to revise its name or priority.
 
 Edit a deadline to revise its name and due date/time.
 
-|Field reference | Definition |
-|:----------------:|:-----------:|
+|Field reference | Definition                        |
+|:----------------|:---------------------------------|
 | n- | name |
 | dd- | due date |
 | dt- | due time |
@@ -501,8 +516,8 @@ Edit a deadline to revise its name and due date/time.
 
 Edit an event to revise its name, starting/ending date/time and location.
 
-|Field reference | Definition |
-|----------------|:-----------|
+|Field reference | Definition                  |
+|----------------|:--------------------------- |
 | n- | name |
 | sd- | start date |
 | st- | start time |
@@ -510,7 +525,14 @@ Edit an event to revise its name, starting/ending date/time and location.
 | et- | end time |
 | loc-| location |
 
-    edit-event <TASK_UNIQUE_INDEX> [n-NEW_NAME | sd-NEW_START_TIME | st-NEW_START_DATE | ed-NEW_END_DATE | et-NEW_END_TIME | n-NEW_NAME | loc-NEW_LOCATION]...
+<!-- BEGIN LATEX
+\pagebreak[3]
+END LATEX -->
+
+    edit-event <TASK_UNIQUE_INDEX> [ n-NEW_NAME | sd-NEW_START_TIME
+                                    | st-NEW_START_DATE | ed-NEW_END_DATE
+                                    | et-NEW_END_TIME | n-NEW_NAME
+                                    | loc-NEW_LOCATION]...
 
 * Quotation marks are not necessary for `NEW_NAME`.
 
@@ -664,7 +686,7 @@ Exits the program.
 ## Command Summary
 
 Command | Format
------------- | :--------
+------------ | :---------------------------------------------------------------
 Add Floating Task | `add "FLOATING_TASK_NAME" [PRIORITY]`
 Add Event |`add “EVENT_NAME” <STARTING_DATE> <STARTING_TIME> <ENDING_DATE> <ENDING_TIME> [loc-LOCATION]`
 Add Deadline |`add “DEADLINE_NAME” <DATE> <TIME>`

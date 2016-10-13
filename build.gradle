@@ -129,7 +129,8 @@ task(pandoc, type: PandocTask) {
     outputFile = new File(project.docsDir, 'manual.pdf')
     filters = [project.file('pandoc/githubonly.py'),
                project.file('pandoc/latexonly.py'),
-               project.file('pandoc/anchorheadings.py')]
+               project.file('pandoc/anchorheadings.py'),
+               project.file('pandoc/appendixrename.py')]
 }
 
 artifacts {

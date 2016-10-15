@@ -10,12 +10,11 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddDeadlineCommand;
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.AddFloatingTaskCommand;
+import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -68,8 +67,8 @@ public class Parser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return prepareAdd(arguments);
+        case AddTaskCommand.COMMAND_WORD:
+            return new AddTaskParser().parse(arguments);
 
         case AddFloatingTaskCommand.COMMAND_WORD:
             return new AddFloatingTaskParser().parse(arguments);
@@ -121,25 +120,6 @@ public class Parser {
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
-        }
-    }
-
-    /**
-     * Parses arguments in the context of the add person command.
-     *
-     * @param args full command args string
-     * @return the prepared command
-     */
-    private Command prepareAdd(String args) {
-        final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(args.trim());
-        // Validate arg string format
-        if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        }
-        try {
-            return new AddCommand(matcher.group("name"));
-        } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
         }
     }
 

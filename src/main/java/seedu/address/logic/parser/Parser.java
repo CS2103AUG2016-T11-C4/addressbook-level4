@@ -11,9 +11,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.AddDeadlineCommand;
-import seedu.address.logic.commands.AddEventCommand;
-import seedu.address.logic.commands.AddFloatingTaskCommand;
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -69,15 +66,6 @@ public class Parser {
 
         case AddTaskCommand.COMMAND_WORD:
             return new AddTaskParser().parse(arguments);
-
-        case AddFloatingTaskCommand.COMMAND_WORD:
-            return new AddFloatingTaskParser().parse(arguments);
-
-        case AddEventCommand.COMMAND_WORD:
-            return new AddEventParser().parse(arguments);
-
-        case AddDeadlineCommand.COMMAND_WORD:
-            return new AddDeadlineParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return prepareSelect(arguments);

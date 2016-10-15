@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
@@ -37,226 +39,353 @@ import seedu.address.logic.commands.SelectCommand;
  */
 public class Parser {
 
-    /**
-     * Used for initial separation of command word and args.
-     */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+	/**
+	 * Used for initial separation of command word and args.
+	 */
+	private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
-    private static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+	private static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
-    private static final Pattern KEYWORDS_ARGS_FORMAT =
-            Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
+	private static final Pattern KEYWORDS_ARGS_FORMAT = Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one
+																											// or
+																											// more
+																											// keywords
+																											// separated
+																											// by
+																											// whitespace
 
-    private static final Pattern PERSON_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)");
+	private static final Pattern PERSON_DATA_ARGS_FORMAT = // '/' forward
+															// slashes are
+															// reserved for
+															// delimiter
+															// prefixes
+			Pattern.compile("(?<name>[^/]+)");
 
-    public Parser() {}
+	public Parser() {
+	}
 
-    /**
-     * Parses user input into command for execution.
-     *
-     * @param userInput full user input string
-     * @return the command based on the user input
-     */
-    public Command parseCommand(String userInput) {
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
-        if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
-        }
+	/**
+	 * Parses user input into command for execution.
+	 *
+	 * @param userInput
+	 *            full user input string
+	 * @return the command based on the user input
+	 */
+	public Command parseCommand(String userInput) {
+		final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+		if (!matcher.matches()) {
+			return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+		}
 
-        final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
-        switch (commandWord) {
+		final String commandWord = matcher.group("commandWord");
+		final String arguments = matcher.group("arguments");
+		switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return prepareAdd(arguments);
+		case AddCommand.COMMAND_WORD:
+			return prepareAdd(arguments);
 
-        case AddFloatingTaskCommand.COMMAND_WORD:
-            return new AddFloatingTaskParser().parse(arguments);
+		case SelectCommand.COMMAND_WORD:
+			return prepareSelect(arguments);
 
-        case AddEventCommand.COMMAND_WORD:
-            return new AddEventParser().parse(arguments);
+		case DeleteCommand.COMMAND_WORD:
+			return prepareDelete(arguments);
 
-        case AddDeadlineCommand.COMMAND_WORD:
-            return new AddDeadlineParser().parse(arguments);
+		case DeleteFloatingTaskCommand.COMMAND_WORD:
+			return prepareDeleteFloatingTask(arguments);
 
-        case SelectCommand.COMMAND_WORD:
-            return prepareSelect(arguments);
+		case EditFloatingTaskCommand.COMMAND_WORD:
+			return new EditFloatingTaskParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return prepareDelete(arguments);
+		case DeleteEventCommand.COMMAND_WORD:
+			return prepareDeleteEvent(arguments);
 
-        case DeleteFloatingTaskCommand.COMMAND_WORD:
-            return prepareDeleteFloatingTask(arguments);
+		case EditEventCommand.COMMAND_WORD:
+			return new EditEventParser().parse(arguments);
 
-        case EditFloatingTaskCommand.COMMAND_WORD:
-            return new EditFloatingTaskParser().parse(arguments);
+		case DeleteDeadlineCommand.COMMAND_WORD:
+			return prepareDeleteDeadline(arguments);
 
-        case DeleteEventCommand.COMMAND_WORD:
-            return prepareDeleteEvent(arguments);
+		case EditDeadlineCommand.COMMAND_WORD:
+			return new EditDeadlineParser().parse(arguments);
 
-        case EditEventCommand.COMMAND_WORD:
-            return new EditEventParser().parse(arguments);
+		case ClearCommand.COMMAND_WORD:
+			return new ClearCommand();
 
-        case DeleteDeadlineCommand.COMMAND_WORD:
-            return prepareDeleteDeadline(arguments);
+		case FindCommand.COMMAND_WORD:
+			return prepareFind(arguments);
 
-        case EditDeadlineCommand.COMMAND_WORD:
-            return new EditDeadlineParser().parse(arguments);
+		case ListCommand.COMMAND_WORD:
+			return new ListCommand();
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+		case ExitCommand.COMMAND_WORD:
+			return new ExitCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return prepareFind(arguments);
+		case HelpCommand.COMMAND_WORD:
+			return new HelpCommand();
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+		default:
+			return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
+		}
+	}
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+	/**
+	 * Parses arguments in the context of the add Task command.
+	 *
+	 * @param args
+	 *            full command args string
+	 * @return the prepared command
+	 */
+	private Command prepareAdd(String args) {
+		args = args.trim();
+		final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(args.trim());// Todos:
+																				// replace
+																				// with
+																				// TASK_DATA_ARGS_FORMAT
+		// Validate arg string format
+		if (!matcher.matches()) {
+			return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+		}
+		String type = idTaskType(args);
+		switch (type) {
+		case ("float"):
+			return new AddFloatingTaskParser().parse(args);
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+		case ("deadline"):
+			return new AddDeadlineParser().parse(args);
 
-        default:
-            return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
-        }
-    }
+		case ("event"):
+			return new AddEventParser().parse(args);
+		}
+		return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+	}
 
-    /**
-     * Parses arguments in the context of the add person command.
-     *
-     * @param args full command args string
-     * @return the prepared command
-     */
-    private Command prepareAdd(String args) {
-        final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(args.trim());
-        // Validate arg string format
-        if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        }
-        try {
-            return new AddCommand(matcher.group("name"));
-        } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
-        }
-    }
+	/**
+	 * Identifies the type of task.
+	 * 
+	 * @param args
+	 * @return type of task as String
+	 */
+	private String idTaskType(String args) {
 
-    /**
-     * Parses arguments in the context of the delete person command.
-     *
-     * @param args full command args string
-     * @return the prepared command
-     */
-    private Command prepareDelete(String args) {
+		// float, no date or time
+		// deadline, has date or/and time
+		// event has date and time and to keyword
+		String[] s = args.split(" ");
 
-        Optional<Integer> index = parseIndex(args);
-        if (!index.isPresent()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-        }
+		if (isEvent(s)) {
+			return "event";
+		}
+		
+		if (isDeadline(s)) {
+			return "deadline";
+		}
+		
+		if (isFloat(s)) {
+			return "float";
+		}
 
-        return new DeleteCommand(index.get());
-    }
+		return null;
+	}
 
-    /**
-     * Parses arguments in the context of the delete floating task command.
-     *
-     * @param args full command args string
-     * @return the prepared command
-     */
-    private Command prepareDeleteFloatingTask(String args) {
-        Optional<Integer> index = parseIndex(args);
-        if (!index.isPresent()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                  DeleteFloatingTaskCommand.MESSAGE_USAGE));
-        }
-        return new DeleteFloatingTaskCommand(index.get());
-    }
+	public int wordCount(String s) {
+		if (s == null) {
+			return 0;
+		} else {
+			return s.trim().split("\\s+").length;
+		}
+	}
+	
+	/**
+	 * Checks if arguments contains `to`, at least one LocalDate or LocalTime before `to` and at least one LocalDate or LocalTime after `to`. 
+	 * @param args
+	 * @return true if task is an event
+	 */
+	private boolean isEvent(String[] args) {
+		boolean passCheck = false;
+		// max no. of args for event is 6 (name, sd, st, ed, et, loc)
+		if (args.length <= 6) {
+			passCheck = true;
+		}
+		int toIndex = 0;
+		// check for `to`
+		for (int i = 0; i < args.length; i++) {
+			if (args[i].equals("to")) {
+				passCheck = true;
+				toIndex = i;
+				break;
+			}
+		}
+		
+		// check for at least one date/time input before `to`
+		if (passCheck) {
+			passCheck=LocalDateTimePresenceChecker(0, toIndex, args);
+		}
+		// check for at least one date/time input after `to`
+		if (passCheck) {
+			passCheck=LocalDateTimePresenceChecker(toIndex, args.length, args);
+		}
+		return passCheck;
+	}
+	
+	private boolean isDeadline(String[] args) {
+		boolean passCheck = false;
+		//max no. of arguments for deadline is 3 (name, dd, dt)  
+		if(args.length<=3) {
+			passCheck=true;
+		}
+		//check for at least one date or time after name
+		if(passCheck) {
+			passCheck=LocalDateTimePresenceChecker(1, args.length, args);
+		}
+		return passCheck;
+	}
+	
+	private boolean isFloat(String[] args) {
+		
+		//max no. of arguments for float is 2 (name, p-)
+		if(args.length==2) {
+			return args[1].matches("\\d");
+		}
+		if(args.length==1) {
+			return true;
+		}
+		return false; 
+	}
+	/**
+	 * Checks for the presence of at least one LocalDate or LocalTime object that can be formed from a String array
+	 */
+	private boolean LocalDateTimePresenceChecker(int startIndex, int endIndex, String[] args) {
+		DateParser isDate = new DateParser(LocalDate.now());
+		TimeParser isTime = new TimeParser(LocalTime.now());
+		for (int i = startIndex; i < endIndex; i++) {
+			try {
+				if (isDate.parse(args[i]) instanceof LocalDate || isTime.parse(args[i]) instanceof LocalTime) {
+					return true;
+				}
+			} catch (IllegalValueException e) {
+				//do nothing.
+			}
+		} 
+		return false;	
+	}
 
-    /**
-     * Parses arguments in the context of the delete event command.
-     *
-     * @param args full command args string
-     * @return the prepared command
-     */
-    private Command prepareDeleteEvent(String args) {
-        Optional<Integer> index = parseIndex(args);
-        if (!index.isPresent()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteEventCommand.MESSAGE_USAGE));
-        }
-        return new DeleteEventCommand(index.get());
-    }
+	/**
+	 * Parses arguments in the context of the delete person command.
+	 *
+	 * @param args
+	 *            full command args string
+	 * @return the prepared command
+	 */
+	private Command prepareDelete(String args) {
 
-    /**
-     * Parses arguments in the context of the delete deadline command.
-     *
-     * @param args full command args string
-     * @return the prepared command
-     */
-    private Command prepareDeleteDeadline(String args) {
-        Optional<Integer> index = parseIndex(args);
-        if (!index.isPresent()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteDeadlineCommand.MESSAGE_USAGE));
-        }
-        return new DeleteDeadlineCommand(index.get());
-    }
+		Optional<Integer> index = parseIndex(args);
+		if (!index.isPresent()) {
+			return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+		}
 
-    /**
-     * Parses arguments in the context of the select person command.
-     *
-     * @param args full command args string
-     * @return the prepared command
-     */
-    private Command prepareSelect(String args) {
-        Optional<Integer> index = parseIndex(args);
-        if (!index.isPresent()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
-        }
+		return new DeleteCommand(index.get());
+	}
 
-        return new SelectCommand(index.get());
-    }
+	/**
+	 * Parses arguments in the context of the delete floating task command.
+	 *
+	 * @param args
+	 *            full command args string
+	 * @return the prepared command
+	 */
+	private Command prepareDeleteFloatingTask(String args) {
+		Optional<Integer> index = parseIndex(args);
+		if (!index.isPresent()) {
+			return new IncorrectCommand(
+					String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteFloatingTaskCommand.MESSAGE_USAGE));
+		}
+		return new DeleteFloatingTaskCommand(index.get());
+	}
 
-    /**
-     * Returns the specified index in the {@code command} IF a positive unsigned integer is given as the index.
-     *   Returns an {@code Optional.empty()} otherwise.
-     */
-    private Optional<Integer> parseIndex(String command) {
-        final Matcher matcher = TASK_INDEX_ARGS_FORMAT.matcher(command.trim());
-        if (!matcher.matches()) {
-            return Optional.empty();
-        }
+	/**
+	 * Parses arguments in the context of the delete event command.
+	 *
+	 * @param args
+	 *            full command args string
+	 * @return the prepared command
+	 */
+	private Command prepareDeleteEvent(String args) {
+		Optional<Integer> index = parseIndex(args);
+		if (!index.isPresent()) {
+			return new IncorrectCommand(
+					String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteEventCommand.MESSAGE_USAGE));
+		}
+		return new DeleteEventCommand(index.get());
+	}
 
-        String index = matcher.group("targetIndex");
-        if (!StringUtil.isUnsignedInteger(index)) {
-            return Optional.empty();
-        }
-        return Optional.of(Integer.parseInt(index));
+	/**
+	 * Parses arguments in the context of the delete deadline command.
+	 *
+	 * @param args
+	 *            full command args string
+	 * @return the prepared command
+	 */
+	private Command prepareDeleteDeadline(String args) {
+		Optional<Integer> index = parseIndex(args);
+		if (!index.isPresent()) {
+			return new IncorrectCommand(
+					String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteDeadlineCommand.MESSAGE_USAGE));
+		}
+		return new DeleteDeadlineCommand(index.get());
+	}
 
-    }
+	/**
+	 * Parses arguments in the context of the select person command.
+	 *
+	 * @param args
+	 *            full command args string
+	 * @return the prepared command
+	 */
+	private Command prepareSelect(String args) {
+		Optional<Integer> index = parseIndex(args);
+		if (!index.isPresent()) {
+			return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+		}
 
-    /**
-     * Parses arguments in the context of the find person command.
-     *
-     * @param args full command args string
-     * @return the prepared command
-     */
-    private Command prepareFind(String args) {
-        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
-        if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    FindCommand.MESSAGE_USAGE));
-        }
+		return new SelectCommand(index.get());
+	}
 
-        // keywords delimited by whitespace
-        final String[] keywords = matcher.group("keywords").split("\\s+");
-        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
-        return new FindCommand(keywordSet);
-    }
+	/**
+	 * Returns the specified index in the {@code command} IF a positive unsigned
+	 * integer is given as the index. Returns an {@code Optional.empty()}
+	 * otherwise.
+	 */
+	private Optional<Integer> parseIndex(String command) {
+		final Matcher matcher = TASK_INDEX_ARGS_FORMAT.matcher(command.trim());
+		if (!matcher.matches()) {
+			return Optional.empty();
+		}
+
+		String index = matcher.group("targetIndex");
+		if (!StringUtil.isUnsignedInteger(index)) {
+			return Optional.empty();
+		}
+		return Optional.of(Integer.parseInt(index));
+
+	}
+
+	/**
+	 * Parses arguments in the context of the find person command.
+	 *
+	 * @param args
+	 *            full command args string
+	 * @return the prepared command
+	 */
+	private Command prepareFind(String args) {
+		final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+		if (!matcher.matches()) {
+			return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+		}
+
+		// keywords delimited by whitespace
+		final String[] keywords = matcher.group("keywords").split("\\s+");
+		final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+		return new FindCommand(keywordSet);
+	}
 
 }

@@ -39,7 +39,7 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public CommandResult execute(String commandText) {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        final TaskBookChangeListener taskBookListener = new TaskBookChangeListener(model.getAddressBook());
+        final TaskBookChangeListener taskBookListener = new TaskBookChangeListener(model.getTaskBook());
         final Config oldConfig = new Config(model.getConfig());
         Command command = parser.parseCommand(commandText);
         command.setData(model);
@@ -53,7 +53,7 @@ public class LogicManager extends ComponentManager implements Logic {
         try {
             if (listener.getHasChanged()) {
                 logger.info("Task book data changed, saving to file");
-                storage.saveTaskBook(model.getAddressBook());
+                storage.saveTaskBook(model.getTaskBook());
             }
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));

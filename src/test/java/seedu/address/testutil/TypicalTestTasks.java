@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.TaskBook;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.Task;
 
 /**
@@ -46,14 +47,14 @@ public class TypicalTestTasks {
         }
     }
 
-    public static void loadAddressBookWithSampleData(TaskBook ab) {
-        ab.addTask(new Task(alice));
-        ab.addTask(new Task(benson));
-        ab.addTask(new Task(carl));
-        ab.addTask(new Task(daniel));
-        ab.addTask(new Task(elle));
-        ab.addTask(new Task(fiona));
-        ab.addTask(new Task(george));
+    public static void loadAddressBookWithSampleData(TaskBook ab) throws IllegalValueException {
+        ab.addTask(new FloatingTask("alice"));
+        ab.addTask(new FloatingTask("benson"));
+        ab.addTask(new FloatingTask("carl"));
+        ab.addTask(new FloatingTask("daniel"));
+        ab.addTask(new FloatingTask("elle"));
+        ab.addTask(new FloatingTask("fiona"));
+        ab.addTask(new FloatingTask("george"));
     }
 
     public TestTask[] getTypicalPersons() {
@@ -62,7 +63,12 @@ public class TypicalTestTasks {
 
     public TaskBook getTypicalAddressBook() {
         TaskBook ab = new TaskBook();
-        loadAddressBookWithSampleData(ab);
+        try {
+			loadAddressBookWithSampleData(ab);
+		} catch (IllegalValueException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return ab;
     }
 }

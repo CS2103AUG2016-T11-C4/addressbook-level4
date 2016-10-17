@@ -10,7 +10,7 @@ import seedu.address.model.task.DeadlineTask;
  */
 public class AddDeadlineCommand extends Command {
 
-    public static final String COMMAND_WORD = "due";
+    public static final String COMMAND_WORD = "deadline";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a deadline to the task book. "
             + "Parameters: \"NAME\" <DUE_DATE> <DUE_TIME>\n"

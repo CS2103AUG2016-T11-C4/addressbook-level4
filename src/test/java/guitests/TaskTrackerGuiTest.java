@@ -18,6 +18,7 @@ import guitests.guihandles.ResultDisplayHandle;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.TaskBook;
 import seedu.address.testutil.TestUtil;
 import seedu.address.testutil.TypicalTestTasks;
@@ -77,7 +78,12 @@ public abstract class TaskTrackerGuiTest {
      */
     protected TaskBook getInitialData() {
         TaskBook ab = TestUtil.generateEmptyAddressBook();
-        TypicalTestTasks.loadAddressBookWithSampleData(ab);
+        try {
+			TypicalTestTasks.loadAddressBookWithSampleData(ab);
+		} catch (IllegalValueException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return ab;
     }
 

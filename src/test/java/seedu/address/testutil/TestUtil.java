@@ -29,6 +29,7 @@ import seedu.address.TestApp;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.TaskBook;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
 import seedu.address.storage.JsonStorageModule;
@@ -66,15 +67,15 @@ public class TestUtil {
     private static Task[] getSampleTaskData() {
         try {
             return new Task[]{
-                new Task(new Name("Ali Muster")),
-                new Task(new Name("Boris Mueller")),
-                new Task(new Name("Carl Kurz")),
-                new Task(new Name("Daniel Meier")),
-                new Task(new Name("Elle Meyer")),
-                new Task(new Name("Fiona Kunz")),
-                new Task(new Name("George Best")),
-                new Task(new Name("Hoon Meier")),
-                new Task(new Name("Ida Mueller"))
+                new FloatingTask("Ali Muster"),
+                new FloatingTask("Boris Mueller"),
+                new FloatingTask("Carl Kurz"),
+                new FloatingTask("Daniel Meier"),
+                new FloatingTask("Elle Meyer"),
+                new FloatingTask("Fiona Kunz"),
+                new FloatingTask("George Best"),
+                new FloatingTask("Hoon Meier"),
+                new FloatingTask("Ida Mueller")
             };
         } catch (IllegalValueException e) {
             assert false;

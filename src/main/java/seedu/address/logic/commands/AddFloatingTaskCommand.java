@@ -10,7 +10,7 @@ import seedu.address.model.task.Priority;
  */
 public class AddFloatingTaskCommand extends Command {
 
-    public static final String COMMAND_WORD = "task";
+    public static final String COMMAND_WORD = "float";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an floating task to the task book. "
             + "Parameters: \"NAME\" [PRIORITY]\n"

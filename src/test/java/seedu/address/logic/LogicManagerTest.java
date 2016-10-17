@@ -37,6 +37,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.TaskBook;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
 import seedu.address.storage.StorageManager;
@@ -349,9 +350,9 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
 
-        Task adam() throws Exception {
-            Name name = new Name("Adam Brown");
-            return new Task(name);
+        FloatingTask adam() throws Exception {
+            String name = "Adam Brown";
+            return new FloatingTask(name);
         }
 
         /**
@@ -362,9 +363,7 @@ public class LogicManagerTest {
          * @param seed used to generate the task data field values
          */
         Task generateTask(int seed) throws Exception {
-            return new Task(
-                    new Name("Task " + seed)
-            );
+            return new FloatingTask(new Name("Task " + seed).toString());
         }
 
         /** Generates the correct add command based on the task given */
@@ -449,9 +448,7 @@ public class LogicManagerTest {
          * Generates a Task object with given name. Other fields will have some dummy values.
          */
         Task generateTaskWithName(String name) throws Exception {
-            return new Task(
-                    new Name(name)
-            );
+            return new FloatingTask(name);
         }
     }
 }

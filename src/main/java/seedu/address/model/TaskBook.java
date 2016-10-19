@@ -37,10 +37,9 @@ public class TaskBook implements ReadOnlyTaskBook {
      * Tasks are copied into this TaskBook.
      */
     public TaskBook(ReadOnlyTaskBook toBeCopied) {
-        this(toBeCopied.getTasks(),
-             toBeCopied.getFloatingTasks(),
-             toBeCopied.getEventTasks(),
-             toBeCopied.getDeadlineTasks());
+ 
+        this();
+        resetData(toBeCopied);
     }
 
     /**
@@ -55,8 +54,16 @@ public class TaskBook implements ReadOnlyTaskBook {
         setDeadlineTasks(deadlineTasks);
     }
 
+    /**
+     * Replaces the contents of this TaskBook with {@code newData}.
+     * @param newData
+     */
     public void resetData(ReadOnlyTaskBook newData) {
+        
         setTasks(newData.getTasks());
+        setFloatingTasks(newData.getFloatingTasks());
+        setEventTasks(newData.getEventTasks());
+        setDeadlineTasks(newData.getDeadlineTasks());
     }
 
     //// task operations

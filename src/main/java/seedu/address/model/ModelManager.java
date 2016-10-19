@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import java.util.EmptyStackException;
+import java.util.Stack;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -10,6 +12,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.TaskBookChangedEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.EventTask;
 import seedu.address.model.task.FloatingTask;
@@ -28,7 +31,15 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<FloatingTask> filteredFloatingTasks;
     private final FilteredList<EventTask> filteredEventTasks;
     private final FilteredList<DeadlineTask> filteredDeadlineTasks;
+   
+    //for undo
+    public Stack<TaskBook> stateStack=new Stack<TaskBook>();//a stack of past TaskBook states
+    public final Stack<Command> modifyingDataCommandHistory=new Stack<Command>();
 
+    //for redo
+    public Stack <TaskBook> undoneStates = new Stack<TaskBook>();
+    public Stack<Command> undoneCommands=new Stack<Command>();
+    
     /**
      * Initializes a ModelManager with the given TaskBook
      * TaskBook and its variables should not be null
@@ -57,7 +68,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ReadOnlyTaskBook getAddressBook() {
+    public ReadOnlyTaskBook getTaskBook() {
         return taskBook;
     }
 
@@ -78,6 +89,41 @@ public class ModelManager extends ComponentManager implements Model {
         setFilter(null);
         indicateTaskBookChanged();
     }
+    
+    //=============for undo and redo===================================
+    @Override
+    public Command undo() throws EmptyStackException {
+			undoneStates.push(new TaskBook(getTaskBook()));
+			TaskBook prevState = stateStack.pop();
+			resetData(prevState);
+			Command undoneAction=modifyingDataCommandHistory.pop();
+			undoneCommands.push(undoneAction);
+			return undoneAction;
+    }
+    
+    @Override
+    public void resetRedoables() {
+    	undoneCommands=new Stack<Command>();
+    	undoneStates = new Stack<TaskBook>(); 
+    }
+    
+    @Override
+    public void recordStateBeforeChange(Command command) {
+    	TaskBook state = new TaskBook(getTaskBook());
+    	stateStack.push(state);
+    	modifyingDataCommandHistory.push(command);
+    }
+    
+    @Override 
+    public Command redo() throws EmptyStackException {
+    	
+    	TaskBook state = undoneStates.pop();
+    	Command action = undoneCommands.pop();
+    	recordStateBeforeChange(action);
+    	resetData(state);
+    	return action;
+    }
+    
 
     //=========== Filtered Task List Accessors ===============================================================
 

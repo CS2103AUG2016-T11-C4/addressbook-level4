@@ -22,4 +22,14 @@ public class HelpCommand extends Command {
         EventsCenter.getInstance().post(new ShowHelpRequestEvent());
         return new CommandResult(SHOWING_HELP_MESSAGE);
     }
+
+	@Override
+	public boolean modifiesData() {
+		return false;
+	}
+	
+	@Override
+	public String getCommandWord() {
+		return COMMAND_WORD;
+	}
 }

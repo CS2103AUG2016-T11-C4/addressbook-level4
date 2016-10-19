@@ -32,4 +32,13 @@ public class DeleteEventCommand extends Command {
         }
     }
 
+	@Override
+	public boolean modifiesData() {
+		return true;
+	}
+
+	@Override
+	public String getCommandWord() {
+		return COMMAND_WORD;
+	}
 }

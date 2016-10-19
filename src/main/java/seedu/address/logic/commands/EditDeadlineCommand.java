@@ -75,4 +75,14 @@ public class EditDeadlineCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, newDeadlineTask));
     }
 
+	@Override
+	public boolean modifiesData() {
+		return true;
+	}
+	
+	@Override
+	public String getCommandWord() {
+		return COMMAND_WORD;
+	}
+
 }

@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.EventTask;
 import seedu.address.model.task.FloatingTask;
@@ -19,14 +20,27 @@ public interface Model {
     void resetData(ReadOnlyTaskBook newData);
 
     /** Returns the TaskBook */
-    ReadOnlyTaskBook getAddressBook();
+    ReadOnlyTaskBook getTaskBook();
 
     /** Deletes the given task. */
     void deleteTask(Task target) throws TaskNotFoundException;
 
     /** Adds the given task */
     void addTask(Task task);
-
+    
+    //undo and redo
+    /** Undo prev action that modifies data**/
+    Command undo();
+    
+    /** reset stack of redoable actions when a non undo modifying data command is called**/
+    void resetRedoables();
+    
+    void recordStateBeforeChange(Command command);
+    
+    /** redo previous undo **/
+    Command redo();
+    /////////////end of undo and redo//////////
+    
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<Task>} */
     UnmodifiableObservableList<Task> getFilteredTaskList();
 
@@ -108,5 +122,5 @@ public interface Model {
      * If predicate is null, the filtered deadline task list will be populated with all deadline tasks.
      */
     void setDeadlineTaskFilter(Predicate<? super DeadlineTask> predicate);
-
-}
+    
+ }

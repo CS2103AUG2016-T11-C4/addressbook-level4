@@ -99,4 +99,13 @@ public class EditEventCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, newEventTask));
     }
 
+	@Override
+	public boolean modifiesData() {
+		return true;
+	}
+
+	@Override
+	public String getCommandWord() {
+		return COMMAND_WORD;
+	}
 }

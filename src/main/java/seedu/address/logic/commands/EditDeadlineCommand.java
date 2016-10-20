@@ -11,7 +11,7 @@ import seedu.address.model.task.Name;
 
 public class EditDeadlineCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit-due";
+    public static final String COMMAND_WORD = "edit-deadline";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the deadline identified by the index number used in the filtered deadline listing.\n"

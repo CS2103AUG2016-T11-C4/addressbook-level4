@@ -8,7 +8,7 @@ import seedu.address.model.task.Priority;
 
 public class EditFloatingTaskCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit-task";
+    public static final String COMMAND_WORD = "edit-float";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the floating task identified by the index number used in the filtered floating task listing.\n"

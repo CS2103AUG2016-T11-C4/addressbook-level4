@@ -6,7 +6,7 @@ import seedu.address.model.task.FloatingTask;
 
 public class DeleteFloatingTaskCommand extends Command {
 
-    public static final String COMMAND_WORD = "del-task";
+    public static final String COMMAND_WORD = "del-float";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the floating task identified by the index number used in the filtered floating task listing.\n"

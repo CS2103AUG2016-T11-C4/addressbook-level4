@@ -6,7 +6,7 @@ import seedu.address.model.task.DeadlineTask;
 
 public class DeleteDeadlineCommand extends Command {
 
-    public static final String COMMAND_WORD = "del-due";
+    public static final String COMMAND_WORD = "del-deadline";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the deadline identified by the index number used in the filtered deadline listing.\n"

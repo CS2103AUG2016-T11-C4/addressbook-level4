@@ -73,20 +73,22 @@ TaskTracker makes time-management smart and simple for you!
 
 2. Download the latest `TaskTracker.jar` from the 'releases' tab.
 
-3. Copy the file to the folder you want to use as the home folder for your task
-   database.
+3. Copy the file to the folder you want to use as the home folder for your task database.
 
-4. Double-click the file to start the app. The GUI should appear in a few
-   seconds.
+4. Double-click the file to start the app. The GUI should appear in a few seconds.
 
 5. Set up: enter your name and verify the current date and time.
 
 6. You're good to go! Try adding your first Task. Press Enter to enter a
-   command. For floating task, try `add "Learn Task Tracker"`.
+   command. For adding a floating task, try:
+	
+	* `add "Learn Task Tracker"`.
 
     ![alt text](./images/userguide/1.png "command bar")
 
-    Let's do another one, `add "bake potatoes" 2`
+    Let's do another one: 
+	
+	* `add "bake potatoes" p-2`
 
     ![alt text](./images/userguide/2.png "")
 
@@ -110,31 +112,25 @@ TaskTracker makes time-management smart and simple for you!
 8. Next up, events. An event is a task with a start date, start time, end date
    and end time. Example commands are:
 
-	* `add "CS2103t summer camp" 30/8 1pm 3/1/2017 6pm`
+	* `add "CS2103t programming camp" 30/8 1pm to 3/1/2017 6pm`
 
-        Event `CS2103t summer camp` starts on 30 Aug 2016, 1pm, and ends on 3
-        January 2017,6pm.
+        Event `CS2103t programming camp` starts from 1pm of the 30th August 2016, and ends at 6pm of the 3rd January 2017.
 
 	* `add "potato peeling" tdy 3pm to 7pm`
 
-        Event `potato peeling` starts today 3pm and ends today 7pm.
+        Event `potato peeling` starts from today's 3pm and ends at today's 7pm.
 
-	* `add "cupcake festival" tdy 8pm tmr 12pm loc-NUS`
+	* `add "cupcake festival" tdy 8pm tmr 12pm`
 
-        Event `cupcake festival` starts today 8pm and ends tomorrow 12 pm at
-        NUS.
+        Event `cupcake festival` starts from today's 8pm and ends at tomorrow's 12 pm.
 
 	* `add "Trick or treat" 31/10 8pm to 9pm`
 
-        Event `Trick or treat` starts 31 October this year 8pm and ends on the
-        same day, 9pm.
+        Event `Trick or treat` starts from 8pm of 31st October this year and ends on the same day's 9pm.
 
     ![alttext](./images/userguide/4.png "")
 
-9. All task in the database will be assigned a unique index. The unique index
-   can be seen to the left of the task name.
-
-10. To delete a task, try:
+9. To delete a task, try:
 
     ```
     del-float 2
@@ -156,20 +152,19 @@ TaskTracker makes time-management smart and simple for you!
 
     ![alttext](./images/userguide/5.png "")
 
-11. To edit a deadline, try:
+10. To edit a deadline, try:
 
-	* `edit-deadline 1 dd-29dec dt-2pm`
+	* `edit-deadline 1 dd-29/12 dt-2pm`
 
-        The following properties of task are modified: due date, due time. (`dd`
-        refers to due date, `dt` refers to due time)
+        The following properties of task are modified: 'due date' and 'due time'. (`dd` refers to due date, `dt` refers to due time)
 
 	* `edit-deadline 1 dt-3pm`
 
-        Only due time of `bake cookies` modified.
+        Only the due time of `bake cookies` is modified.
 
     ![alttext](./images/userguide/6.png "")
 
-12. To edit an event, try:
+11. To edit an event, try:
 
 	* `edit-event 2 loc-NUS`
 
@@ -188,36 +183,40 @@ TaskTracker makes time-management smart and simple for you!
 
         ![alttext](./images/userguide/8.png "")
 
-13. To edit a floating task, try:
+12. To edit a floating task, try:
 
 	* `edit-float 1 p-1`
 
-        Floating Task `Learn Task Tracker` is given a priority of 1.
+        Floating Task `Learn Task Tracker` is given a priority of `1`.
 
         ![alttext](./images/userguide/9.png "")
 
-14. You've finished a task. Congrations! Let's mark a task as finshed.
+13. If you've finished a task. Congrations! Let's mark that task as finshed.
 
      * `fin-float 1`
 
-        Floating task `Learn Task Tracker` is marked as finished.
+        Floating task `Learn Task Tracker` will be marked as finished.
 
-15. To exit the program, try:
+     * `fin-deadline 1`
+
+        Deadline task `bake cookies` will be marked as finished.
+
+14. To exit the program, please enter:
 
 	 * `exit`
 
         Close the Task-tracker.
 
-16. Refer to the [Features](#features) section below for details of each
-    command.
+15. For more details of each 
+     command.
+please refer to the [Features](#features) section below.
+
 
 ## Features
 
 ### <a name="dm">Data models</a>
 
-The task stored in Task Tracker will be automatically grouped into three
-different type of task: floating task, deadline task, and event, depending on
-the type and number of fields entered when creating the task.
+All tasks stored in TaskTracker will be automatically categorized into three different types: `floating task`, `deadline task`, and `event`, depending on the types and number of parameters entered when created.
 
 |A/An... | has...|
 |----| :-------------------------------------|
@@ -225,35 +224,32 @@ the type and number of fields entered when creating the task.
 |Deadline task |  end time and date |
 |Event | start time and date,  end time and date|
 
-All the time and date fields of the task have to be entered in order to create the task.
-
 ### <a name="cf">Command Format</a>
 
 * Words in `UPPER_CASE` are parameters to be defined by the user.
 
-* Words in `lower_case` are the reserved keywords.
+* Words in `lower_case` are the reserved keywords. All keywords can not be changed in each command line.
 
-* Items in `[SQUARE_BRACKETS]` are optional parameters.
+* Items in `[SQUARE_BRACKETS]` are optional parameters. All paramters in square backets can be omitted.
 
-* Items in `<ANGLE_BRACKETS>` essential parameters. All essential parameters
-  have to be included in the command.
+* Items in `<ANGLE_BRACKETS>` are optional parameters. However, a certain number of these kind of parameters will be required in different commands.
+
+* All square brackets and angle brackets should not be included in the real commands.
 
 * Items separated by `|` are in parallel relation, only one of them should be
   use in each command.
 
 * Items with `...` after them can have multiple instances.
 
-* The parameters have to follow the order in which they are presented, unless
-  otherwise specified.
+* The parameters have to follow the order in which they are presented, unless otherwise specified.
 
-### <a name="pk">Parameter keywords</a>
+### <a name="pk">Keywords for Special Time Representation</a>
 
 |Keyword | Definition     |
 |----| :------------------|
 |`tdy` | today|
 |`tmr` | tommorow|
 |`yst` | yesteday|
-| `to` | to |
 
 ### <a name="DateFormat">Date format</a>
 
@@ -268,12 +264,10 @@ Valid input examples:
 * dd/mm
 
     ```
-    31/12
+    3/12
     ```
 
-    If the year is not defined, the year is assumed to be the current year. The
-    year this document was last updated was 2016, therefore all examples
-    protraying the current year will read 2016.
+    If the year is not given, the default year will be the current year as logged by the local machine.
 
 * dd
 
@@ -281,7 +275,7 @@ Valid input examples:
     31
     ```
 
-    If the month is not defined, the month is assumed to be the current month.
+    If the month is not defined, the default month will be the current as logged by the local machine.
 
 * Today
 
@@ -297,21 +291,12 @@ Valid input examples:
     tmr
     ```
 
-    Means tommorow, the day after today as logged by the local machine.
+    Means tommorow, the day after date as logged by the local machine.
 
-* To
-
-    ```
-    to
-    ```
-
-    This keyword is only applicable for adding an event. `to` can only be
-    entered into an `<END_DATE>` field. `to` would mean the `<END_DATE>` is the
-    same as the `<START_DATE>` for an event. See [example](#to).
 
 ### <a name="TimeFormat">Time Format</a>
 
-The 12 hour clock is used. `hh:mm am/pm`
+The 12-hour clock is used. `hh:mm` + `am/pm`
 
 Valid input examples:
 
@@ -323,7 +308,7 @@ Valid input examples:
 
     11:45pm at night
 
-* `8:00pm`
+* `8pm` or `8:00pm`
 
     8:00pm at night
 
@@ -331,11 +316,13 @@ If the minute field is `00`, it may be ommitted from the command.
 
 ### <a name="help">Viewing help: `help`</a>
 
+View the all the command formats of TaskTracker.
+
 ```
 help
 ```
 
-Help is also shown if you enter an incorrect command e.g. `abcd`
+* Help is also shown if you enter an incorrect command e.g. `abcd`
 
 ![alt text](./images/userguide/help.png "")
 
@@ -343,127 +330,111 @@ Help is also shown if you enter an incorrect command e.g. `abcd`
 
 Adds a floating task to TaskTracker.
 
+Format: 
+``` 
+add "FLOATING_TASK_NAME" [p-PRIORITY]
 ```
-add <"FLOATING_TASK_NAME"> [PRIORITY]
-```
 
-* Task name should be in a pair of quotation marks. And quotations marks are
-not allowed in task name.
+* Task name should be in a pair of quotation marks. However, quotations marks are not allowed in task name.
 
-* Task name could be a single word or a phrase, white space are allowed.
+* Task name can be a single word or a phrase, white space are allowed.
 
-* The floating task will be shown according to their `PRIORITY`.
+* All floating tasks will be shown according to their `PRIORITY`s.
 
-* Two floating tasks with the same `PRIORITY` will be shown according to
-  the order of the time they are created.
+* Two floating tasks with the same `PRIORITY` will be shown according to the order of the time they are created.
 
-* The `PRIORITY` attribute is an integer which ranges from `0` to `5`, with 0
-  being the highest pririoty and 5 the lowest.
+* The `PRIORITY` attribute is an integer which ranges from `0` to `5`, with `0` being the lowest pririoty and `5` the higest.
 
-* The default priority of a floating task is 0.
+* The default priority of a floating task is `0`.
 
 #### Examples
 
-* `add "EE2020 lab report" 5`
+* `add "EE2020 lab report" p-5`
 
-  To create a task called `EE2020 lab report` with `PRIORITY` of 5.
+  To create a floating task called `EE2020 lab report` with `PRIORITY` of 5.
 
-* `add Progress Reflection`
+* `add "Progress Reflection"`
 
-  To create a task called `Progress Reflection` with default `PRIORITY` of 0.
+  To create a floating task called `Progress Reflection` with default `PRIORITY` of 0.
 
 ### <a name="adddt">Adding a deadline task: `add`</a>
 
 Adds a deadline with specific due date and time to TaskTracker.
 
+Format:
 ```
-add <"DEADLINE_NAME"> <DATE> <TIME> [PRIORITY]
+add "DEADLINE_NAME" <DATE> <TIME>
 ```
 
-* Deadline name should be in a pair of quotation marks. And quotations marks
-  are not allowed in deadline name.
+* Deadline name should be in a pair of quotation marks. And quotations marks are not allowed in deadline name.
 
-* Keywords like `tdy`, `tmr`, `yst`, are allowed in the date field.
+* Keywords like `tdy`, `tmr`, `yst`, can be used in the `DATE` field.
 
-* Formats of `DATE` and `TIME` should follow those stated above in this user
-  guide. See [Date Format](#DateFormat) and [Time Format](#TimeFormat)
+* Formats of `DATE` and `TIME` should follow those stated above in this user guide. See [Date Format](#DateFormat) and [Time Format](#TimeFormat)
 
 #### Examples
 
-* `add "CS2103 V1.1" 16/12 2pm`
+* `add "CS2103 milestone 1" 16/12/2016 2pm`
 
-    To create a deadline task named `CS2103 V1.1` with deadline of 16th
-    December 2016, 2pm.
+    To create a deadline task named `CS2103 milestone 1` with deadline of 16th December 2016, 2 pm.
 
 * `add "spend pizza vouchers" 20/11/2018 2pm`
 
-    To create a deadline task named `spend pizza vouchers` with deadline of 20
-    November 2018, 6pm.
+    To create a deadline task named `spend pizza vouchers` with deadline of 20 November 2018, 6 pm.
 
 * `add "event proposal" tdy 6pm`
 
-    To create a deadline named `event proposal` with due date today, 6 pm.
+    To create a deadline named `event proposal` with due date of today, and due time of 6 pm.
 
 * `add "EE2024 homework 1" tmr 6am`
 
-    To create a deadline named `EE2024 homework 1` tommorow, 6 am.
+    To create a deadline named `EE2024 homework 1` with deadline of tommorow, 6 am.
 
 ### <a name="adde">Adding an event: `add`</a>
 
-Adds an event with specific start date, start time and end date, end time to
-TaskTracker.
+Adds an event with specific starting date, starting time and ending date, ending time to TaskTracker.
 
+Format:
 ```
-add <"EVENT_NAME"> <START_DATE> <START_TIME> <END_DATE> <END_TIME> [loc-LOCATION]
+add "EVENT_NAME" <START_DATE> <START_TIME> to <END_DATE> <END_TIME>
 ```
 
-* Event name should be within a pair of quotation marks. Quotations marks are
-  not allowed in event name.
+* Event name should be within a pair of quotation marks. Quotations marks are not allowed in event name.
 
-* The four parameters `START_DATE`, `START_TIME`, `END_DATE`, `END_TIME` are
-  all required for adding an event.
+* The four parameters `START_DATE`, `START_TIME`, `END_DATE`, `END_TIME` are not all required for adding an event. Only one of `START_DATE` and `START_TIME` is required and only one of `START_TIME` and `END_DATE` is required.
 
-* Formats of `START_DATE`, `START_TIME`, `END_DATE`, `END_TIME` should follow
-  those stated above in this user guide. See [Date Format](#DateFormat) and
-  [Time Format](#TimeFormat)
-
-* `[LOCATION]` is a String which could contain any characters.
+* Formats of `START_DATE`, `START_TIME`, `END_DATE`, `END_TIME` should follow those stated above in this user guide. See [Date Format](#DateFormat) and [Time Format](#TimeFormat).
 
 #### Examples
 
-* <a name="to">`add "CS2103 week8 lecture" 7oct 2pm to 4pm`</a>
+* <a name="to">`add "CS2103 week8 lecture" 7/10 2pm to 4pm`</a>
 
-    To create an event `CS2103 week8 lecture` with starting date 7 October
-    2016, starting time 2pm, ending date 7 Oct 2016, ending time 4pm.
+    To create an event `CS2103 week8 lecture` with starting date 7 October 2016, starting time 2pm, ending date 7 Oct 2016, ending time 4pm.
 
-* `add "programming workshop" tdy 10am to 5pm loc-LT15`
+* `add "programming workshop" tdy 10am to 5pm`
 
-    To create an event `programming workshop` that starts today, 10am, and last
-    till 5pm, at LT15.
+    To create an event `programming workshop` that starts today, 10am, and last till 5pm.
 
-* `add "sports training camp" 1/12/2016 7pm 10/1/2017 1pm`
+* `add "sports training camp" 1/12/2016 7pm to 10/1/2017 1pm`
 
-    To create an event `sports training camp` with starting date 1 December
-    2016, starting time 7pm, ending date 10 January 2017 and ending time 1pm.
+    To create an event `sports training camp` with starting date 1 December 2016, starting time 7pm, ending date 10 January 2017 and ending time 1pm.
 
 ### <a name="del">Deleting a floating task/event/deadline: `del`</a>
 
 Delete a useless floating task/event/deadline on TaskTracker.
 
+Format:
 ```
 del-float|-deadline|-event <INDEX>
 ```
 
-* Every event, deadline and floating task will have their own unique index.
-
-* A task's `INDEX` is the number displayed beside the task name in the user
-  interface.
+* A task's `INDEX` is the number displayed beside the task name in the user interface.
 
 #### Examples
 
-* `del-event 1`
+* `del-event 2`
 
-    Delete the event with the unique index of `1`.
+    Delete the event with the index of `2` in the task list shown in user interface.
 
 ### Edit a floating task/deadline/event: `edit`
 
@@ -474,7 +445,7 @@ del-float|-deadline|-event <INDEX>
 * To edit an task, key in the index of the event followed by the properties to
   be modified. Label the new properties with their respective field references.
 
-* The `[optional parameters]` need not follow the order shown.
+* The `[PARAMETERS]` need not follow the order shown in the command format.
 
 #### <a name="editft">Edit a floating task: `edit`</a>
 
@@ -485,11 +456,12 @@ Edit a floating task to revise its name or priority.
 | n- | name |
 | p- | priority |
 
+Format:
 ```
-edit-float <INDEX> [n-NEW_NAME | p-PRIORITY]...
+edit-float <INDEX> [n-NEW_NAME] [p-PRIORITY]
 ```
 
-* Quotation marks are not necessary for `NEW_NAME`.
+* Quotation marks are not required for `NEW_NAME`.
 
 * `PRIORITY` should only be the integer ranges from `0` to `5`.
 
@@ -497,16 +469,16 @@ edit-float <INDEX> [n-NEW_NAME | p-PRIORITY]...
 
 * `edit-float 2 p-0`
 
-    Edit floating task with unique index of `2`'s priority to 0.
+    Edit floating task with index of `2`'s priority to 0.
 
 * `edit-float 2 n-buy stationary`
 
-    Edit floating task with unique index of `2`'s name to `"buy stationary"`.
+    Edit floating task with index of `2`'s name to `buy stationary`.
 
-* `edit-float 5 n-"go to Nanyang Mart" p-1`
+* `edit-float 5 n-go to Nanyang Mart p-1`
 
-    Edit floating task with unique index of `5`'s name to `"go to Nanyang
-    Mart"` and priority to 1.
+    Edit floating task with index of `5`'s name to `go to Nanyang
+    Mart` and priority to 1.
 
 #### <a name="editdl">Edit a deadline : `edit`</a>
 
@@ -518,24 +490,24 @@ Edit a deadline to revise its name and due date/time.
 | dd- | due date |
 | dt- | due time |
 
+Format:
 ```
-edit-deadline <INDEX> [dd-DUE_DATE | dt-DUE_TIME | n-NEW_NAME]...
+edit-deadline <INDEX> [dd-DUE_DATE] [dt-DUE_TIME] [n-NEW_NAME]
 ```
 
-* Quotation marks are not necessary for `NEW_NAME`.
+* Quotation marks are not required for `NEW_NAME`.
 
-* `[dd-DUE_DATE | dt-DUE_TIME]` are of the same format when creating
-  event-like task. Please refer `event` command for reference.
+* Formats of `[dd-DUE_DATE]` and `[dt-DUE_TIME]` should follow those stated above in this user guide. See [Date Format](#DateFormat) and [Time Format](#TimeFormat).
 
 ##### Examples
 
 * `edit-deadline 1 dt-5pm`
 
-    Edit deadline with unique index of `1`'s due time to 5 pm.
+    Edit deadline with index of `1`'s due time to 5 pm.
 
 * `edit-deadline 2 dd-23/11/2016`
 
-    Edit deadline with unique index of `2`'s due date to 2016 23th November.
+    Edit deadline with index of `2`'s due date to 2016 23th November.
 
 #### <a name="edite">Edit an event : `edit`</a>
 
@@ -551,21 +523,14 @@ Edit an event to revise its name, starting/ending date/time and location.
 | loc-| location |
 
 ```
-edit-event <INDEX> [ n-NEW_NAME | sd-NEW_START_TIME | st-NEW_START_DATE
-                    | ed-NEW_END_DATE | et-NEW_END_TIME | n-NEW_NAME
-                    | loc-NEW_LOCATION]...
+edit-event <INDEX> [ n-NEW_NAME] [sd-NEW_START_TIME] [st-NEW_START_DATE] [ed-NEW_END_DATE] [et-NEW_END_TIME] [n-NEW_NAME]
 ```
 
-* Quotation marks are not necessary for `NEW_NAME`.
+* Quotation marks are not required for `NEW_NAME`.
 
-* `[sd-NEW_START_TIME | st-NEW_START_DATE | ed-NEW_END_DATE | et-NEW_END_TIME]`
-  are of the same format when creating event-like task. Please refer `event` command for reference.
+* Formates of `[sd-NEW_START_TIME]` `[st-NEW_START_DATE]` `[ed-NEW_END_DATE]` `[ed-NEW_END_DATE]` should follow those stated above in this user guide. See [Date Format](#DateFormat) and [Time Format](#TimeFormat).
 
 ##### Examples
-
-* `edit-event 6 loc-LT6`
-
-    Edit event with unique index of `6`'s location to `LT6`.
 
 * `edit-event 2 st-4pm et-6pm`
 
@@ -573,7 +538,7 @@ edit-event <INDEX> [ n-NEW_NAME | sd-NEW_START_TIME | st-NEW_START_DATE
 
 * `edit-event 7 n-"proposal meeting" st-7pm`
 
-    Edit event with unique index of `7`'s starting time to 7pm and name to
+    Edit event with index of `7`'s starting time to 7pm and name to
     `proposal meeting`.
 
 ### <a name="fin">Mark a floating task/deadline as done/finished: `fin`</a>
@@ -585,11 +550,9 @@ will be archived.
 fin-float|-deadline|-event <INDEX>
 ```
 
-* Events that have already passed it `DUE_TIME` will be marked as done
-  automatically.
+* Events that have already passed it `DUE_TIME` will be marked as done automatically.
 
-* Deadlines that have already passed it `DUE_TIME` will not be marked as done,
-  but will be marked as "overdue" automatically.
+* Deadlines that have already passed it `DUE_TIME` will not be marked as done, but will be marked as "overdue" automatically.
 
 #### Examples
 
@@ -633,7 +596,7 @@ slot <STARTING_DATE> <STARTING_TIME> <ENDING_DATE> <ENDING_TIME> <h-HOUR> <m-MIN
 #### View all events that start on and all deadline tasks due on a specific date.
 
 ```
-view <DATE>
+view [DATE]
 ```
 
 * `DATE` will follow the format shown in [Date Format](#DateFormat)
@@ -643,7 +606,7 @@ view <DATE>
 #### View all time events and deadline task
 
 ```
-view all
+view
 ```
 
 * All the task in the database will be displayed.
@@ -659,7 +622,7 @@ view all
 Search task that contains specific keywords.
 
 ```
-search <KEY_WORDS>
+search KEY_WORDS
 ```
 
 * The `KEY_WORDS` are CASE-SENSITIVE
@@ -728,17 +691,17 @@ exit
 
 Command | Format
 ------------ | :---------------------------------------------------------------
-Add Floating Task | `add "FLOATING_TASK_NAME" [PRIORITY]`
-Add Event |`add “EVENT_NAME” <STARTING_DATE> <STARTING_TIME> <ENDING_DATE> <ENDING_TIME> [loc-LOCATION]`
+Add Floating Task | `add "FLOATING_TASK_NAME" [p-PRIORITY]`
+Add Event |`add “EVENT_NAME” <STARTING_DATE> <STARTING_TIME>  to <ENDING_DATE> <ENDING_TIME>`
 Add Deadline |`add “DEADLINE_NAME” <DATE> <TIME>`
-Delete a task | `del-[float or deadline or event] <INDEX>`
-Edit Floating Tasks | `edit-float <INDEX> [n-NEW_NAME or p-PRIORITY]... `
-Edit Event |`edit-event <INDEX> [sd-NEW_START_DATE or st-NEW_START_TIME or ed-NEW_END_DATE or et-NEW_END_TIME or n-NEW_NAME or loc-NEW_LOCATION]... `
-Edit Deadline |`edit-deadline <INDEX> [dd-DUE_DATE or dt-DUE_TIME or n-NEW_NAME]... `
+Delete a task | `del-float|-deadline|-event] <INDEX>`
+Edit Floating Tasks | `edit-float <INDEX> [n-NEW_NAME] [p-PRIORITY]`
+Edit Event |`edit-event <INDEX> [sd-NEW_START_DATE] [st-NEW_START_TIME] [ed-NEW_END_DATE] [et-NEW_END_TIME] [n-NEW_NAME]`
+Edit Deadline |`edit-deadline <INDEX> [dd-DUE_DATE] [dt-DUE_TIME] [n-NEW_NAME]`
 Generate recommended time slots | `slot <STARTING_DATE> <STARTING_TIME> <ENDING_DATE> <ENDING_TIME> <h-HOUR> <m-MINUTE>`
-Mark a task as finished | `fin-[float or deadline or event] <INDEX>`
-View a date in calendar | `view <DATE>`
-Search for keywords | `search <KEY_WORDS>`
+Mark a task as finished | `fin-float|-deadline|-event <INDEX>`
+View a date in calendar | `view [DATE]`
+Search for keywords | `search KEY_WORDS`
 Help | `help`
 Undo | `undo`
 Redo | `redo`

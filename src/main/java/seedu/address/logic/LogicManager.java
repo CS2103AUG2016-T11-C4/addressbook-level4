@@ -46,6 +46,7 @@ public class LogicManager extends ComponentManager implements Logic {
         final CommandResult result = command.execute();
         updateConfigStorage(oldConfig);
         updateTaskBookStorage(taskBookListener);
+        commitNewModelState(commandText);
         return result;
     }
 
@@ -74,6 +75,15 @@ public class LogicManager extends ComponentManager implements Logic {
             }
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
+        }
+    }
+
+    /**
+     * Commit any changes to the model.
+     */
+    private void commitNewModelState(String commandText) {
+        if (model.hasUncommittedChanges()) {
+            model.commit(commandText);
         }
     }
 

@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import java.util.EmptyStackException;
+import java.util.Stack;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -31,6 +33,9 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<FloatingTask> filteredFloatingTasks;
     private final FilteredList<EventTask> filteredEventTasks;
     private final FilteredList<DeadlineTask> filteredDeadlineTasks;
+    private final Stack<Commit> undoStack;
+    private final Stack<Commit> redoStack;
+    private final Commit initialCommit;
 
     /**
      * Initializes a ModelManager with the given config and TaskBook
@@ -48,6 +53,9 @@ public class ModelManager extends ComponentManager implements Model {
         this.filteredFloatingTasks = new FilteredList<>(this.taskBook.getFloatingTasks());
         this.filteredEventTasks = new FilteredList<>(this.taskBook.getEventTasks());
         this.filteredDeadlineTasks = new FilteredList<>(this.taskBook.getDeadlineTasks());
+        this.undoStack = new Stack<>();
+        this.redoStack = new Stack<>();
+        this.initialCommit = new Commit("initial commit", this.taskBook, this.config);
     }
 
     public ModelManager() {
@@ -263,6 +271,53 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void setDeadlineTaskFilter(Predicate<? super DeadlineTask> predicate) {
         filteredDeadlineTasks.setPredicate(predicate);
+    }
+
+    /// Undo/Redo
+
+    @Override
+    public boolean hasUncommittedChanges() {
+        final Commit currentCommit = undoStack.isEmpty() ? initialCommit : undoStack.peek();
+        return !currentCommit.taskBook.equals(taskBook) || !currentCommit.config.equals(config);
+    }
+
+    @Override
+    public void commit(String name) {
+        final Commit commit = new Commit(name, taskBook, config);
+        undoStack.push(commit);
+        redoStack.clear();
+    }
+
+    @Override
+    public String undo() throws EmptyStackException {
+        final Commit undoneCommit = undoStack.pop();
+        final Commit currentCommit = undoStack.isEmpty() ? initialCommit : undoStack.peek();
+        taskBook.resetData(currentCommit.taskBook);
+        config.resetData(currentCommit.config);
+        redoStack.push(undoneCommit);
+        return undoneCommit.name;
+    }
+
+    @Override
+    public String redo() throws EmptyStackException {
+        final Commit redoneCommit = redoStack.pop();
+        taskBook.resetData(redoneCommit.taskBook);
+        config.resetData(redoneCommit.config);
+        undoStack.push(redoneCommit);
+        return redoneCommit.name;
+    }
+
+    private static class Commit {
+        final String name;
+        final TaskBook taskBook;
+        final Config config;
+
+        Commit(String name, ReadOnlyTaskBook taskBook, ReadOnlyConfig config) {
+            assert name != null;
+            this.name = name;
+            this.taskBook = new TaskBook(taskBook);
+            this.config = new Config(config);
+        }
     }
 
 }

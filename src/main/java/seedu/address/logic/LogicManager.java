@@ -39,13 +39,14 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public CommandResult execute(String commandText) {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        final TaskBookChangeListener taskBookListener = new TaskBookChangeListener(model.getAddressBook());
+        final TaskBookChangeListener taskBookListener = new TaskBookChangeListener(model.getTaskBook());
         final Config oldConfig = new Config(model.getConfig());
         Command command = parser.parseCommand(commandText);
         command.setData(model);
         final CommandResult result = command.execute();
         updateConfigStorage(oldConfig);
         updateTaskBookStorage(taskBookListener);
+        commitNewModelState(commandText);
         return result;
     }
 
@@ -53,7 +54,7 @@ public class LogicManager extends ComponentManager implements Logic {
         try {
             if (listener.getHasChanged()) {
                 logger.info("Task book data changed, saving to file");
-                storage.saveTaskBook(model.getAddressBook());
+                storage.saveTaskBook(model.getTaskBook());
             }
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
@@ -74,6 +75,15 @@ public class LogicManager extends ComponentManager implements Logic {
             }
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
+        }
+    }
+
+    /**
+     * Commit any changes to the model.
+     */
+    private void commitNewModelState(String commandText) {
+        if (model.hasUncommittedChanges()) {
+            model.commit(commandText);
         }
     }
 

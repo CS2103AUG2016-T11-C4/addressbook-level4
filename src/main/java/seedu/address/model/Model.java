@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.EmptyStackException;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -34,7 +35,7 @@ public interface Model {
     void resetData(ReadOnlyTaskBook newData);
 
     /** Returns the TaskBook */
-    ReadOnlyTaskBook getAddressBook();
+    ReadOnlyTaskBook getTaskBook();
 
     /** Deletes the given task. */
     void deleteTask(Task target) throws TaskNotFoundException;
@@ -123,5 +124,37 @@ public interface Model {
      * If predicate is null, the filtered deadline task list will be populated with all deadline tasks.
      */
     void setDeadlineTaskFilter(Predicate<? super DeadlineTask> predicate);
+
+    /// Undo/Redo
+
+    /** Returns true if there are changes to the model since the last commit. */
+    boolean hasUncommittedChanges();
+
+    /**
+     * Make a commit, saving the state of the Model at this point in time.
+     * This commit can be undone with {@link #undo()}.
+     * Making a commit will clear the redo stack -- previously undone commits can no longer be redone.
+     *
+     * @param name Name of the commit. Must not be null.
+     */
+    void commit(String name);
+
+    /**
+     * Undoes the latest commit, reverting the state of the Model to the state of the previous commit.
+     * This undone commit can be redone by calling {@link #redo()}.
+     *
+     * @return The name of the undone commit.
+     * @throws EmptyStackException when there are no more commits left to undo.
+     */
+    String undo() throws EmptyStackException;
+
+    /**
+     * Redoes the latest commit that was undone (with {@link #undo()}, changing the state of the Model back
+     * to its state then the commit was made.
+     *
+     * @return The name of the redone commit.
+     * @throws EmptyStackException when there are no more commits left to redo.
+     */
+    String redo() throws EmptyStackException;
 
 }

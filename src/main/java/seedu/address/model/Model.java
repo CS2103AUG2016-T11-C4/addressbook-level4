@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.Command;
+import seedu.address.model.ModelManager.HeadAtBoundaryException;
 import seedu.address.model.config.ReadOnlyConfig;
 import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.EventTask;
@@ -34,7 +36,7 @@ public interface Model {
     void resetData(ReadOnlyTaskBook newData);
 
     /** Returns the TaskBook */
-    ReadOnlyTaskBook getAddressBook();
+    ReadOnlyTaskBook getTaskBook();
 
     /** Deletes the given task. */
     void deleteTask(Task target) throws TaskNotFoundException;
@@ -123,5 +125,36 @@ public interface Model {
      * If predicate is null, the filtered deadline task list will be populated with all deadline tasks.
      */
     void setDeadlineTaskFilter(Predicate<? super DeadlineTask> predicate);
+
+    ////undo redo
+    /**
+     * saves a copy of the current TaskBook, and the Command that causes the change from the previous TaskBook to the current TaskBook.
+     * @param command
+     */
+    void recordState(Command command);
+
+    /**
+     * resets the TaskBook to the TaskBook before it was changed by the most recent undo.
+     * @return the Command that was redone
+     * @throws HeadAtBoundaryException
+     */
+    Command redo() throws HeadAtBoundaryException;
+
+    /**
+     * resets the TaskBook to it's previous state.
+     * @return the Command that was undone
+     * @throws HeadAtBoundaryException
+     */
+    Command undo() throws HeadAtBoundaryException;
+
+    /**
+     *@return true if TaskBook has changed
+     *Unlikely the commits list will be empty since recordState() is called when ModelManager is initialised. Thus there will always be at least one Commit in commits.
+     */
+    boolean hasUncommittedChanges();
+
+    String printRedoables();
+
+    String printUndoables();
 
 }

@@ -27,7 +27,11 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkDeadlineFinishedCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.RedoTraceCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UndoTraceCommand;
 
 /**
  * Parses user input.
@@ -106,6 +110,18 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
+
+        case RedoTraceCommand.COMMAND_WORD:
+            return new RedoTraceCommand();
+
+        case UndoTraceCommand.COMMAND_WORD:
+            return new UndoTraceCommand();
 
         case SetDataDirectoryParser.COMMAND_WORD:
             return new SetDataDirectoryParser().parse(arguments);

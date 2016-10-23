@@ -9,6 +9,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.model.Model;
 import seedu.address.model.TaskBookChangeListener;
@@ -39,13 +41,17 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public CommandResult execute(String commandText) {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        final TaskBookChangeListener taskBookListener = new TaskBookChangeListener(model.getAddressBook());
+        final TaskBookChangeListener taskBookListener = new TaskBookChangeListener(model.getTaskBook());
         final Config oldConfig = new Config(model.getConfig());
         Command command = parser.parseCommand(commandText);
         command.setData(model);
         final CommandResult result = command.execute();
         updateConfigStorage(oldConfig);
         updateTaskBookStorage(taskBookListener);
+
+        if (model.hasUncommittedChanges() && !(command instanceof UndoCommand) && !(command instanceof RedoCommand) ) {
+            model.recordState(command);
+        }
         return result;
     }
 
@@ -53,7 +59,7 @@ public class LogicManager extends ComponentManager implements Logic {
         try {
             if (listener.getHasChanged()) {
                 logger.info("Task book data changed, saving to file");
-                storage.saveTaskBook(model.getAddressBook());
+                storage.saveTaskBook(model.getTaskBook());
             }
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));

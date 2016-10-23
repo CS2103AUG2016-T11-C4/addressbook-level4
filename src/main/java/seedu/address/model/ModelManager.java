@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -10,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.TaskBookChangedEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.config.Config;
 import seedu.address.model.config.ReadOnlyConfig;
 import seedu.address.model.task.DeadlineTask;
@@ -19,8 +21,8 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data.
- * All changes to any model should be synchronized.
+ * Represents the in-memory model of the address book data. All changes to any
+ * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -32,9 +34,13 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<EventTask> filteredEventTasks;
     private final FilteredList<DeadlineTask> filteredDeadlineTasks;
 
+    //for undo
+    private ArrayList<Commit> commits = new ArrayList<Commit>();
+    private int head; //head points to a the current commit which holds the TaskBook displayed by the UI
+
     /**
-     * Initializes a ModelManager with the given config and TaskBook
-     * TaskBook and its variables should not be null
+     * Initializes a ModelManager with the given config and TaskBook TaskBook
+     * and its variables should not be null
      */
     public ModelManager(ReadOnlyConfig config, ReadOnlyTaskBook taskBook) {
         super();
@@ -48,10 +54,14 @@ public class ModelManager extends ComponentManager implements Model {
         this.filteredFloatingTasks = new FilteredList<>(this.taskBook.getFloatingTasks());
         this.filteredEventTasks = new FilteredList<>(this.taskBook.getEventTasks());
         this.filteredDeadlineTasks = new FilteredList<>(this.taskBook.getDeadlineTasks());
+        recordState(null);
+        this.head = commits.size() - 1;
     }
 
     public ModelManager() {
         this(new Config(), new TaskBook());
+        recordState(null);
+        this.head = commits.size() - 1;
     }
 
     /// Config
@@ -80,7 +90,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ReadOnlyTaskBook getAddressBook() {
+    public ReadOnlyTaskBook getTaskBook() {
         return taskBook;
     }
 
@@ -102,7 +112,8 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskBookChanged();
     }
 
-    //=========== Filtered Task List Accessors ===============================================================
+    // =========== Filtered Task List Accessors
+    // ===============================================================
 
     @Override
     public UnmodifiableObservableList<Task> getFilteredTaskList() {
@@ -142,7 +153,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized FloatingTask removeFloatingTask(int indexInFilteredList) throws IllegalValueException {
-        final FloatingTask removedFloating = taskBook.removeFloatingTask(getFloatingTaskSourceIndex(indexInFilteredList));
+        final FloatingTask removedFloating = taskBook
+                .removeFloatingTask(getFloatingTaskSourceIndex(indexInFilteredList));
         indicateTaskBookChanged();
         return removedFloating;
     }
@@ -243,7 +255,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized DeadlineTask removeDeadlineTask(int indexInFilteredList) throws IllegalValueException {
-        final DeadlineTask removedDeadline = taskBook.removeDeadlineTask(getDeadlineTaskSourceIndex(indexInFilteredList));
+        final DeadlineTask removedDeadline = taskBook
+                .removeDeadlineTask(getDeadlineTaskSourceIndex(indexInFilteredList));
         indicateTaskBookChanged();
         return removedDeadline;
     }
@@ -265,4 +278,69 @@ public class ModelManager extends ComponentManager implements Model {
         filteredDeadlineTasks.setPredicate(predicate);
     }
 
+    ////undo redo
+
+    @Override
+    public Command undo() throws HeadAtBoundaryException {
+
+        if (head <= 0) {
+            throw new HeadAtBoundaryException("No actions to undo");
+        }
+        Command undoneAction = commits.get(head).getCommand();
+        head--;
+        Commit commit = commits.get(head);
+        resetData(new TaskBook(commit.getTaskBook()));
+        return undoneAction;
+    }
+
+    @Override
+    public void recordState(Command command) {
+        commits.add(new Commit(command, new TaskBook(getTaskBook())));
+        this.head = commits.size() - 1;
+    }
+
+    @Override
+    public Command redo() throws HeadAtBoundaryException {
+        if (head >= commits.size() - 1) {
+            System.out.println(head);
+            throw new HeadAtBoundaryException("no undos to redo");
+        }
+        head++;
+        Commit commit = commits.get(head);
+        resetData(new TaskBook(commit.getTaskBook()));
+        return commit.getCommand();
+    }
+
+    /**
+     * check if taskBook has changed.
+     * @return true if TaskBook changed
+     */
+    @Override
+    public boolean hasUncommittedChanges() {
+        return !(this.taskBook.equals(commits.get(commits.size() - 1).getTaskBook()));
+    }
+
+    private class Commit {
+        private TaskBook taskBook;
+        private Command command;
+
+        Commit(Command command, TaskBook state) {
+            this.taskBook = state;
+            this.command = command;
+        }
+
+        public TaskBook getTaskBook() {
+            return this.taskBook;
+        }
+
+        public Command getCommand() {
+            return this.command;
+        }
+    }
+
+    public class HeadAtBoundaryException extends Exception {
+        public HeadAtBoundaryException(String message) {
+            super(message);
+        }
+    }
 }

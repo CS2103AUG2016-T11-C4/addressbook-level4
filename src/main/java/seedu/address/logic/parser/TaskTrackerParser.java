@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import seedu.address.logic.commands.ClearFinishedTasksCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.IncorrectCommand;
 
@@ -16,6 +17,7 @@ public class TaskTrackerParser {
             .putSubcommand("hide-finished", new HideFinishedTaskParser())
             .putSubcommand("view", new ShowAllTaskParser())
             .putSubcommand("clear", new ClearCommandParser())
+            .putSubcommand("clear-finished", str -> new ClearFinishedTasksCommand())
             .putSubcommand("exit", new ExitCommandParser())
             .putSubcommand("help", new HelpCommandParser())
             .putSubcommand("setdatadir", new SetDataDirectoryParser())

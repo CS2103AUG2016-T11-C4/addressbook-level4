@@ -17,7 +17,8 @@ public class TaskTrackerParser {
             .putSubcommand("exit", new ExitCommandParser())
             .putSubcommand("help", new HelpCommandParser())
             .putSubcommand("setdatadir", new SetDataDirectoryParser())
-            ;
+            .putSubcommand("undo", new UndoCommandParser())
+            .putSubcommand("redo", new RedoCommandParser());
 
     /**
      * Parses user input into command for execution.

@@ -7,6 +7,7 @@ package seedu.address.logic.parser;
  */
 public interface Parser<T> {
 
+
     /**
      * Parses an input string and returns the parsed result as an object with type T.
      * @throws ParseException if the input string could not be parsed. The ranges of the ParseException will

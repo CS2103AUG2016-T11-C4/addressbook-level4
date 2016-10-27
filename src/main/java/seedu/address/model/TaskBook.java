@@ -32,6 +32,7 @@ public class TaskBook implements ReadOnlyTaskBook {
      * Tasks are copied into this TaskBook.
      */
     public TaskBook(ReadOnlyTaskBook toBeCopied) {
+
         this();
         resetData(toBeCopied);
     }

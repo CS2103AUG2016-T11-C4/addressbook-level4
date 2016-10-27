@@ -9,6 +9,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.TaskTrackerParser;
 import seedu.address.model.Model;
 import seedu.address.model.TaskBookChangeListener;
@@ -45,6 +47,10 @@ public class LogicManager extends ComponentManager implements Logic {
         final CommandResult result = command.execute();
         updateConfigStorage(oldConfig);
         updateTaskBookStorage(taskBookListener);
+
+        if (model.hasUncommittedChanges() && command instanceof UndoCommand && command instanceof RedoCommand) {
+            model.recordState(command);
+        }
         return result;
     }
 

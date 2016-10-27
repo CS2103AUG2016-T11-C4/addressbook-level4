@@ -11,8 +11,6 @@ import seedu.address.commons.events.model.TaskBookChangedEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.config.Config;
 import seedu.address.model.config.ReadOnlyConfig;
-import seedu.address.model.filter.DeadlineTaskFinishedPredicate;
-import seedu.address.model.filter.FloatingTaskFinishedPredicate;
 import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.EventTask;
 import seedu.address.model.task.FloatingTask;

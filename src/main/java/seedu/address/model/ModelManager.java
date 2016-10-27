@@ -135,13 +135,6 @@ public class ModelManager extends ComponentManager implements Model {
         filteredFloatingTasks.setPredicate(predicate);
     }
 
-    /**
-     * Updates the filter of the filtered floating task list to remove all finished tasks from the list.
-     */
-    public void setIsFinishedFloatingTaskFilter() {
-        setFloatingTaskFilter(new FloatingTaskFinishedPredicate());
-    }
-
     //// Deadline tasks
 
     @Override
@@ -190,13 +183,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void setDeadlineTaskFilter(Predicate<? super DeadlineTask> predicate) {
         filteredDeadlineTasks.setPredicate(predicate);
-    }
-
-    /**
-     * Updates the filter of the filtered deadline task list to remove all finished tasks from the list.
-     */
-    public void setIsFinishedDeadlineFilter() {
-        setDeadlineTaskFilter(new DeadlineTaskFinishedPredicate());
     }
 
     //// Event tasks

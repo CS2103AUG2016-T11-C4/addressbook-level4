@@ -2,20 +2,18 @@
 
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER_LEFT" maxHeight="120.0" minHeight="80.0"
-        prefHeight="110.0" stylesheets="@DarkTheme.css" styleClass="card">
-    <HBox spacing="5" alignment="CENTER_LEFT">
+<HBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER_LEFT" spacing="10" 
+        prefHeight="45.0" maxHeight="400" stylesheets="@DarkTheme.css" styleClass="card">
+    <HBox spacing="5" alignment="CENTER_LEFT" HBox.Hgrow="ALWAYS">
         <Label fx:id="indexLabel" styleClass="cell_big_label"></Label>
-        <Label fx:id="nameLabel" styleClass="cell_big_label"></Label>
+	    <Label fx:id="nameLabel" styleClass="cell_big_label" WrapText="true"></Label>       
     </HBox>
-    <HBox spacing="5" alignment="CENTER_LEFT">
-        <Label>Due: </Label>
+    <HBox spacing="5" alignment="CENTER_RIGHT" HBox.Hgrow="ALWAYS">
+        <Label alignment="CENTER_RIGHT">Due:</Label>
         <Label fx:id="dueLabel">$due</Label>
     </HBox>
-    <HBox spacing="5" alignment="CENTER_LEFT">
-        <Label>Finished: </Label>
-        <Label fx:id="finishedLabel">$finished</Label>
-    </HBox>
-</VBox>
+    
+</HBox>
 

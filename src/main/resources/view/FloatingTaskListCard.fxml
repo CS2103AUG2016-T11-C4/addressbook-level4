@@ -2,19 +2,18 @@
 
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER_LEFT" maxHeight="120.0" minHeight="80.0"
-        prefHeight="110.0" stylesheets="@DarkTheme.css" styleClass="card">
-    <HBox spacing="5" alignment="CENTER_LEFT">
+<HBox xmlns:fx="http://javafx.com/fxml/1" spacing="10" alignment="CENTER_LEFT" maxHeight="120.0" minHeight="40.0"
+        prefHeight="45.0" stylesheets="@DarkTheme.css" styleClass="card">  
+   <HBox spacing = "5" alignment="CENTER_LEFT" HBox.Hgrow="ALWAYS">     
         <Label fx:id="indexLabel" styleClass="cell_big_label"></Label>
-        <Label fx:id="nameLabel" styleClass="cell_big_label"></Label>
-    </HBox>
-    <HBox spacing="5" alignment="CENTER_LEFT">
-        <Label>Priority: </Label>
-        <Label fx:id="priorityLabel">$priority</Label>
-    </HBox>
-    <HBox spacing="5" alignment="CENTER_LEFT">
-        <Label>Finished: </Label>
-        <Label fx:id="finishedLabel">$finished</Label>
-    </HBox>
-</VBox>
+        <Label fx:id="nameLabel" styleClass="cell_big_label"></Label>     
+   </HBox>
+   <HBox spacing="5" alignment="CENTER_RIGHT" HBox.Hgrow="ALWAYS">     	
+       	<Label>Priority: </Label>
+       	<Label fx:id="priorityLabel">$priority</Label>
+   </HBox>
+</HBox>
+

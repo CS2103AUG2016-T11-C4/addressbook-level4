@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.util.Collection;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 import com.google.common.base.MoreObjects;
 
@@ -67,6 +68,17 @@ public class TaskBook implements ReadOnlyTaskBook {
         return floatingTasks.remove(index);
     }
 
+    /**
+     * Remove the FloatingTasks that are filtered by the given predicate.
+     */
+    public Collection<FloatingTask> removeFloatingTask(Predicate<FloatingTask> predicate) {
+        Collection<FloatingTask> toRemove = FXCollections.observableArrayList();
+        toRemove.addAll(floatingTasks);
+        toRemove.removeIf(predicate);
+        floatingTasks.removeAll(toRemove);
+        return toRemove;
+    }
+
     public void setFloatingTask(int index, FloatingTask newFloatingTask) {
         floatingTasks.set(index, newFloatingTask);
     }
@@ -93,6 +105,17 @@ public class TaskBook implements ReadOnlyTaskBook {
         return deadlineTasks.remove(index);
     }
 
+    /**
+     * Remove the DeadlineTasks that are filtered by the given predicate.
+     */
+    public Collection<DeadlineTask> removeDeadlineTask(Predicate<DeadlineTask> predicate) {
+        Collection<DeadlineTask> toRemove = FXCollections.observableArrayList();
+        toRemove.addAll(deadlineTasks);
+        toRemove.removeIf(predicate);
+        deadlineTasks.removeAll(toRemove);
+        return toRemove;
+    }
+
     public void setDeadlineTask(int index, DeadlineTask newDeadlineTask) {
         deadlineTasks.set(index, newDeadlineTask);
     }
@@ -117,6 +140,17 @@ public class TaskBook implements ReadOnlyTaskBook {
      */
     public EventTask removeEventTask(int index) {
         return eventTasks.remove(index);
+    }
+
+    /**
+     * Remove the EventTasks that are filtered by the given predicate.
+     */
+    public Collection<EventTask> removeEventTask(Predicate<EventTask> predicate) {
+        Collection<EventTask> toRemove = FXCollections.observableArrayList();
+        toRemove.addAll(eventTasks);
+        toRemove.removeIf(predicate);
+        eventTasks.removeAll(toRemove);
+        return toRemove;
     }
 
     public void setEventTask(int index, EventTask newEventTask) {

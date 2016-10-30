@@ -1,15 +1,15 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
 
-public class ClearCommandParser implements Parser<ClearCommand> {
+public class ClearCommandParser implements Parser<Command> {
 
-    private final CommandLineParser cmdParser = new CommandLineParser();
+    private final OverloadParser<Command> overloadParser = new OverloadParser<Command>()
+            .addParser("Clear all tasks in TaskTracker", new ClearAllParser())
+            .addParser("Clear all finished tasks in TaskTracker", new ClearFinishedParser());
 
     @Override
-    public ClearCommand parse(String str) throws ParseException {
-        cmdParser.parse(str);
-        return new ClearCommand();
+    public Command parse(String str) throws ParseException {
+        return overloadParser.parse(str);
     }
-
 }

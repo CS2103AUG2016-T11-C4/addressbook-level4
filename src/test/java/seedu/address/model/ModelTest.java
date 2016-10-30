@@ -15,7 +15,7 @@ import org.junit.rules.ExpectedException;
 import junit.framework.Assert;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearAllCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.ModelManager.HeadAtBoundaryException;
@@ -209,7 +209,7 @@ public class ModelTest {
         assertEquals(new TaskBook(), model.getTaskBook());
 
         //clear an empty taskbook
-        Command clear = new ClearCommand();
+        Command clear = new ClearAllCommand();
         clear.setData(model);
         clear.execute();
         assertFalse(model.hasUncommittedChanges());

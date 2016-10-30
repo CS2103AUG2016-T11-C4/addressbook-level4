@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -123,6 +124,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public synchronized void removeFloatingTask(Predicate<FloatingTask> predicate) {
+        final Collection<FloatingTask> toRemove = taskBook.removeFloatingTask(predicate);
+        filteredFloatingTasks.removeAll(toRemove);
+        indicateTaskBookChanged();
+        return;
+    }
+
+    @Override
     public synchronized void setFloatingTask(int indexInFilteredList, FloatingTask newFloatingTask)
             throws IllegalValueException {
         final int sourceIndex = filteredFloatingTasks.getSourceIndex(indexInFilteredList);
@@ -171,6 +180,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public synchronized void removeDeadlineTask(Predicate<DeadlineTask> predicate) {
+        final Collection<DeadlineTask> toRemove = taskBook.removeDeadlineTask(predicate);
+        filteredDeadlineTasks.removeAll(toRemove);
+        indicateTaskBookChanged();
+        return;
+    }
+
+    @Override
     public synchronized void setDeadlineTask(int indexInFilteredList, DeadlineTask newDeadlineTask)
             throws IllegalValueException {
         final int sourceIndex = filteredDeadlineTasks.getSourceIndex(indexInFilteredList);
@@ -215,6 +232,14 @@ public class ModelManager extends ComponentManager implements Model {
         filteredEventTasks.remove(indexInFilteredList);
         indicateTaskBookChanged();
         return removedEvent;
+    }
+
+    @Override
+    public synchronized void removeEventTask(Predicate<EventTask> predicate) {
+        final Collection<EventTask> toRemove = taskBook.removeEventTask(predicate);
+        filteredEventTasks.removeAll(toRemove);
+        indicateTaskBookChanged();
+        return;
     }
 
     @Override
@@ -320,6 +345,19 @@ public class ModelManager extends ComponentManager implements Model {
             // Adjust mapping of sourceIndexes
             for (ItemMapping<E> item : filteredList) {
                 if (item.sourceIndex.isPresent() && item.sourceIndex.get() > deletedSourceIndex) {
+                    item.sourceIndex = Optional.of(item.sourceIndex.get() - 1);
+                }
+            }
+        }
+
+        void removeAll(Collection<E> toRemove) {
+            for (E item : toRemove) {
+                if (filteredList.contains(item)) {
+                    filteredList.set(filteredList.indexOf(item), ItemMapping.empty());
+                }
+            }
+            for (ItemMapping<E> item : filteredList) {
+                if (item.sourceIndex.isPresent()) {
                     item.sourceIndex = Optional.of(item.sourceIndex.get() - 1);
                 }
             }

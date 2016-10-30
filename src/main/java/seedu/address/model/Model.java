@@ -48,6 +48,10 @@ public interface Model {
     /** Removes the given Floating task and returns it. */
     FloatingTask removeFloatingTask(int indexInFilteredList) throws IllegalValueException;
 
+    /** Removes the Floating tasks that filtered out by the given predicate and return nothing.
+     */
+    void removeFloatingTask(Predicate<FloatingTask> predicate);
+
     /** Replaces the given Floating task with a new Floating task */
     void setFloatingTask(int indexInFilteredList, FloatingTask newFloatingTask) throws IllegalValueException;
 
@@ -74,6 +78,9 @@ public interface Model {
     /** Removes the given deadline task and returns it. */
     DeadlineTask removeDeadlineTask(int indexInFilteredList) throws IllegalValueException;
 
+    /** Removes the Deadline tasks that filtered out by the given predicate and return nothing. */
+    void removeDeadlineTask(Predicate<DeadlineTask> predicate);
+
     /** Replaces the given deadline task with a new deadline task */
     void setDeadlineTask(int indexInFilteredList, DeadlineTask newDeadlineTask) throws IllegalValueException;
 
@@ -99,6 +106,9 @@ public interface Model {
 
     /** Removes the given event task and returns it. */
     EventTask removeEventTask(int indexInFilteredList) throws IllegalValueException;
+
+    /** Removes the Event tasks that filtered out by the given predicate and return nothing. */
+    void removeEventTask(Predicate<EventTask> predicate);
 
     /** Replaces the given event task with a new event task */
     void setEventTask(int indexInFilteredList, EventTask newEventTask) throws IllegalValueException;

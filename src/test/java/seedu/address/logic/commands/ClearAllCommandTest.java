@@ -10,13 +10,13 @@ import seedu.address.model.TaskBook;
 import seedu.address.model.TaskBookBuilder;
 import seedu.address.model.config.Config;
 
-public class ClearCommandTest {
+public class ClearAllCommandTest {
 
     @Test
     public void execute_clearsTasksInModel() {
         final TaskBook taskBook = new TaskBookBuilder().addTypicalTasks().build();
         final Model model = new ModelManager(new Config(), taskBook);
-        final ClearCommand command = new ClearCommand();
+        final ClearAllCommand command = new ClearAllCommand();
         command.setData(model);
         final CommandResult result = command.execute();
         assertEquals(new TaskBook(), model.getTaskBook());

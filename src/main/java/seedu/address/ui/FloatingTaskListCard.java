@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import seedu.address.commons.core.IndexPrefix;
+import seedu.address.model.filter.FloatingTaskNotFinishedPredicate;
 import seedu.address.model.task.FloatingTask;
 
 public class FloatingTaskListCard extends UiPart<Pane> {
@@ -28,7 +29,7 @@ public class FloatingTaskListCard extends UiPart<Pane> {
             indexLabel.setText(IndexPrefix.FLOAT.getPrefixString() + index + ". ");
             nameLabel.setText(floatingTask.getName().toString());
             priorityLabel.setText(floatingTask.getPriority().toString());
-            if (floatingTask.isFinished()) {
+            if (!(new FloatingTaskNotFinishedPredicate()).test(floatingTask)) {
                 getRoot().getStyleClass().add("finished");
             } else {
                 getRoot().getStyleClass().add("priority" + floatingTask.getPriority().toString());

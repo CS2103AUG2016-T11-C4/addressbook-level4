@@ -16,7 +16,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearAllCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandException;
 import seedu.address.model.Model.Commit;
@@ -316,7 +316,7 @@ public class ModelTest {
         assertEquals(new TaskBook(), model.getTaskBook());
 
         //clear an empty taskbook
-        Command clear = new ClearCommand();
+        Command clear = new ClearAllCommand();
         clear.execute(model);
         assertFalse(model.hasUncommittedChanges());
 

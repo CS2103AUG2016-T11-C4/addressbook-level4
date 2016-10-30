@@ -6,12 +6,12 @@ import seedu.address.model.TaskBook;
 /**
  * Clears the task book.
  */
-public class ClearCommand implements Command {
+public class ClearAllCommand implements Command {
 
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Task book has been cleared!";
 
-    public ClearCommand() {}
+    public ClearAllCommand() {}
 
     @Override
     public CommandResult execute(Model model) {

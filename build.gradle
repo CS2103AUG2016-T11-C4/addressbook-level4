@@ -4,6 +4,7 @@
  * For more details take a look at the Java Quickstart chapter in the Gradle
  * user guide available at http://gradle.org/docs/2.2.1/userguide/tutorial_java_projects.html
  */
+import org.apache.tools.ant.taskdefs.condition.Os
 
 plugins {
     id 'java'
@@ -68,13 +69,13 @@ test {
             excludeCategories 'seedu.address.testutil.GuiTests'
     }
 
-    beforeTest { descriptor ->
-        if (headless == 'true') {
-            systemProperty 'java.awt.robot', 'true'
-            systemProperty 'testfx.robot', 'glass'
+    if (headless == 'true') {
+        systemProperty 'java.awt.robot', 'true'
+        systemProperty 'testfx.robot', 'glass'
+        systemProperty 'prism.order', 'sw'
+        systemProperty 'prism.text', 't2k'
+        if (!Os.isFamily(Os.FAMILY_UNIX)) {
             systemProperty 'testfx.headless', 'true'
-            systemProperty 'prism.order', 'sw'
-            systemProperty 'prism.text', 't2k'
         }
     }
 }

@@ -7,6 +7,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import seedu.address.MainApp;
 import seedu.address.commons.util.AppUtil;
 import seedu.address.logic.Logic;
@@ -74,6 +75,7 @@ public class MainWindow extends UiPart<Scene> {
         setWindowMinSize();
         fillInnerParts(config, logic);
         setAccelerators();
+        primaryStage.setOnShown(this::onShown);
     }
 
     private void setAccelerators() {
@@ -124,6 +126,13 @@ public class MainWindow extends UiPart<Scene> {
      */
     private void setIcon(String iconSource) {
         primaryStage.getIcons().add(AppUtil.getImage(iconSource));
+    }
+
+    /**
+     * Called after the window (primaryStage) is shown.
+     */
+    private void onShown(WindowEvent ev) {
+        commandBox.requestFocus();
     }
 
 }

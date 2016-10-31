@@ -36,6 +36,13 @@ public class CommandBox extends UiPart<Pane> {
         FxViewUtil.applyAnchorBoundaryParameters(commandTextField, 0.0, 0.0, 0.0, 0.0);
     }
 
+    /**
+     * Focus on the command box text field.
+     */
+    public void requestFocus() {
+        commandTextField.requestFocus();
+    }
+
     @FXML
     private void handleCommandInputChanged() {
         //Take a copy of the command text

@@ -162,5 +162,8 @@ public class MainApp extends Application {
 
     public static void main(String[] args) {
         launch(args);
+        // The application uses AWT components, but sometimes they do not clean up their threads properly
+        // (operating-system dependent). Ensure the process actually terminates by calling System.exit()
+        System.exit(0);
     }
 }

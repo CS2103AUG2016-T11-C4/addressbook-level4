@@ -129,6 +129,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public synchronized void removeFloatingTasks(Predicate<? super FloatingTask> predicate) {
+        workingTaskBook.removeFloatingTasks(predicate);
+    }
+
+    @Override
     public synchronized void setFloatingTask(int workingIndex, FloatingTask newFloatingTask)
             throws IllegalValueException {
         workingTaskBook.setFloatingTask(workingIndex, newFloatingTask);
@@ -184,6 +189,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public synchronized void removeDeadlineTasks(Predicate<? super DeadlineTask> predicate) {
+        workingTaskBook.removeDeadlineTasks(predicate);
+    }
+
+    @Override
     public synchronized void setDeadlineTask(int workingIndex, DeadlineTask newDeadlineTask)
             throws IllegalValueException {
         workingTaskBook.setDeadlineTask(workingIndex, newDeadlineTask);
@@ -236,6 +246,11 @@ public class ModelManager extends ComponentManager implements Model {
             setTaskSelect(Optional.empty());
         }
         return removedEvent;
+    }
+
+    @Override
+    public synchronized void removeEventTasks(Predicate<? super EventTask> predicate) {
+        workingTaskBook.removeEventTasks(predicate);
     }
 
     @Override

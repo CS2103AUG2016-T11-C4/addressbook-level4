@@ -90,6 +90,27 @@ public class WorkingTaskBook {
         return removedFloating;
     }
 
+    /**
+     * Remove all the floating tasks that satisfy the given predicate.
+     * @param predicate The filter used to judge whether a floating task needs to be deleted or not.
+     * @throws IllegalValueException Will be throw during iteration if internal error happens.
+     */
+    public void removeFloatingTasks(Predicate<? super FloatingTask> predicate) {
+        int iterator = 1;
+        while (iterator < workingFloatingTasks.size()) {
+            FloatingTask toBeTested;
+            try {
+                toBeTested = workingFloatingTasks.get(iterator);
+                if (predicate.test(toBeTested)) {
+                    removeFloatingTask(iterator);
+                }
+            } catch (IllegalValueException e) {
+                ; // skip this index if this item is already deleted
+            }
+            iterator = iterator + 1;
+        }
+    }
+
     public void setFloatingTask(int workingIndex, FloatingTask newFloatingTask) throws IllegalValueException {
         final int sourceIndex = workingFloatingTasks.getSourceIndex(workingIndex);
         taskBook.setFloatingTask(sourceIndex, newFloatingTask);
@@ -141,6 +162,27 @@ public class WorkingTaskBook {
         return removedDeadline;
     }
 
+    /**
+     * Remove all the deadline tasks that satisfy the given predicate.
+     * @param predicate The filter used to judge whether a deadline task needs to be deleted or not.
+     * @throws IllegalValueException Will be throw during iteration if internal error happens.
+     */
+    public void removeDeadlineTasks(Predicate<? super DeadlineTask> predicate) {
+        int iterator = 1;
+        while (iterator < workingDeadlineTasks.size()) {
+            DeadlineTask toBeTested;
+            try {
+                toBeTested = workingDeadlineTasks.get(iterator);
+                if (predicate.test(toBeTested)) {
+                    removeDeadlineTask(iterator);
+                }
+            } catch (IllegalValueException e) {
+                ; // skip this index if this item is already deleted
+            }
+            iterator = iterator + 1;
+        }
+    }
+
     public void setDeadlineTask(int workingIndex, DeadlineTask newDeadlineTask) throws IllegalValueException {
         final int sourceIndex = workingDeadlineTasks.getSourceIndex(workingIndex);
         taskBook.setDeadlineTask(sourceIndex, newDeadlineTask);
@@ -190,6 +232,27 @@ public class WorkingTaskBook {
         final EventTask removedEvent = taskBook.removeEventTask(sourceIndex);
         workingEventTasks.remove(workingIndex);
         return removedEvent;
+    }
+
+    /**
+     * Remove all the events tasks that satisfy the given predicate.
+     * @param predicate The filter used to judge whether an event task needs to be deleted or not.
+     * @throws IllegalValueException Will be throw during iteration if internal error happens.
+     */
+    public void removeEventTasks(Predicate<? super EventTask> predicate) {
+        int iterator = 1;
+        while (iterator < workingEventTasks.size()) {
+            EventTask toBeTested;
+            try {
+                toBeTested = workingEventTasks.get(iterator);
+                if (predicate.test(toBeTested)) {
+                    removeEventTask(iterator);
+                }
+            } catch (IllegalValueException e) {
+                ; // skip this index if this item is already deleted
+            }
+            iterator = iterator + 1;
+        }
     }
 
     public void setEventTask(int workingIndex, EventTask newEventTask) throws IllegalValueException {
@@ -356,6 +419,14 @@ public class WorkingTaskBook {
                 newWorkingList.set(i, new WorkingItem<>(i, src.getItem(), src.sourceIndex));
             }
             workingItemList.setAll(newWorkingList);
+        }
+
+        Predicate<WorkingItem<E>> changeWorkingToItemPredicate (Predicate<? super E> predicate) {
+            return p -> predicate.test(sourceList.get(p.sourceIndex));
+        }
+
+        int size () {
+            return workingItemList.size();
         }
     }
 

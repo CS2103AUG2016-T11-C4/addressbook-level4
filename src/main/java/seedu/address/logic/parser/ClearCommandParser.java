@@ -8,7 +8,8 @@ public class ClearCommandParser implements Parser<Command> {
 
     public ClearCommandParser() {
         overloadParser = new OverloadParser<Command>()
-                         .addParser("Clear all the task in Task Tracker.", new ClearAllParser());
+                         .addParser("Clear all the tasks in Task Tracker", new ClearAllParser())
+                         .addParser("Clear all the finished tasks in Task Tracker", new ClearFinishedParser());
     }
 
     @Override

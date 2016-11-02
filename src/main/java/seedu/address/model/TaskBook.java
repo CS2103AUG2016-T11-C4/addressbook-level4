@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.util.Collection;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 import com.google.common.base.MoreObjects;
 
@@ -67,6 +68,14 @@ public class TaskBook implements ReadOnlyTaskBook {
         return floatingTasks.remove(index);
     }
 
+    /**
+     * Remove all the floating tasks that satisfy the given predicate.
+     * @param predicate The filter used to judge whether a floating task needs to be deleted or not.
+     */
+    public boolean removeFloatingTasks(Predicate<? super FloatingTask> predicate) {
+        return floatingTasks.removeIf(predicate);
+    }
+
     public void setFloatingTask(int index, FloatingTask newFloatingTask) {
         floatingTasks.set(index, newFloatingTask);
     }
@@ -93,6 +102,14 @@ public class TaskBook implements ReadOnlyTaskBook {
         return deadlineTasks.remove(index);
     }
 
+    /**
+     * Remove all the deadline tasks that satisfy the given predicate.
+     * @param predicate The filter used to judge whether a deadline task needs to be deleted or not.
+     */
+    public boolean removeDeadlineTasks(Predicate<? super DeadlineTask> predicate) {
+        return deadlineTasks.removeIf(predicate);
+    }
+
     public void setDeadlineTask(int index, DeadlineTask newDeadlineTask) {
         deadlineTasks.set(index, newDeadlineTask);
     }
@@ -117,6 +134,14 @@ public class TaskBook implements ReadOnlyTaskBook {
      */
     public EventTask removeEventTask(int index) {
         return eventTasks.remove(index);
+    }
+
+    /**
+     * Remove all the events tasks that satisfy the given predicate.
+     * @param predicate The filter used to judge whether an event task needs to be deleted or not.
+     */
+    public boolean removeEventTasks(Predicate<? super EventTask> predicate) {
+        return eventTasks.removeIf(predicate);
     }
 
     public void setEventTask(int index, EventTask newEventTask) {

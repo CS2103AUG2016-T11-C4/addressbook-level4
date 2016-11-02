@@ -15,7 +15,7 @@ public class HideFinishedFloatingTaskCommand implements Command {
 
     @Override
     public CommandResult execute(Model model) {
-        model.setFloatingTaskPredicate(new FloatingTaskFinishedPredicate());
+        model.setFloatingTaskPredicate((new FloatingTaskFinishedPredicate()).negate());
         return new CommandResult(MESSAGE_EDIT_TASK_SUCCESS);
     }
 }

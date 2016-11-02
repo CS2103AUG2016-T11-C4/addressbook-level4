@@ -15,7 +15,7 @@ public class HideFinishedDeadlineCommand implements Command {
 
     @Override
     public CommandResult execute(Model model) {
-        model.setDeadlineTaskPredicate(new DeadlineTaskFinishedPredicate());
+        model.setDeadlineTaskPredicate((new DeadlineTaskFinishedPredicate()).negate());
         return new CommandResult(MESSAGE_EDIT_TASK_SUCCESS);
     }
 }

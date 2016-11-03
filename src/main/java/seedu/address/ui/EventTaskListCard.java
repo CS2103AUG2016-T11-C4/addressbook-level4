@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import seedu.address.commons.core.IndexPrefix;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.task.EventTask;
 
 public class EventTaskListCard extends UiPart<Pane> {
@@ -32,8 +33,8 @@ public class EventTaskListCard extends UiPart<Pane> {
         if (eventTask != null) {
             indexLabel.setText(IndexPrefix.EVENT.getPrefixString() + index + ". ");
             nameLabel.setText(eventTask.getName().toString());
-            startLabel.setText(eventTask.getStart().toString());
-            endLabel.setText(eventTask.getEnd().toString());
+            startLabel.setText(StringUtil.localDateTimeToPrettyString(eventTask.getStart()));
+            endLabel.setText(StringUtil.localDateTimeToPrettyString(eventTask.getEnd()));
             if (eventTask.getEnd().isBefore(LocalDateTime.now())) {
                 getRoot().getStyleClass().add("finished");
             } else if (eventTask.getStart().isBefore(LocalDateTime.now())) {

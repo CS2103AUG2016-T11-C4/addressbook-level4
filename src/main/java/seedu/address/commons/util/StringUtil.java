@@ -2,6 +2,7 @@ package seedu.address.commons.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,5 +33,25 @@ public class StringUtil {
      */
     public static boolean isUnsignedInteger(String s) {
         return s != null && s.matches("^0*[1-9]\\d*$");
+    }
+
+    /**
+     * returns a neater version of Local Date Time to string
+     * @param localDateTime
+     * @return local date time in dd/mm/yyyy Time: HH:mm (24hr)
+     */
+    public static String localDateTimeToPrettyString(LocalDateTime ldt) {
+        String ldtString = ldt.toString();
+        String[] parts = ldtString.split("-");
+        String yyyy = parts[0];
+        String mm = parts[1];
+        ldtString = parts[2];
+        parts = ldtString.split("T");
+        String dd = parts[0];
+        String time = parts[1];
+
+        String pretty = dd + "/" + mm + "/" + yyyy + " " + "Time: " + time;
+
+        return pretty;
     }
 }

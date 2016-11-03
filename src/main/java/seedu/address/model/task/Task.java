@@ -21,5 +21,4 @@ public abstract class Task {
     public Name getName() {
         return name;
     }
-
 }

@@ -84,7 +84,8 @@ public class MainWindow extends UiPart<Scene> {
     void fillInnerParts(Config config, Logic logic) {
         topBar = new TopBar(logic.getModel().taskPredicateProperty());
         topBarRegion.setNode(topBar.getRoot());
-        floatingTaskListPane = new FloatingTaskListPane(logic.getModel().getFloatingTaskList());
+        floatingTaskListPane = new FloatingTaskListPane(logic.getModel().getFloatingTaskList(),
+                                                        logic.getModel().getFloatingTaskList().size());
         floatingTaskListRegion.setNode(floatingTaskListPane.getRoot());
         eventTaskListPane = new EventTaskListPane(logic.getModel().getEventTaskList(),
                                                   logic.getModel().getEventTaskList().size());

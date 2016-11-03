@@ -9,6 +9,7 @@
         <graphic><FontAwesomeIconView glyphName="LIST_OL" /></graphic>
         <text>Floating Tasks</text>
     </Label>
+    <Label fx:id="listedFloatingTaskCounter" wrapText="true" />
     <ListView fx:id="floatingTaskListView" VBox.vgrow="ALWAYS" minHeight="0" />
 </VBox>
 

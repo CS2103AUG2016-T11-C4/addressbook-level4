@@ -89,7 +89,8 @@ public class MainWindow extends UiPart<Scene> {
         eventTaskListPane = new EventTaskListPane(logic.getModel().getEventTaskList(),
                                                   logic.getModel().getEventTaskList().size());
         eventTaskListRegion.setNode(eventTaskListPane.getRoot());
-        deadlineTaskListPane = new DeadlineTaskListPane(logic.getModel().getDeadlineTaskList());
+        deadlineTaskListPane = new DeadlineTaskListPane(logic.getModel().getDeadlineTaskList(),
+                                                        logic.getModel().getDeadlineTaskList().size());
         deadlineTaskListRegion.setNode(deadlineTaskListPane.getRoot());
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.setNode(resultDisplay.getRoot());

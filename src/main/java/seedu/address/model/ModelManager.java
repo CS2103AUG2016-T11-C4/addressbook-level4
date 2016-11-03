@@ -150,6 +150,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void removeFloatingTasks(TaskPredicate predicate) {
         workingTaskBook.removeFloatingTasks(predicate);
+        indicateTaskBookChanged();
+        setTaskSelect(Optional.empty());
     }
 
     @Override
@@ -204,6 +206,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void removeDeadlineTasks(TaskPredicate predicate) {
         workingTaskBook.removeDeadlineTasks(predicate);
+        indicateTaskBookChanged();
+        setTaskSelect(Optional.empty());
     }
 
     @Override
@@ -258,6 +262,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void removeEventTasks(TaskPredicate predicate) {
         workingTaskBook.removeEventTasks(predicate);
+        indicateTaskBookChanged();
+        setTaskSelect(Optional.empty());
     }
 
     @Override

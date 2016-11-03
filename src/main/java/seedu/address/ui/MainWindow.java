@@ -86,7 +86,8 @@ public class MainWindow extends UiPart<Scene> {
         topBarRegion.setNode(topBar.getRoot());
         floatingTaskListPane = new FloatingTaskListPane(logic.getModel().getFloatingTaskList());
         floatingTaskListRegion.setNode(floatingTaskListPane.getRoot());
-        eventTaskListPane = new EventTaskListPane(logic.getModel().getEventTaskList());
+        eventTaskListPane = new EventTaskListPane(logic.getModel().getEventTaskList(),
+                                                  logic.getModel().getEventTaskList().size());
         eventTaskListRegion.setNode(eventTaskListPane.getRoot());
         deadlineTaskListPane = new DeadlineTaskListPane(logic.getModel().getDeadlineTaskList());
         deadlineTaskListRegion.setNode(deadlineTaskListPane.getRoot());

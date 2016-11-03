@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -49,15 +48,4 @@ public class DeadlineTaskListCardTest extends FxRobot {
         assertEquals("Speech Transcript", nameLabel.getText());
         assertEquals("01/01/1970 Time: 01:00", dueLabel.getText());
     }
-
-    @Test
-    public void nullDeadlineTask_becomesInvisible() throws Exception {
-        FxToolkit.setupSceneRoot(() -> {
-            deadlineTaskListCard = new DeadlineTaskListCard(null, 34);
-            return deadlineTaskListCard.getRoot();
-        });
-        setupNodes();
-        assertFalse(deadlineTaskListCard.getRoot().isVisible());
-    }
-
 }

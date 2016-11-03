@@ -86,6 +86,11 @@ public class ModelManager extends ComponentManager implements Model {
         return workingTaskBook.getTaskBook();
     }
 
+    @Override
+    public int size() {
+        return workingTaskBook.size();
+    }
+
     /** Raises an event to indicate the model has changed */
     private void indicateTaskBookChanged() {
         raise(new TaskBookChangedEvent(workingTaskBook.getTaskBook()));

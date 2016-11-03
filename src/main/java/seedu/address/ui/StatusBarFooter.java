@@ -22,15 +22,23 @@ public class StatusBarFooter extends UiPart<Pane> {
     private static final String FXML = "/view/StatusBarFooter.fxml";
 
     @FXML
+    private StatusBar taskCounter;
+
+    @FXML
     private StatusBar syncStatus;
 
     @FXML
     private StatusBar saveLocationStatus;
 
-    public StatusBarFooter(String saveLocation) {
+    public StatusBarFooter(String saveLocation, int numberOfTask) {
         super(FXML);
+        setTaskCounter(String.valueOf(numberOfTask));
         setSyncStatus("Not updated yet in this session");
         setSaveLocation("./" + saveLocation);
+    }
+
+    private void setTaskCounter(String counterValue) {
+        this.taskCounter.setText("Total number of tasks in Task Tracker: " + counterValue);
     }
 
     private void setSaveLocation(String location) {
@@ -42,9 +50,10 @@ public class StatusBarFooter extends UiPart<Pane> {
     }
 
     @Subscribe
-    public void handleAddressBookChangedEvent(TaskBookChangedEvent abce) {
+    public void handleTaskBookChangedEvent(TaskBookChangedEvent abce) {
         String lastUpdated = (new Date()).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
+        setTaskCounter(String.valueOf(abce.dataSize()));
         setSyncStatus("Last Updated: " + lastUpdated);
     }
 }

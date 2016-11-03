@@ -14,6 +14,12 @@ public class TaskBookChangedEvent extends BaseEvent {
         this.data = data;
     }
 
+    public int dataSize() {
+        return data.getFloatingTasks().size()
+               + data.getDeadlineTasks().size()
+               + data.getEventTasks().size();
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)

@@ -101,6 +101,13 @@ public class WorkingTaskBook {
         this.taskPredicate.set(taskPredicate);
     }
 
+    /**
+     * @return the total number of tasks stored in TaskBook.
+     */
+    public int size() {
+        return taskBook.size();
+    }
+
     /// Floating tasks
 
     public int addFloatingTask(FloatingTask floatingTask) {

@@ -31,6 +31,9 @@ public interface ReadOnlyModel {
     /** Returns the TaskBook */
     ReadOnlyTaskBook getTaskBook();
 
+    /** Return the total number of tasks sotred in sotrage file. */
+    int size();
+
     //// Task Select
 
     /** Returns the task being selected, if any. */

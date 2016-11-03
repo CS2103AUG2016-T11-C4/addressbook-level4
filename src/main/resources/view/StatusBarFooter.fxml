@@ -8,7 +8,8 @@
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     </columnConstraints>
     <children>
-        <StatusBar styleClass="anchor-pane" fx:id="syncStatus" />
-        <StatusBar styleClass="anchor-pane" fx:id="saveLocationStatus" GridPane.columnIndex="1" />
+        <StatusBar styleClass="anchor-pane" fx:id="taskCounter" />
+        <StatusBar styleClass="anchor-pane" fx:id="syncStatus" GridPane.columnIndex="1"/>
+        <StatusBar styleClass="anchor-pane" fx:id="saveLocationStatus" GridPane.columnIndex="2" />
     </children>
 </GridPane>

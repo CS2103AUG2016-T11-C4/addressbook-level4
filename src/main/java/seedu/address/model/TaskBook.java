@@ -148,4 +148,12 @@ public class TaskBook implements ReadOnlyTaskBook {
     public int hashCode() {
         return Objects.hash(floatingTasks, deadlineTasks, eventTasks);
     }
+
+    /** Return the size of TaskBook, namely the total number of tasks sotred. */
+    public int size() {
+        return floatingTasks.size()
+               + deadlineTasks.size()
+               + eventTasks.size();
+    }
+
 }

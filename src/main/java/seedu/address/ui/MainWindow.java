@@ -84,18 +84,22 @@ public class MainWindow extends UiPart<Scene> {
     void fillInnerParts(Config config, Logic logic) {
         topBar = new TopBar(logic.getModel().taskPredicateProperty());
         topBarRegion.setNode(topBar.getRoot());
-        floatingTaskListPane = new FloatingTaskListPane(logic.getModel().getFloatingTaskList());
+        floatingTaskListPane = new FloatingTaskListPane(logic.getModel().getFloatingTaskList(),
+                                                        logic.getModel().getFloatingTaskList().size());
         floatingTaskListRegion.setNode(floatingTaskListPane.getRoot());
-        eventTaskListPane = new EventTaskListPane(logic.getModel().getEventTaskList());
+        eventTaskListPane = new EventTaskListPane(logic.getModel().getEventTaskList(),
+                                                  logic.getModel().getEventTaskList().size());
         eventTaskListRegion.setNode(eventTaskListPane.getRoot());
-        deadlineTaskListPane = new DeadlineTaskListPane(logic.getModel().getDeadlineTaskList());
+        deadlineTaskListPane = new DeadlineTaskListPane(logic.getModel().getDeadlineTaskList(),
+                                                        logic.getModel().getDeadlineTaskList().size());
         deadlineTaskListRegion.setNode(deadlineTaskListPane.getRoot());
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.setNode(resultDisplay.getRoot());
         commandBox = new CommandBox(resultDisplay, logic);
         commandBox.setOnCommandResult(this::onCommandResult);
         commandBoxPlaceholder.setNode(commandBox.getRoot());
-        statusBarFooter = new StatusBarFooter(config.getTaskBookFilePath());
+        statusBarFooter = new StatusBarFooter(config.getTaskBookFilePath(),
+                                              logic.getModel().size());
         statusbarPlaceholder.setNode(statusBarFooter.getRoot());
     }
 

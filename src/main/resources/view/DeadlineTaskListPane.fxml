@@ -6,8 +6,9 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml/1" stylesheets="@DarkTheme.css">
     <Label styleClass="header">
-        <graphic><FontAwesomeIconView glyphName="CLOCK_ALT" /></graphic>
-        <text>Deadlines</text>
+       	<graphic><FontAwesomeIconView glyphName="CLOCK_ALT" /></graphic>
+       	<text>Deadlines</text>
     </Label>
+   	<Label fx:id="listedDeadlineCounter" wrapText="true" />
     <ListView fx:id="deadlineTaskListView" VBox.vgrow="ALWAYS" minHeight="0" />
 </VBox>

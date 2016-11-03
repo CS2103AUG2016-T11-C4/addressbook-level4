@@ -95,7 +95,7 @@ public class MainWindow extends UiPart<Scene> {
         commandBox = new CommandBox(resultDisplay, logic);
         commandBox.setOnCommandResult(this::onCommandResult);
         commandBoxPlaceholder.setNode(commandBox.getRoot());
-        statusBarFooter = new StatusBarFooter(config.getTaskBookFilePath());
+        statusBarFooter = new StatusBarFooter(config.getTaskBookFilePath(), logic.getModel());
         statusbarPlaceholder.setNode(statusBarFooter.getRoot());
     }
 

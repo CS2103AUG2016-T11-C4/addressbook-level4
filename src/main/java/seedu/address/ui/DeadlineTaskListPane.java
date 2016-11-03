@@ -2,8 +2,10 @@ package seedu.address.ui;
 
 import java.util.List;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
@@ -17,10 +19,15 @@ public class DeadlineTaskListPane extends UiPart<Pane> {
     @FXML
     private ListView<IndexedItem<DeadlineTask>> deadlineTaskListView;
 
+    @FXML
+    private Label listedDeadlineCounter;
+
     public DeadlineTaskListPane(ObservableList<IndexedItem<DeadlineTask>> deadlineTaskList) {
         super(FXML);
         deadlineTaskListView.setItems(deadlineTaskList);
         deadlineTaskListView.setCellFactory(listView -> new DeadlineTaskListCell());
+        listedDeadlineCounter.textProperty().bind(Bindings.size(deadlineTaskList)
+                                                    .asString("Number of Deadlines listed: %d"));
     }
 
     /**

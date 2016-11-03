@@ -2,8 +2,10 @@ package seedu.address.ui;
 
 import java.util.List;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
@@ -17,10 +19,15 @@ public class EventTaskListPane extends UiPart<Pane> {
     @FXML
     private ListView<IndexedItem<EventTask>> eventTaskListView;
 
+    @FXML
+    private Label listedEventCounter;
+
     public EventTaskListPane(ObservableList<IndexedItem<EventTask>> eventTaskList) {
         super(FXML);
         eventTaskListView.setItems(eventTaskList);
         eventTaskListView.setCellFactory(listView -> new EventTaskListCell());
+        listedEventCounter.textProperty().bind(Bindings.size(eventTaskList)
+                .asString("Number of Events listed: %d"));
     }
 
     /**

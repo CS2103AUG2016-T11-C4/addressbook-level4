@@ -9,6 +9,7 @@
         <graphic><FontAwesomeIconView glyphName="CALENDAR" /></graphic>
         <text>Events</text>
     </Label>
+    <Label fx:id="listedEventCounter" wrapText="true" />
     <ListView fx:id="eventTaskListView" VBox.vgrow="ALWAYS" minHeight="0" />
 </VBox>
 

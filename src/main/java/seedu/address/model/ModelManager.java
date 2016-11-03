@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.TaskBookChangedEvent;
+import seedu.address.commons.events.ui.UpdateTaskBookListViewEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.config.Config;
 import seedu.address.model.config.ReadOnlyConfig;
@@ -96,6 +97,11 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskBookChangedEvent(workingTaskBook.getTaskBook()));
     }
 
+    /** Raise an event to indicate the list view in UI has changed */
+    private void indicateUIChanged() {
+        raise(new UpdateTaskBookListViewEvent(this));
+    }
+
     //// Task select
 
     @Override
@@ -125,6 +131,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void setTaskPredicate(TaskPredicate taskFilter) {
         workingTaskBook.setTaskPredicate(taskFilter);
         setTaskSelect(Optional.empty());
+        indicateUIChanged();
     }
 
     //// Floating tasks
@@ -134,6 +141,7 @@ public class ModelManager extends ComponentManager implements Model {
         final int workingIndex = workingTaskBook.addFloatingTask(floatingTask);
         indicateTaskBookChanged();
         setTaskSelect(Optional.of(new TaskSelect(TaskType.FLOAT, workingIndex)));
+        indicateUIChanged();
         return workingIndex;
     }
 
@@ -149,6 +157,7 @@ public class ModelManager extends ComponentManager implements Model {
         if (getTaskSelect().equals(Optional.of(new TaskSelect(TaskType.FLOAT, workingIndex)))) {
             setTaskSelect(Optional.empty());
         }
+        indicateUIChanged();
         return removedFloating;
     }
 
@@ -157,6 +166,7 @@ public class ModelManager extends ComponentManager implements Model {
         workingTaskBook.removeFloatingTasks(predicate);
         indicateTaskBookChanged();
         setTaskSelect(Optional.empty());
+        indicateUIChanged();
     }
 
     @Override
@@ -165,6 +175,7 @@ public class ModelManager extends ComponentManager implements Model {
         workingTaskBook.setFloatingTask(workingIndex, newFloatingTask);
         indicateTaskBookChanged();
         setTaskSelect(Optional.of(new TaskSelect(TaskType.FLOAT, workingIndex)));
+        indicateUIChanged();
     }
 
     @Override
@@ -181,6 +192,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void setFloatingTaskComparator(Comparator<? super FloatingTask> comparator) {
         workingTaskBook.setFloatingTaskComparator(comparator);
         setTaskSelect(Optional.empty());
+        indicateUIChanged();
     }
 
     //// Deadline tasks
@@ -190,6 +202,7 @@ public class ModelManager extends ComponentManager implements Model {
         final int workingIndex = workingTaskBook.addDeadlineTask(deadlineTask);
         indicateTaskBookChanged();
         setTaskSelect(Optional.of(new TaskSelect(TaskType.DEADLINE, workingIndex)));
+        indicateUIChanged();
         return workingIndex;
     }
 
@@ -205,6 +218,7 @@ public class ModelManager extends ComponentManager implements Model {
         if (getTaskSelect().equals(Optional.of(new TaskSelect(TaskType.DEADLINE, workingIndex)))) {
             setTaskSelect(Optional.empty());
         }
+        indicateUIChanged();
         return removedDeadline;
     }
 
@@ -213,6 +227,7 @@ public class ModelManager extends ComponentManager implements Model {
         workingTaskBook.removeDeadlineTasks(predicate);
         indicateTaskBookChanged();
         setTaskSelect(Optional.empty());
+        indicateUIChanged();
     }
 
     @Override
@@ -221,6 +236,7 @@ public class ModelManager extends ComponentManager implements Model {
         workingTaskBook.setDeadlineTask(workingIndex, newDeadlineTask);
         indicateTaskBookChanged();
         setTaskSelect(Optional.of(new TaskSelect(TaskType.DEADLINE, workingIndex)));
+        indicateUIChanged();
     }
 
     @Override
@@ -237,6 +253,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void setDeadlineTaskComparator(Comparator<? super DeadlineTask> comparator) {
         workingTaskBook.setDeadlineTaskComparator(comparator);
         setTaskSelect(Optional.empty());
+        indicateUIChanged();
     }
 
     //// Event tasks
@@ -246,6 +263,7 @@ public class ModelManager extends ComponentManager implements Model {
         final int workingIndex = workingTaskBook.addEventTask(eventTask);
         indicateTaskBookChanged();
         setTaskSelect(Optional.of(new TaskSelect(TaskType.EVENT, workingIndex)));
+        indicateUIChanged();
         return workingIndex;
     }
 
@@ -261,6 +279,7 @@ public class ModelManager extends ComponentManager implements Model {
         if (getTaskSelect().equals(Optional.of(new TaskSelect(TaskType.EVENT, workingIndex)))) {
             setTaskSelect(Optional.empty());
         }
+        indicateUIChanged();
         return removedEvent;
     }
 
@@ -269,6 +288,7 @@ public class ModelManager extends ComponentManager implements Model {
         workingTaskBook.removeEventTasks(predicate);
         indicateTaskBookChanged();
         setTaskSelect(Optional.empty());
+        indicateUIChanged();
     }
 
     @Override
@@ -277,6 +297,7 @@ public class ModelManager extends ComponentManager implements Model {
         workingTaskBook.setEventTask(workingIndex, newEventTask);
         indicateTaskBookChanged();
         setTaskSelect(Optional.of(new TaskSelect(TaskType.EVENT, workingIndex)));
+        indicateUIChanged();
     }
 
     @Override
@@ -293,6 +314,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void setEventTaskComparator(Comparator<? super EventTask> comparator) {
         workingTaskBook.setEventTaskComparator(comparator);
         setTaskSelect(Optional.empty());
+        indicateUIChanged();
     }
 
     ////undo redo

@@ -1,5 +1,6 @@
 @import "fonts/OpenSans.css";
 @import 'fonts/Roboto.css';
+@import "fonts/CourierNew.css"
 
 .root {
     -fx-background-color: derive(#1d1d1d, 20%);
@@ -222,4 +223,8 @@
 
 .card.priority5 {
     -fx-border-color: #ff0000;
+}
+
+.helpBox {
+	-fx-font-family: 'Courier New';
 }

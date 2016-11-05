@@ -110,7 +110,6 @@ public class MainWindow extends UiPart<Scene> {
 
     private void handleHelp() {
         final HelpWindow helpWindow = new HelpWindow();
-        helpWindow.getRoot().showAndWait();
     }
 
     /**

@@ -4,18 +4,21 @@
 <?import javafx.scene.control.*?>
 
 <VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER_LEFT" maxHeight="120.0" minHeight="80.0"
-        prefHeight="110.0" stylesheets="@DarkTheme.css" styleClass="card">
-    <HBox spacing="5" alignment="CENTER_LEFT">
+        prefHeight="80.0" stylesheets="@DarkTheme.css" styleClass="card">
+    <HBox spacing="5" alignment="CENTER_LEFT" HBox.Hgrow="ALWAYS">
         <Label fx:id="indexLabel" styleClass="cell_big_label"></Label>
         <Label fx:id="nameLabel" styleClass="cell_big_label"></Label>
     </HBox>
-    <HBox spacing="5" alignment="CENTER_LEFT">
-        <Label>Start: </Label>
-        <Label fx:id="startLabel">$start</Label>
-    </HBox>
-    <HBox spacing="5" alignment="CENTER_LEFT">
-        <Label>End: </Label>
-        <Label fx:id="endLabel">$end</Label>
+    <HBox spacing="30" alignment="CENTER_LEFT">
+    	<HBox spacing = "5" alignment="CENTER_RIGHT">
+       		<Label>Start: </Label>
+        	<Label fx:id="startLabel">$start</Label>
+        </HBox>
+        
+        <HBox spacing="5" alignment="CENTER_RIGHT">
+        	<Label>End: </Label>
+        	<Label fx:id="endLabel">$end</Label>
+    	</HBox>
     </HBox>
 </VBox>
 

@@ -13,11 +13,11 @@ import seedu.address.model.task.FloatingTask;
  *
  *
  */
-public class FilterByDateCommand implements TaskPredicate{
+public class FilterByDatePredicate implements TaskPredicate{
 	private final LocalDateTime startTime;
 	private final LocalDateTime endTime;
 
-	public FilterByDateCommand (LocalDateTime startTime, LocalDateTime endTime){
+	public FilterByDatePredicate (LocalDateTime startTime, LocalDateTime endTime){
 		assert !startTime.equals(null);
 		assert !endTime.equals(null);
 

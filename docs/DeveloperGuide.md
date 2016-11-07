@@ -934,22 +934,22 @@ Priority | As a ... | I want to ...             | So that I can...
 `* * *`  | User | Add a floating task to the task manager | Keep track of it and remember to do it when I'm free
 `* * *`  | User | View my floating tasks | keep track of them.
 `* * *`  | User | Search specific tasks by keywords |
-`*`  | Power user | Have shortcut keys to launch the app | Launch the app quickly
-`* `  | Power user | Have shortcut keys to minimise the app | Hide the app with only the keyboard
-`* * *`    | User | Mark a deadline as finished before the due time | Remove it from the notification list and archive it.
-`* * *`    | User | Mark a floating task as finished | Remove it from my floating task list.
-`* *`    | User who has events taking place at multiple locations | Add the location of an event | Be reminded of where to go.
-`* *`    | User | Have the app notify me of the error in my command, and suggest the right command when I make a typo/forget the format of the command | Enter in the correct command immediately without having to open up the manual.
-`* *`    | Busy user | View what events or deadlines are scheduled over a range of time | Ensure that the event does not clash with other events or deadlines.
-`* * *`    | User | Revise the due datetime for a certain deadline. | Keep track of it and avoid creating a new deadline when the time has been revised.
-`* * *`    | User | Revise the timeslot for a certain event | Keep track of it and avoid creating a new event when the time has been revised.
-`* *`    | Busy user | Generate a list of all empty time slots in a given period | Choose a free time slot to create new events or tasks.
-`* * *`    | User | Undo an action | Restore tasks deleted by accident.
-`* * *` | User | Redo an action | Reverse an action done by undo. 
-`*`      | User who is unable to remember details of each task | Add a short description under the name of each task in my schedule | Know how to do the task and where, even if I forget these details by any chance.
-`*`      | Busy user | Set priority levels for my tasks | Able to decide which task needs to be completed urgently
-`*`      | Group user | Option to categorize my task as a "Group activity" and automatically send notifications (through mail or other social networking platforms) to all other users who are in my team, whenever I make any changes to our work schedule for the group activity; and send them reminders about upcoming deadlines for the tasks. Every time I add a new task, I should have also an option to either include it to an existing group activity or add it to a new group activity. | Improve my work efficiency, and make sure everyone in my team are aware of the work schedule of our project.
-`* `     | User who needs to be reminded of the task before the deadline date. | Set reminders at customized times before the deadline. | Have enough time to complete the task before deadline, even if I forgot to do it.
+`* * *`  | User | Mark a deadline as finished before the due time | distinguish finished tasks and unfinished tasks in UI.
+`* * *`  | User | Mark a floating task as finished | remove it from my floating task list.
+`* * *`  | User | Mark a finished deadline as unfinished before the due time |
+`* * *`  | User | Mark a finished floating task as unfinished |
+`* *`  | User | Set my database directory | 
+`* *`  | User | Revise the due datetime for a certain deadline. | keep track of it and avoid creating a new deadline when the time has been revised.
+`* *`  | User | Revise the timeslot for a certain event | keep track of it and avoid creating a new event when the time has been revised.
+`* *`  | User | List all the tasks that I have finished | 
+`* *`  | User | List all the tasks that I have not finished | 
+`* *`  | User | Clear all finished tasks at one time | avoid deleting my finished tasks one by one.
+`* *`  | User | Undo an action | restore tasks deleted by accident.
+`* *`  | User | Redo an action | reverse an action done by undo. 
+`* *`    | User | Have the app notify me of the error in my command, and suggest the right command when I make a typo/forget the format of the command | enter in the correct command immediately without having to open up the manual.
+`*`      | Busy user | Set priority levels for my tasks | able to decide which task needs to be completed urgently
+`*`      | Power user | Have shortcut keys to launch the app | launch the app quickly.
+`* `     | Power user | Have shortcut keys to minimise the app | hide the app with only the keyboard.
 
 # Appendix B: Use Cases
 
@@ -981,9 +981,9 @@ Priority | As a ... | I want to ...             | So that I can...
 1b. The range of time specified by the start datetime and end datetime occurs
     in the past.
 
-> 1b1. TaskTracker warns the user that the event is in the past.
+> 1b1. TaskTracker will add this event task but mark it as finished automatically.
 
-> Use case resumes from step 2.
+> Use case ends.
 
 1c. The name of the event contains invalid characters.
 
@@ -1014,9 +1014,9 @@ Priority | As a ... | I want to ...             | So that I can...
 
 1a. The end datetime occurs in the past.
 
-> 1a1. TaskTracker warns the user that the end datetime is in the past.
+> 1a1. TaskTracker will add this deadline but mark it as overdue.
 
-> Use case resumes from step 2.
+> Use case ends.
 
 1b. The name of the deadline contains invalid characters.
 
@@ -1058,22 +1058,23 @@ Priority | As a ... | I want to ...             | So that I can...
 
 > Use case resumes from step 2.
 
-## Use case: View all floating tasks
+## Use case: View all finished/unfinished tasks
 
 **MSS**
 
-1. User requests to view all floating tasks.
+1. User requests to view all finished/unfinished tasks.
 
-2. TaskTracker displays all floating tasks in the database as a list, ordered
-   from highest to lowest priority. <br>
+2. TaskTracker displays all finished/unfinished tasks in the database as a list;
+   floating tasks will be ordered from highest to lowest priority;
+   deadline tasks will be ordered from earliest due time to latest due time;
+   event tasks will be order from earliest startign time to latest starting time. <br>
    Use case ends.
 
 **Extensions**
 
-1a. There are no floating tasks in the database.
+1a. There are no tasks in the database.
 
-> 1a1. TaskTracker notifies the user that there are no floating tasks in the
->      database.
+> 1a1. TaskTracker will display an empty list.
 
 > Use case ends.
 
@@ -1097,23 +1098,17 @@ Priority | As a ... | I want to ...             | So that I can...
 
 > Use case ends.
 
-1b. The new time is the same as the previous due datetime.
+1b. The new date/time occurs in the past.
 
-> 1b1. TaskTracker informs the user that the datetime remains unchanged.
+> 1b1. TaskTracker will edit the date/time and then mark this task as overdue.
 
 > Use case ends.
-
-1c. The new date/time occurs in the past.
-
-> 1c1. TaskTracker warns the user that the end datetime is in the past.
-
-> Use case resumes from step 2.
 
 ## Use case: Revise the time of an event
 
 **MSS**
 
-1. User requests to revise the the time of a certain deadline with new
+1. User requests to revise the the time of a certain event with new
    date/time information.
 
 2. TaskTracker revises the event to a new time slot, and notifies the user that
@@ -1129,12 +1124,12 @@ Priority | As a ... | I want to ...             | So that I can...
 
 > Use case ends.
 
-1b. The range of time specified by the start datetime and end datetime
-    intersects with the start-end datetime range of other event(s).
+1b. The range of time specified by the start datetime and end datetime occurs
+    in the past.
 
-> 1b1. TaskTracker warns the user that the event clashes with which event(s).
+> 1b1. TaskTracker will edit the date/time and then mark this task as finished.
 
-> Use case resumes from step 2.
+> Use case end.
 
 1c. The start datetime occurs after the end datetime.
 
@@ -1143,162 +1138,22 @@ Priority | As a ... | I want to ...             | So that I can...
 
 > Use case ends.
 
-1d. The range of time specified by the start datetime and end datetime occurs
-    in the past.
-
-> 1e1. TaskTracker warns the user that the event is in the past.
-
-> Use case resumes from step 2.
-
-1e. The new datetime is the same as the existing datetime.
-
-> 1e1. TaskTracker informs the user that the datetime remains unchanged.
-
-> Use case ends.
-
-## Use case: mark a floating task/deadline as finished
+## Use case: mark a floating task/deadline as finished/unfinished
 
 **MSS**
 
-1. User requests to mark a certain floating task/deadline as finished.
+1. User requests to mark a certain floating task/deadline as finished/unfinished.
 
-2. TaskTracker marks the task as finished and informs the user.
+2. TaskTracker marks the task as finished/unfinished and informs the user.
    Use case ends.
 
 **Extensions**
 
-1a. The floating task does not exist.
+1a. The floating task/deadline does not exist.
 
 > 1a1. TaskTracker informs the user that the floating task does not exist.
 
 > Use case ends.
-
-## Use case: Generate a list of empty time slots
-
-**MSS**
-
-1. User request to generate a list of free time slots in a certain period with
-   certain time duration.
-
-2. TaskTracker lists all possible time slots in that period <br>
-   Use case ends.
-
-**Extensions**
-
-1a. The time period requested is invalid (wrong format or time in the past)
-
-> 1a1. TaskTracker shows an error message.
-
-> Use case ends.
-
-1b. The input duration is in wrong format
-
-> 1b1. TaskTracker shows an error message to inform the error.
-
-> Use case ends.
-
-2a. There is no feasible time slot
-
-> 2a1. TaskTracker shows an empty list and throw a message saying there is no
-> avaliable time slots for the user in the given time period.
-
-> Use case ends.
-
-## Use case: Add priority tags
-
-**MSS**
-
-1. The user requests to add a priority tag for a specified event.
-
-2. TaskTracker prompts the user to select the priority level of the event -
-   "Very Important"/ "Important"/ "Not important".
-
-3. The user selects the appropriate priority level for the event from these
-   options.
-
-4. TaskManager updates the priority of the event with the specified priority, and it is displayed on the user's schedule.
-
-5. The user is notified that the update was successful.
-
-   Use case ends.
-
-**Extensions**
-
-1a. The user places a request to add a priority tag, but does not add it.
-
-> 1a1. User presses "Esc". TaskTracker goes back to the normal view of the
-> schedule. Now even if the user clicks on any event, priority tag options will
-> not be displayed as the TaskTracker switched from Priority Tag view to Normal
-> view.
-
-> Use case ends.
-
-## Use case: Add new event under a specific "group activity"
-
-**MSS**
-
-1. User requests to add a new event to a group activity.
-
-2. If the user wants to create a new group activity, he places a request to add new group activity. 
-
-3. The user then enters the details of the group activity (such as name of the
-   group activity and email addresses of the people in the group).
-
-4. TaskTracker automatically adds the event to this new activity.
-
-5. TaskTracker notifies the user that the event has been added to the schedule.
-
-   User case ends.
-
-**Extensions**
-
-1a. The user enters an invalid email address of a group member, while creating
-a new group activity.
-
-> 1a1. TaskTracker displays the error message - "Invalid email".
-
-> Use case ends.
-
-1b. The user enters a group activity name that already exists, while adding a
-    new group activity.
-
-> 1b1. TaskTracker displays an error message "Name already exists".
-
-> Use case ends.
-
-## Use case: Add event description
-
-**MSS**
-
-1. The user requests to add a new event.
-
-2. The user writes a small description about the event in the "Description"
-   field, present in the "Add new event" window.
-
-3. The event is added and the user is notified about the new event added.
-
-   User case ends.
-
-## Use case: Set reminders
-
-**MSS**
-
-1. When adding a new event, the user adds the time at which he wants to set a
-   reminder, before the event occurs. The time is entered in day/hours/minutes
-   format.
-
-2. The new event is added to the schedule and the user is notified about the
-   addition of the new event.
-
-   User case ends.
-
-**Extensions**
-
-1a. The user enters the time in a wrong format.
-
-> 1a1. TaskTracker shows an error message "Invalid time format"
-
-> User case ends.
 
 ## See the manual
 
@@ -1314,21 +1169,21 @@ a new group activity.
 
 ## Search the manual
 
-**Use case: search the manual**
+**Use case: Auto-complete**
 
 **MSS**
 
-1. User request to search the manual for a specific command.
+1. User request to auto complete the task name when editing one specific task.
 
-2. TaskTracker shows the specific manual command.
+2. TaskTracker will complete the precious task name automatically.
 
    Use case ends
 
 **Extensions**
 
-1a. The command to be searched does not exist
+1a. The target task does not exist.
 
-> 1a1. TaskTracker informs the user that the command does not exist.
+> 1a1. TaskTracker will show nothing.
 
 > Use case ends
 
@@ -1350,6 +1205,27 @@ a new group activity.
 1a. There is no action to undo
 
 > 1a1. TaskTracker shows an error message "no action to undo"
+
+> User Case ends.
+
+## Redo an action
+
+**User case: Redo an action, such as deleting a task**
+
+**MSS**
+
+1. The user wants to redo an action that is undone previously.
+
+2. The previous undone action is redone. Task manager is restored to state after the
+   completed action.
+
+   User case ends.
+
+**Extensions**
+
+1a. There is no action to redo
+
+> 1a1. TaskTracker shows an error message "no action to redo"
 
 > User Case ends.
 

@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-
 /**
  * Represents a parser which can parse a string and produce a result of type T.
  *
@@ -14,7 +13,7 @@ public interface Parser<T> {
      * contain the substring ranges of the input string which caused the parsing to fail.
      */
 
-    T parse(String str) throws ParseException;
+T parse(String str) throws ParseException;
 
 
 }

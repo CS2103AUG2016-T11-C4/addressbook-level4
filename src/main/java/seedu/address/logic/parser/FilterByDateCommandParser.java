@@ -5,12 +5,11 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Optional;
 
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.filter.FilterByDateCommand;
 import seedu.address.model.filter.TaskPredicate;
 
-public class FilterByDateCommandParser implements Parser<Command>{
+public class FilterByDateCommandParser implements Parser<ListCommand>{
 
 	private final Optional<LocalDateTime> referenceDateTime;
     private final DateTimeArgument dateTimeArg = new DateTimeArgument("DATE", "TIME");
@@ -29,7 +28,7 @@ public class FilterByDateCommandParser implements Parser<Command>{
 
 	private final CommandLineParser cmdParser = new CommandLineParser().addArgument(dateTimeArg);
 	@Override
-	public Command parse(String str) throws ParseException{
+	public ListCommand parse(String str) throws ParseException{
 		cmdParser.parse(str);
         final LocalDateTime now = referenceDateTime.orElse(LocalDateTime.now());
 

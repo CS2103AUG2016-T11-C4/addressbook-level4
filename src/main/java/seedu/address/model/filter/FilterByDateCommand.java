@@ -6,12 +6,18 @@ import java.util.stream.Stream;
 import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.EventTask;
 import seedu.address.model.task.FloatingTask;
-
-public class FilterByDate implements TaskPredicate{
+/*
+ * Filters the events and deadlines based on the time when they are scheduled.
+ * The user inputs a start time and end time, and all events and tasks that occur between the time range
+ * specified by the user, are displayed on the user interface.
+ *
+ *
+ */
+public class FilterByDateCommand implements TaskPredicate{
 	private final LocalDateTime startTime;
 	private final LocalDateTime endTime;
 
-	public FilterByDate (LocalDateTime startTime, LocalDateTime endTime){
+	public FilterByDateCommand (LocalDateTime startTime, LocalDateTime endTime){
 		assert !startTime.equals(null);
 		assert !endTime.equals(null);
 

@@ -7,12 +7,11 @@ import java.util.Optional;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.model.filter.FilterByDate;
+import seedu.address.model.filter.FilterByDateCommand;
 import seedu.address.model.filter.TaskPredicate;
 
 public class FilterByDateCommandParser implements Parser<Command>{
 
-	private String filter;
 	private final Optional<LocalDateTime> referenceDateTime;
     private final DateTimeArgument dateTimeArg = new DateTimeArgument("DATE", "TIME");
 
@@ -39,7 +38,7 @@ public class FilterByDateCommandParser implements Parser<Command>{
 	     final LocalDate endDate = dateTimeArg.getDate().orElse(now.toLocalDate());
 	     final LocalTime endTime = dateTimeArg.getTime().orElse(LocalTime.of(23, 59));
 
-		final TaskPredicate predicate = new FilterByDate(LocalDateTime.of(startDate, startTime), LocalDateTime.of(endDate, endTime) );
+		final TaskPredicate predicate = new FilterByDateCommand(LocalDateTime.of(startDate, startTime), LocalDateTime.of(endDate, endTime) );
 		return new ListCommand(predicate);
 	}
 

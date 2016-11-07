@@ -65,6 +65,7 @@ time you want to modify your schedule.
 TaskTracker makes time-management smart and simple for you!
 
 ## Quick Start
+Oh busy human, office worker by day and super hero by night, lets quick start the end to your disorganised tasks!
 
 1. Ensure you have Java version `1.8.0_60` or later installed in your computer.
 
@@ -86,35 +87,37 @@ TaskTracker makes time-management smart and simple for you!
 
     ![alt text](./images/userguide/1.png "command bar")
 
-    Let's do another one:
+    Oh shoot, here comes BOSS. "Busy human! I need these stack of papers signed!". Let's do another one:
 
-	* `add "bake potatoes" p-2`
+	* `add "sign papers" p-2`
 
     ![alt text](./images/userguide/2.png "")
 
-    Notice how `bake potatoes` is below `Learn Task Tracker`. That's because
-    `bake potatoes` is of number 2 priority, while `Learn Task Tracker` with an
-    undefined priority takes the default highest priority number of 0.
+    Notice how `sign papers` is above `Learn Task Tracker`. That's because
+    `sign papers` has higher priority of 2, while `Learn Task Tracker` with an
+    undefined priority takes the default priority number of 0.
 
-7. Let's add deadline tasks with due date and time.
+7. Suddenly, cubicle neighbour Sharon's head pops up from behind those grey office dividers. "Psst, thats alot of papers to sign. Let me help you with that." Aww, how nice of Sharon! Lets bake some cookies for her before she quits this dingy office year end.  Let's add a deadline tasks with due date and time.
 
 	* `add "bake cookies" 31/12 3pm`
 
         `bake cookies` by 31 December of this year, 3pm. Undeclared year in date
         field will be taken as the current year.
+        
+ Also, remeber to collect the signed papers by today, 3pm!
 
-	* `add "bake cookies" tdy 3pm`
+	* `add "collect papers from Sharon" tdy 3pm`
 
-        `bake cookies` by today, 3pm.
+        Cllect those papers from Sharon by today, 3pm.
 
     ![alt text](./images/userguide/3.png "")
 
-8. Next up, events. An event is a task with a start date, start time, end date
-   and end time. Example commands are:
+8. Your phone bleeps. An invitation to attend the Avenger's convention organised by Dr Strange. Next up, events. An event is a task with a start date, start time, end date
+   and end time. 
 
-	* `add "CS2103t programming camp" 30/8 1pm to 3/1/2017 6pm`
+	* `add "Super hero's convention" 30/8 1pm to 3/1/2017 6pm`
 
-        Event `CS2103t programming camp` starts from 1pm of the 30th August 2016, and ends at 6pm of the 3rd January 2017.
+        Event `super hero's convenrtion` starts from 1pm of the 30th August 2016, and ends at 6pm of the 3rd January 2017.
 
 	* `add "potato peeling" tdy 3pm to 7pm`
 

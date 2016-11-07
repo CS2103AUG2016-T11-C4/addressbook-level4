@@ -7,7 +7,6 @@ import com.google.common.base.MoreObjects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.filter.TaskPredicate;
 import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.EventTask;
 import seedu.address.model.task.FloatingTask;
@@ -53,13 +52,6 @@ public class TaskBook implements ReadOnlyTaskBook {
         return FXCollections.unmodifiableObservableList(floatingTasks);
     }
 
-    @Override
-    public ObservableList<FloatingTask> getFloatingTasks(TaskPredicate predicate) {
-        assert predicate != null;
-        ObservableList<FloatingTask> result = FXCollections.unmodifiableObservableList(floatingTasks);
-        return result.filtered(p -> predicate.test(p));
-    }
-
     public void setFloatingTasks(Collection<FloatingTask> floatingTasks) {
         this.floatingTasks.setAll(floatingTasks);
     }
@@ -86,13 +78,6 @@ public class TaskBook implements ReadOnlyTaskBook {
         return FXCollections.unmodifiableObservableList(deadlineTasks);
     }
 
-    @Override
-    public ObservableList<DeadlineTask> getDeadlineTasks(TaskPredicate predicate) {
-        assert predicate != null;
-        ObservableList<DeadlineTask> result = FXCollections.unmodifiableObservableList(deadlineTasks);
-        return result.filtered(p -> predicate.test(p));
-    }
-
     public void setDeadlineTasks(Collection<DeadlineTask> deadlineTasks) {
         this.deadlineTasks.setAll(deadlineTasks);
     }
@@ -117,13 +102,6 @@ public class TaskBook implements ReadOnlyTaskBook {
     @Override
     public ObservableList<EventTask> getEventTasks() {
         return FXCollections.unmodifiableObservableList(eventTasks);
-    }
-
-    @Override
-    public ObservableList<EventTask> getEventTasks(TaskPredicate predicate) {
-        assert predicate != null;
-        ObservableList<EventTask> result = FXCollections.unmodifiableObservableList(eventTasks);
-        return result.filtered(p -> predicate.test(p));
     }
 
     public void setEventTasks(Collection<EventTask> eventTasks) {

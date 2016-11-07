@@ -27,9 +27,9 @@ public class DeadlineTaskListPane extends UiPart<Pane> {
     private static final Logger logger = LogsCenter.getLogger(DeadlineTaskListPane.class);
 
     private final ObservableList<IndexedItem<DeadlineTask>> listedDeadlineTasks;
-    private ObservableList<DeadlineTask> todayDeadlineTasks;
-    private ObservableList<DeadlineTask> overdueDeadlineTasks;
-    private ObservableList<DeadlineTask> unfinishedDeadlineTasks;
+    private ObservableList<IndexedItem<DeadlineTask>> todayDeadlineTasks;
+    private ObservableList<IndexedItem<DeadlineTask>> overdueDeadlineTasks;
+    private ObservableList<IndexedItem<DeadlineTask>> unfinishedDeadlineTasks;
 
     @FXML
     private ListView<IndexedItem<DeadlineTask>> deadlineTaskListView;

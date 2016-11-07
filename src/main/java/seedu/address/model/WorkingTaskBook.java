@@ -151,14 +151,6 @@ public class WorkingTaskBook {
     }
 
     /**
-     * Return a filtered floating task list filtered by given predicate
-     */
-    public ObservableList<FloatingTask> getFloatingTaskList(TaskPredicate taskPredicate) {
-        assert taskPredicate != null;
-        return taskBook.getFloatingTasks(taskPredicate);
-    }
-
-    /**
      * Returns the comparator used to sort floating tasks in the floating task working list.
      */
     public Comparator<? super FloatingTask> getFloatingTaskComparator() {
@@ -223,14 +215,6 @@ public class WorkingTaskBook {
     }
 
     /**
-     * Return a filtered deadline task list filtered by given predicate
-     */
-    public ObservableList<DeadlineTask> getDeadlineTaskList(TaskPredicate taskPredicate) {
-        assert taskPredicate != null;
-        return taskBook.getDeadlineTasks(taskPredicate);
-    }
-
-    /**
      * Returns the comparator used to sort deadline tasks in the deadline task working list.
      */
     public Comparator<? super DeadlineTask> getDeadlineTaskComparator() {
@@ -292,14 +276,6 @@ public class WorkingTaskBook {
 
     public ObservableList<IndexedItem<EventTask>> getEventTaskList() {
         return workingEventTasks.getWorkingItemList();
-    }
-
-    /**
-     * Return a filtered event task list filtered by given predicate
-     */
-    public ObservableList<EventTask> getEventTaskList(TaskPredicate taskPredicate) {
-        assert taskPredicate != null;
-        return taskBook.getEventTasks(taskPredicate);
     }
 
     /**

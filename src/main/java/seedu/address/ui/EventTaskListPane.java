@@ -26,8 +26,8 @@ public class EventTaskListPane extends UiPart<Pane> {
     private static final Logger logger = LogsCenter.getLogger(EventTaskListPane.class);
 
     private final ObservableList<IndexedItem<EventTask>> listedEventTasks;
-    private ObservableList<EventTask> todayEventTasks;
-    private ObservableList<EventTask> unfinishedEventTasks;
+    private ObservableList<IndexedItem<EventTask>> todayEventTasks;
+    private ObservableList<IndexedItem<EventTask>> unfinishedEventTasks;
 
     @FXML
     private ListView<IndexedItem<EventTask>> eventTaskListView;

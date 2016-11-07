@@ -20,7 +20,7 @@ public class FloatingTaskListPane extends UiPart<Pane> {
     private static final String FXML = "/view/FloatingTaskListPane.fxml";
 
     private final ObservableList<IndexedItem<FloatingTask>> listedFloatingTasks;
-    private ObservableList<FloatingTask> unfinishedFloatingTasks;
+    private ObservableList<IndexedItem<FloatingTask>> unfinishedFloatingTasks;
 
     @FXML
     private ListView<IndexedItem<FloatingTask>> floatingTaskListView;

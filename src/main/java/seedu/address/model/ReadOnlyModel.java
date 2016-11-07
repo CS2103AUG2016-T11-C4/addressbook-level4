@@ -52,8 +52,8 @@ public interface ReadOnlyModel {
     /** Returns the filtered Floating task list as an unmodifiable ObservableList */
     ObservableList<IndexedItem<FloatingTask>> getFloatingTaskList();
 
-    /** Get a filtered Floating task list filter by given task predicate. */
-    ObservableList<FloatingTask> getFloatingTaskList(TaskPredicate taskFilter);
+    /** Returns the filtered Floating task list filtered again by given task predicate. */
+    ObservableList<IndexedItem<FloatingTask>> getFloatingTaskList(TaskPredicate taskFilter);
 
     /** Returns the comparator used to sort the floating task list. */
     Comparator<? super FloatingTask> getFloatingTaskComparator();
@@ -66,8 +66,8 @@ public interface ReadOnlyModel {
     /** Returns the filtered deadline task list as an unmodifiable ObservableList */
     ObservableList<IndexedItem<DeadlineTask>> getDeadlineTaskList();
 
-    /** Return a filtered Deadline task list filter by given task predicate. */
-    ObservableList<DeadlineTask> getDeadlineTaskList(TaskPredicate taskFilter);
+    /** Return the filtered Deadline task list filtered again by given task predicate. */
+    ObservableList<IndexedItem<DeadlineTask>> getDeadlineTaskList(TaskPredicate taskFilter);
 
     /** Returns the comparator used to sort the deadline task list. */
     Comparator<? super DeadlineTask> getDeadlineTaskComparator();
@@ -80,8 +80,8 @@ public interface ReadOnlyModel {
     /** Returns the filtered event task list as an unmodifiable ObservableList */
     ObservableList<IndexedItem<EventTask>> getEventTaskList();
 
-    /** Return a filtered Event task list filter by given task predicate. */
-    ObservableList<EventTask> getEventTaskList(TaskPredicate taskFilter);
+    /** Return the filtered Event task list filtered again by given task predicate. */
+    ObservableList<IndexedItem<EventTask>> getEventTaskList(TaskPredicate taskFilter);
 
     /** Returns the comparator used to sort the event task list. */
     Comparator<? super EventTask> getEventTaskComparator();

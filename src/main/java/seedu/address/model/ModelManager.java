@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.beans.property.ReadOnlyProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
@@ -166,8 +167,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ObservableList<FloatingTask> getFloatingTaskList(TaskPredicate predicate) {
-        return workingTaskBook.getFloatingTaskList(predicate);
+    public ObservableList<IndexedItem<FloatingTask>> getFloatingTaskList(TaskPredicate predicate) {
+        assert predicate != null;
+        ObservableList<IndexedItem<FloatingTask>> result =
+                FXCollections.unmodifiableObservableList(workingTaskBook.getFloatingTaskList());
+        return result.filtered(p -> predicate.test(p.getItem()));
     }
 
     @Override
@@ -225,8 +229,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ObservableList<DeadlineTask> getDeadlineTaskList(TaskPredicate predicate) {
-        return workingTaskBook.getDeadlineTaskList(predicate);
+    public ObservableList<IndexedItem<DeadlineTask>> getDeadlineTaskList(TaskPredicate predicate) {
+        assert predicate != null;
+        ObservableList<IndexedItem<DeadlineTask>> result =
+                FXCollections.unmodifiableObservableList(workingTaskBook.getDeadlineTaskList());
+        return result.filtered(p -> predicate.test(p.getItem()));
     }
 
     @Override
@@ -284,8 +291,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ObservableList<EventTask> getEventTaskList(TaskPredicate predicate) {
-        return workingTaskBook.getEventTaskList(predicate);
+    public ObservableList<IndexedItem<EventTask>> getEventTaskList(TaskPredicate predicate) {
+        assert predicate != null;
+        ObservableList<IndexedItem<EventTask>> result =
+                FXCollections.unmodifiableObservableList(workingTaskBook.getEventTaskList());
+        return result.filtered(p -> predicate.test(p.getItem()));
     }
 
     @Override

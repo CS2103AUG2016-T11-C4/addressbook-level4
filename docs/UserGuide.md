@@ -82,19 +82,18 @@ TaskTracker makes time-management smart and simple for you!
 6. You're good to go! Try adding your first Task. Press Enter to enter a
    command. For adding a floating task, try:
 
-	* `add "Learn Task Tracker"`.
+	* `add "Learn Task Tracker" p-5`.
 
     ![alt text](./images/userguide/1.png "command bar")
 
     Let's do another one:
 
-	* `add "bake potatoes" p-2`
+	* `add "bake potatoes"`
 
     ![alt text](./images/userguide/2.png "")
 
     Notice how `bake potatoes` is below `Learn Task Tracker`. That's because
-    `bake potatoes` is of number 2 priority, while `Learn Task Tracker` with an
-    undefined priority takes the default highest priority number of 0.
+    `bake potatoes` is of default priority 0, lower than `Learn Task Tracker` priority of 5.
 
 7. Let's add deadline tasks with due date and time.
 
@@ -109,24 +108,20 @@ TaskTracker makes time-management smart and simple for you!
 
     ![alt text](./images/userguide/3.png "")
 
-8. Next up, events. An event is a task with a start date, start time, end date
-   and end time. Example commands are:
+8. Next up, events. An event is a task with a start date and time, end date and time. These are seperated by the essential keyword `to`. Example commands are:
 
 	* `add "CS2103t programming camp" 30/8 1pm to 3/1/2017 6pm`
 
-        Event `CS2103t programming camp` starts from 1pm of the 30th August 2016, and ends at 6pm of the 3rd January 2017.
-
 	* `add "potato peeling" tdy 3pm to 7pm`
 
-        Event `potato peeling` starts from today's 3pm and ends at today's 7pm.
+	* `add "cupcake festival"  8pm to tmr 12pm`
 
-	* `add "cupcake festival" tdy 8pm tmr 12pm`
-
-        Event `cupcake festival` starts from today's 8pm and ends at tomorrow's 12 pm.
-
-	* `add "Trick or treat" 31/10 8pm to 9pm`
-
-        Event `Trick or treat` starts from 8pm of 31st October this year and ends on the same day's 9pm.
+	* `add "Trick or treat" 8pm to 9pm`
+Play around with event parameter's arrangement to discover other formats valid for Task Tracker, or see Features for the answer. As you've noticed, the important keyword unique for event is 
+	
+   ```
+   to
+   ```
 
     ![alttext](./images/userguide/4.png "")
 
@@ -216,13 +211,13 @@ please refer to the [Features](#features) section below.
 
 ### <a name="dm">Data models</a>
 
-All tasks stored in TaskTracker will be automatically categorized into three different types: `floating task`, `deadline task`, and `event`, depending on the types and number of parameters entered when created.
+All tasks stored in TaskTracker will be automatically categorized into three different types: `floating task`, `deadline task`, and `event`, depending on the types of parameters entered when created.
 
 |A/An... | has...|
 |----| :-------------------------------------|
 |Floating Task | only a task name|
 |Deadline task |  end time and date |
-|Event | start time and date,  end time and date|
+|Event | start time and date, `to`, end time and date|
 
 ### <a name="cf">Command Format</a>
 
@@ -240,8 +235,6 @@ All tasks stored in TaskTracker will be automatically categorized into three dif
   use in each command.
 
 * Items with `...` after them can have multiple instances.
-
-* The parameters have to follow the order in which they are presented, unless otherwise specified.
 
 ### <a name="pk">Keywords for Special Time Representation</a>
 
@@ -275,7 +268,7 @@ Valid input examples:
     31
     ```
 
-    If the month is not defined, the default month will be the current as logged by the local machine.
+    If the month is not defined, the default month will be the current one as logged by the local machine.
 
 * Today
 
@@ -368,8 +361,6 @@ add "DEADLINE_NAME" <DATE> <TIME>
 
 * Deadline name should be in a pair of quotation marks. And quotations marks are not allowed in deadline name.
 
-* Keywords like `tdy`, `tmr`, `yst`, can be used in the `DATE` field.
-
 * Formats of `DATE` and `TIME` should follow those stated above in this user guide. See [Date Format](#DateFormat) and [Time Format](#TimeFormat)
 
 #### Examples
@@ -442,7 +433,7 @@ del-float|-deadline|-event <INDEX>
   the type of task.  For example, `edit` cannot transform a floating task to a
   event task.
 
-* To edit an task, key in the index of the event followed by the properties to
+* To edit a task, key in the index of the task followed by the properties to
   be modified. Label the new properties with their respective field references.
 
 * The `[PARAMETERS]` need not follow the order shown in the command format.
